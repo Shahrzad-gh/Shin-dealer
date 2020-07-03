@@ -6,7 +6,7 @@ import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
+import StoreIcon from "@material-ui/icons/Store";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,7 +32,7 @@ export default function Services() {
             <Card>
               <CardHeader className={classes.typography}>
                 <Typography className={classes.typography}>
-                  بازگشت محصول
+                  بازگشت محصول<StoreIcon></StoreIcon>
                 </Typography>
               </CardHeader>
               <CardContent>

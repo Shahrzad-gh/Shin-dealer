@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./components/navbar/Navbar";
 import Landing from "./components/Landing";
-
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import Best from "./components/Best";
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Landing />
-    </div>
+    <Router>
+      <Route exact path="/" component={Landing} />
+      <Route exact path="/Best" component={Best} />
+    </Router>
   );
 }
 

@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import CardMedia from "@material-ui/core/CardMedia";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
-
+import { Link } from "react-router-dom";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -32,11 +32,13 @@ export default function Popular() {
       <div className={classes.root}>
         <Carousel breakPoints={breakPoints}>
           <Item>
-            <CardMedia
-              component="img"
-              image="https://image.freepik.com/free-photo/summer-street-style_72402-384.jpg"
-              alt="female"
-            />
+            <Link to="/Best">
+              <CardMedia
+                component="img"
+                image="https://image.freepik.com/free-photo/summer-street-style_72402-384.jpg"
+                alt="female"
+              />
+            </Link>
           </Item>
           <Item>
             <CardMedia
