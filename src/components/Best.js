@@ -1,6 +1,13 @@
 import React from "react";
+import Popular from "./Popular";
 
-function Best() {
-  return <div>Hello</div>;
+export default function Best() {
+  return (
+    <div>
+      <Popular />
+      <Popular />
+      <Popular />
+      <Popular />
+    </div>
+  );
 }
-export default Best;

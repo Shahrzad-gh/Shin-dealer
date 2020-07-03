@@ -7,12 +7,13 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import StoreIcon from "@material-ui/icons/Store";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginBottom: 15,
   },
-  typography: { fontFamily: "Almarai", fontSize: "1rem" },
+  typography: { fontFamily: "Almarai", fontSize: "1rem", textAlign: "center" },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
@@ -30,11 +31,12 @@ export default function Services() {
         <Grid container spacing={3}>
           <Grid item xs={3}>
             <Card>
-              <CardHeader className={classes.typography}>
+              <CardContent>
                 <Typography className={classes.typography}>
-                  بازگشت محصول<StoreIcon></StoreIcon>
+                  <i class="fas fa-retweet fa-2x"></i>
+                  <p>بازگشت محصول</p>
                 </Typography>
-              </CardHeader>
+              </CardContent>
               <CardContent>
                 <Typography className={classes.typography}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
@@ -47,11 +49,12 @@ export default function Services() {
           </Grid>
           <Grid item xs={3}>
             <Card>
-              <CardHeader className={classes.typography}>
+              <CardContent className={classes.typography}>
                 <Typography className={classes.typography}>
-                  ارسال رایگان
+                  <i class="fas fa-shipping-fast fa-2x"></i>
+                  <p> ارسال رایگان</p>
                 </Typography>
-              </CardHeader>
+              </CardContent>
               <CardContent>
                 <Typography className={classes.typography}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
@@ -64,11 +67,12 @@ export default function Services() {
           </Grid>
           <Grid item xs={3}>
             <Card>
-              <CardHeader className={classes.typography}>
+              <CardContent className={classes.typography}>
                 <Typography className={classes.typography}>
-                  پرداخت مطمئن
+                  <i className="far fa-credit-card fa-2x"></i>
+                  <p> پرداخت مطمئن</p>
                 </Typography>
-              </CardHeader>
+              </CardContent>
               <CardContent>
                 <Typography className={classes.typography}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
@@ -81,11 +85,12 @@ export default function Services() {
           </Grid>
           <Grid item xs={3}>
             <Card>
-              <CardHeader className={classes.typography}>
+              <CardContent className={classes.typography}>
                 <Typography className={classes.typography}>
-                  پشتیبانی 24
+                  <i class="fas fa-phone-volume fa-2x"></i>
+                  <p>پشتیبانی 24 ساعته</p>
                 </Typography>
-              </CardHeader>
+              </CardContent>
               <CardContent>
                 <Typography className={classes.typography}>
                   لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و
