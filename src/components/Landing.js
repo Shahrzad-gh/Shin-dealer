@@ -5,12 +5,10 @@ import Collections from "./Collections";
 import Feeds from "./Feeds";
 import Popular from "./Popular";
 import Services from "./Services";
-import Navbar from "../components/Navbar/Navbar";
 
 export default function CenteredGrid() {
   return (
     <React.Fragment>
-      <Navbar />
       <CssBaseline />
       <Collections />
       <Feeds />

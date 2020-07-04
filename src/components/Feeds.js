@@ -39,7 +39,7 @@ export default function Feeds() {
                     alt="sale"
                     height="140"
                     image="https://t4.ftcdn.net/jpg/02/06/48/31/240_F_206483181_lzr9IaOPG2djCIl1VdZHwWjDKODyJYev.jpg"
-                    title="girl"
+                    title="تخفیف"
                   />
                   <CardContent className={classes.paddingCard}>
                     <Typography
