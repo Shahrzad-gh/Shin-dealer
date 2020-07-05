@@ -82,7 +82,7 @@ export default function Collections() {
             </Grid>
             <Grid item xs={4}>
               {/* //////////// */}
-              <Link to="ProductCard">
+              <Link to="ProductList">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia

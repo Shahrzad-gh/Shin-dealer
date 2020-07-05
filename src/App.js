@@ -7,7 +7,7 @@ import Kids from "./components/Kids";
 import Men from "./components/Men";
 import Women from "./components/Women";
 import Navbar from "./components/Navbar/Navbar";
-import ProductCard from "./components/ProductCard";
+import ProductList from "./components/ProductList";
 function App() {
   return (
     <Router>
@@ -19,7 +19,7 @@ function App() {
         <Route exact path="/Kids" component={Kids} />
         <Route exact path="/Men" component={Men} />
         <Route exact path="/Women" component={Women} />
-        <Route exact path="/ProductCard" component={ProductCard} />
+        <Route exact path="/ProductList" component={ProductList} />
       </div>
     </Router>
   );

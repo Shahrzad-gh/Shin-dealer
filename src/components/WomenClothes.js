@@ -1,4 +1,5 @@
 import React from "react";
+import ProductList from "./ProductList";
 
 export default function WomenClothes() {
   return (
@@ -8,11 +9,7 @@ export default function WomenClothes() {
         <div className="content">
           <div className="container">
             <ul>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
+              <ProductList />
             </ul>
           </div>
         </div>
