@@ -8,12 +8,17 @@ import Men from "./components/Men";
 import Women from "./components/Women";
 import Navbar from "./components/Navbar/Navbar";
 import ProductList from "./components/ProductList";
+import SignIn from "./components/SignIn"
+import SignUp from "./components/SignUp"
+import ForgetPass from "./components/ForgetPass"
 function App() {
   return (
     <Router>
       <div className="App">
         <Navbar />
-
+        <Route exact path="/SignIn" component={SignIn} />
+        <Route exact path="/SignUp" component={SignUp} />
+        <Route exact path="/ForgetPass" component={ForgetPass} />
         <Route exact path="/" component={Landing} />
         <Route exact path="/Best" component={Best} />
         <Route exact path="/Kids" component={Kids} />
