@@ -68,12 +68,17 @@ export default function ProductCard() {
         </CardContent>
         <div className={classes.controls}>
           <Button>
-            <IconButton aria-label="add" title="اضافه به سبد خرید">
-              <AddIcon
+            <Button variant="outlined" color="secondary" aria-label="add" title="اضافه به سبد خرید">
+              {/* <AddIcon
                 className={classes.addIcon}
                 onClick={handleAddToBasket}
-              />
-            </IconButton>
+              /> */}
+              <Typography className={classes.typography}
+>
+              افزودن به سبد خرید
+              </Typography>
+
+            </Button>
           </Button>
         </div>
       </div>
