@@ -6,7 +6,7 @@ import Best from "./components/Best";
 import Kids from "./components/Kids";
 import Men from "./components/Men";
 import Women from "./components/Women";
-import Navbar from "./components/Navbar/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import ProductList from "./components/ProductList";
 import SignIn from "./components/SignIn"
 import SignUp from "./components/SignUp"
