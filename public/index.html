@@ -45,6 +45,33 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+  <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+  <!-- Previously loaded Firebase SDKs -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.17.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDgd1413_Upp347BeP8v8oLTeUlF7I5VIE",
+    authDomain: "shin-dealer.firebaseapp.com",
+    databaseURL: "https://shin-dealer.firebaseio.com",
+    projectId: "shin-dealer",
+    storageBucket: "shin-dealer.appspot.com",
+    messagingSenderId: "796810654974",
+    appId: "1:796810654974:web:dba1b4633c272cc81f21af",
+    measurementId: "G-SLE75BLFS7"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
+
     <script src="https://kit.fontawesome.com/ad8e25574c.js" crossorigin="anonymous"></script>
   </body>
 </html>
