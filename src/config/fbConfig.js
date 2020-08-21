@@ -5,7 +5,7 @@ import 'firebase/auth'
    
 // Initialize Firebase
 
-var firebaseConfig = {
+var config = {
     apiKey: "AIzaSyDgd1413_Upp347BeP8v8oLTeUlF7I5VIE",
     authDomain: "shin-dealer.firebaseapp.com",
     databaseURL: "https://shin-dealer.firebaseio.com",
@@ -15,7 +15,7 @@ var firebaseConfig = {
     appId: "1:796810654974:web:dba1b4633c272cc81f21af",
     measurementId: "G-SLE75BLFS7"
   };
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(config);
   firebase.firestore().settings({ timestampsInSnapshots: true});
 
   export default firebase;
