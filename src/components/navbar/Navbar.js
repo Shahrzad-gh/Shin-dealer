@@ -14,6 +14,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import  {connect} from 'react-redux'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -78,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+function Navbar() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -232,3 +233,10 @@ export default function PrimarySearchAppBar() {
     </div>
   );
 }
+const mapStateToProps = (state) => {
+  console.log(state.firebase);
+  return{
+    auth: state.firebase.auth
+  }
+}
+export default connect(mapStateToProps)(Navbar)

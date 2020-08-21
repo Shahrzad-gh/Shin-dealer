@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { connect } from 'react-redux';
+import { signIn } from '../redux/action/authActions';
 
 function Copyright() {
   return (
@@ -46,9 +48,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn() {
+function SignIn() {
   const classes = useStyles();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
 
+  const { email, password } = formData
+  const { authError } = this.props;
+  function handleChange(e){
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  function handleSignIn(e){
+    e.preventDefault();
+
+    signIn(formData)
+  }
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -59,7 +76,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleSignIn}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,16 +87,21 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange={handleChange}
+            value={email}
           />
           <TextField
+            minLenght= "6"
             variant="outlined"
             margin="normal"
+            value={password}
             required
             fullWidth
             name="password"
             label="Password"
             type="password"
             id="password"
+            onChange={e => handleChange(e)}
             autoComplete="current-password"
           />
           <FormControlLabel
@@ -97,6 +119,7 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
+              { authError ? <p>{authError}</p> : null }
               <Link to="forgetPass" variant="body2">
                 Forgot password?
               </Link>
@@ -115,3 +138,13 @@ export default function SignIn() {
     </Container>
   );
 }
+const mapStateToProps = state => {
+  return {
+    authError : state.auth.authError
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {signIn : (cred) => dispatch(signIn(cred))}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
