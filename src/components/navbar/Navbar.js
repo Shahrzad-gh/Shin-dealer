@@ -160,6 +160,7 @@ export default function PrimarySearchAppBar() {
     </Menu>
   );
 
+
   return (
     <div className={classes.grow}>
       <AppBar position="static">
