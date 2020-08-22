@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignIn() {
+function SignIn(props) {
   const classes = useStyles();
   const [formData, setFormData] = useState({
     email: '',
@@ -56,7 +56,7 @@ function SignIn() {
   })
 
   const { email, password } = formData
-  const { authError } = this.props;
+  const { authError } = props;
   function handleChange(e){
     setFormData({...formData, [e.target.name]: e.target.value})
   }

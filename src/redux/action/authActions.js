@@ -1,7 +1,7 @@
 import { SIGN_IN_SUCCESS,
     SIGN_IN_ERROR,
-     SIGN_OUT,
-      SIGN_UP } 
+     SIGN_OUT_SUCCESS,
+      SIGN_UP_SUCCESS } 
       from './Types';
 
 export const signIn = (cred) => {
@@ -25,8 +25,13 @@ export const signIn = (cred) => {
 
     }
 }
-export const signOut = (cred) => {
-
+export const signOut = () => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        firebase.auth().signOut().then(() => {
+            dispatch({type: SIGN_OUT_SUCCESS});
+        })
+    }
 }
 export const signUp = (cred) => {
 
