@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react';
+import React,{ useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -63,7 +63,6 @@ function SignIn(props) {
 
   function handleSignIn(e){
     e.preventDefault();
-
     signIn(formData)
   }
   return (

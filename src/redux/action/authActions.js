@@ -1,7 +1,8 @@
 import { SIGN_IN_SUCCESS,
     SIGN_IN_ERROR,
      SIGN_OUT_SUCCESS,
-      SIGN_UP_SUCCESS } 
+      SIGNUP_SUCCESS, 
+      SIGNUP_ERROR} 
       from './Types';
 
 export const signIn = (cred) => {
@@ -33,6 +34,25 @@ export const signOut = () => {
         })
     }
 }
-export const signUp = (cred) => {
-
+export const signUp = (newUser) => {
+    console.log("signUP RUUUN")
+    return (dispatch, getState, {getFirebase, getFirestore}) => {
+        const firebase = getFirebase();
+        const firestore = getFirestore();
+        firebase.auth().createUserWithEmailAndPassword(
+            newUser.email,
+            newUser.password
+            ).then((res) => {
+                return firestore.collection('users').doc(res.user.uid).set({
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    initials: newUser.firstName[0] + newUser.lastName[0]
+                })
+            }).then(()=>{
+                dispatch({type: SIGNUP_SUCCESS})
+            }).catch((err) => {
+                dispatch({type: SIGNUP_ERROR, payload: err})
+            })
+    }
 }
+

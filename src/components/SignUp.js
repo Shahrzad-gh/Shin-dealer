@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,7 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import {signUp} from "../redux/action/authActions"
+import {connect} from 'react-redux'
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -46,7 +47,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+function SignUp(props) {
+  const [newUser, setNewUser] = useState({
+    firstName:'',
+    lastName:'',
+    email:'',
+    password:''
+  })
+  const {firstName, lastName, email, password} = newUser;
+
+  function handleOnChange(e){
+    setNewUser({...newUser,[e.target.name] : [e.target.value]});
+  }
+
+  function handleOnSubmit(e){
+    e.preventDefault();
+    props.signUp(newUser);
+  }
   const classes = useStyles();
 
   return (
@@ -59,7 +76,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleOnSubmit} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -70,6 +87,8 @@ export default function SignUp() {
                 fullWidth
                 id="firstName"
                 label="First Name"
+                value={firstName}
+                onChange={handleOnChange}
                 autoFocus
               />
             </Grid>
@@ -82,6 +101,8 @@ export default function SignUp() {
                 label="Last Name"
                 name="lastName"
                 autoComplete="lname"
+                value={lastName}
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +114,8 @@ export default function SignUp() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                value={email}
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -104,7 +127,9 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
                 autoComplete="current-password"
+                onChange={handleOnChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -119,7 +144,7 @@ export default function SignUp() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
+            className={classes.submit}            
           >
             Sign Up
           </Button>
@@ -138,3 +163,9 @@ export default function SignUp() {
     </Container>
   );
 }
+const mapDispatchToProps = dispatch => {
+  return {
+    signUp : (newUser) => { dispatch(signUp(newUser))}
+  }
+}
+export default connect(null, mapDispatchToProps)(SignUp)

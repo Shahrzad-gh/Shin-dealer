@@ -9,18 +9,27 @@ import fbConfig from './config/fbConfig';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import firebase from "firebase/app";
 import {createFirestoreInstance} from 'redux-firestore';
-
+import { isLoaded } from 'react-redux-firebase'
+import { useSelector } from 'react-redux'
 const rrfProps = {
      firebase,
      config: fbConfig,
      dispatch: store.dispatch,
      createFirestoreInstance
   }
+
+  function AuthIsLoaded({ children }) {
+    const auth = useSelector(state => state.firebase.auth)
+    if (!isLoaded(auth)) return <div>splash screen...</div>;
+    return children
+  }  
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
     <ReactReduxFirebaseProvider {...rrfProps}>
-      <App />
+    <AuthIsLoaded>
+            <App />
+   </AuthIsLoaded>
   </ReactReduxFirebaseProvider>
   </Provider>
   </React.StrictMode>,
