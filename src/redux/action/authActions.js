@@ -8,7 +8,6 @@ import { SIGN_IN_SUCCESS,
 export const signIn = (cred) => {
     return (dispatch, getState, {getFirebase}) => {
       const firebase = getFirebase()  ;
-      
       firebase.auth().signInWithEmailAndPassword(
           cred.email, cred.password
       )
@@ -35,24 +34,30 @@ export const signOut = () => {
     }
 }
 export const signUp = (newUser) => {
-    console.log("signUP RUUUN")
-    return (dispatch, getState, {getFirebase, getFirestore}) => {
-        const firebase = getFirebase();
-        const firestore = getFirestore();
-        firebase.auth().createUserWithEmailAndPassword(
-            newUser.email,
-            newUser.password
-            ).then((res) => {
-                return firestore.collection('users').doc(res.user.uid).set({
-                    firstName: newUser.firstName,
-                    lastName: newUser.lastName,
-                    initials: newUser.firstName[0] + newUser.lastName[0]
-                })
-            }).then(()=>{
-                dispatch({type: SIGNUP_SUCCESS})
-            }).catch((err) => {
-                dispatch({type: SIGNUP_ERROR, payload: err})
-            })
-    }
-}
-
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+      const firebase = getFirebase();
+      const firestore = getFirestore();
+      console.log("firebase", firebase.auth())
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(newUser.email, newUser.password)
+        .then((response) => {
+          console.log("signup", response.user);
+          return firestore
+            .collection("users")
+            .doc(response.user.uid)
+            .set({
+              firstName: newUser.firstName,
+              lastName: newUser.lastName,
+              initials: newUser.firstName[0] + newUser.lastName[0],
+            });
+        })
+        .then(() => {
+          dispatch({ type: SIGNUP_SUCCESS });
+        })
+        .catch((err) => {
+          dispatch({ type: SIGNUP_ERROR, err });
+        });
+    };
+  };
+  
