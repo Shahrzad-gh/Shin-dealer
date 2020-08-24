@@ -63,7 +63,7 @@ function SignIn(props) {
 
   function handleSignIn(e){
     e.preventDefault();
-    signIn(formData)
+    props.signIn(formData)
   }
   return (
     <Container component="main" maxWidth="xs">
