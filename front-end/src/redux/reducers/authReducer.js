@@ -7,6 +7,7 @@ import { SIGN_IN_SUCCESS,
 
 const initState = {
  authError: null,
+ isLoggedIn: false
 }
 
 const authReducer = (state = initState, action) => {
@@ -17,28 +18,36 @@ const authReducer = (state = initState, action) => {
          return {
              ...state,
              authError: null,
+             isLoggedIn: true
+
          }
      case SIGN_IN_ERROR:
          return {
              ...state,
-             authError: 'login failed'
+             authError: 'login failed',
+             isLoggedIn: false
+
          }
      case SIGNUP_SUCCESS:
          console.log('signup succes')
          return {
              ...state,
-             authError: null
+             authError: null,
+             isLoggedIn: true
          }
      case SIGNUP_ERROR:
          console.log('signup error')
          return {
              ...state,
-             authError: 'signup failed'
+             authError: 'signup failed',
+             isLoggedIn: false
+
          }
      case SIGN_OUT_SUCCESS:
          console.log('logout succes')
              return {
                  state,
+                 isLoggedIn: false
              }    
      default:
          return state    

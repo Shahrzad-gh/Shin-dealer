@@ -65,10 +65,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Navbar(props) {
+  console.log(props)
   const classes = useStyles();
       
-  const { auth } = props;
-  const links = auth ? <SignInLinks/> :<SignOutLinks/>
+  const { isLoggedIn } = props;
+  console.log("a", isLoggedIn)
+  const links = isLoggedIn  ? <SignInLinks/> :<SignOutLinks/>
   return (
     <div className={classes.grow}>
       <AppBar position="static">
@@ -109,8 +111,8 @@ function Navbar(props) {
 const mapStateToProps = (state) => {
   console.log(state);
   return{
-    auth: state
+    isLoggedIn: state.auth.isLoggedIn
   }
 }
 
-export default connect(mapStateToProps)(Navbar)
+export default connect(mapStateToProps, null)(Navbar)

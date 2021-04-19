@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import {signOut} from "../../../redux/actions/authActions"
 import  {connect} from 'react-redux'
+import {useHistory} from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
@@ -29,6 +30,7 @@ function SignInLinks(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -53,7 +55,7 @@ function SignInLinks(props) {
   const handleSignOut = (e) => {
     e.preventDefault();
     console.log("sign out btn");
-    props.signOut();
+    props.signOut(history);
   }
 
   const menuId = "primary-search-account-menu";
@@ -145,7 +147,7 @@ function SignInLinks(props) {
 
     const mapDispatchToProps = (dispatch) => {
       return{
-        signOut : () => { dispatch(signOut())}
+        signOut : (history) => { dispatch(signOut(history))}
       }
     }
 export default connect(null, mapDispatchToProps)(SignInLinks)

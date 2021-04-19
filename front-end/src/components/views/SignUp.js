@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {signUp} from "../../redux/actions/authActions"
 import {connect} from 'react-redux' 
+import {useHistory} from 'react-router'
 
 function Copyright() {
   return (
@@ -56,6 +57,7 @@ function SignUp(props) {
     password:''
   })
   const {firstName, lastName, email, password} = newUser;
+  const history = useHistory();
 
   function handleOnChange(e){
     setNewUser({...newUser,[e.target.name] : e.target.value});
@@ -68,7 +70,7 @@ function SignUp(props) {
   //const passwordError = document.querySelector('.password.error');
   function handleOnSubmit(e){
     e.preventDefault();
-    props.signUp(newUser);
+    props.signUp(newUser, history);
     // reset errors
     //emailError.textContent = '';
     //passwordError.textContent = '';
@@ -198,7 +200,7 @@ function SignUp(props) {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp : (newUser) => { dispatch(signUp(newUser))}
+    signUp : (newUser, history) => { dispatch(signUp(newUser, history))}
   }
 }
 

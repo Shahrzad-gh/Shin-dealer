@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {signIn} from "../../redux/actions/authActions"
 import {connect} from 'react-redux' 
+import {useHistory} from 'react-router'
 
 function Copyright() {
   return (
@@ -54,6 +55,7 @@ function SignIn(props) {
     email: '',
     password: '',
   })
+  const history = useHistory();
 
   const { email, password } = formData
   const { authError } = props;
@@ -66,9 +68,9 @@ function SignIn(props) {
 
 const handleSignIn =  async (e) => {
   e.preventDefault();
-  props.signUp(formData);
+  props.signUp(formData, history);
 }
-  
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -146,7 +148,7 @@ const handleSignIn =  async (e) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signUp : (cred) => { dispatch(signIn(cred))}
+    signUp : (cred, history) => { dispatch(signIn(cred, history))}
   }
 }
 

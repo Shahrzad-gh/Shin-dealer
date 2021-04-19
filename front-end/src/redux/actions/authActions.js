@@ -7,18 +7,20 @@ import { SIGN_IN_SUCCESS,
     from './Types';
 import axios from 'axios';
 
-export const signIn = (cred) => {
+export const signIn = (cred, history) => {
   return async function(dispatch){
     try {
       const res = await axios.post('/Signin', cred);
       const {data} = res
+      console.log(data);
+
       if (data.errors) {
         console.log("error", data.errors)
         //emailError.textContent = data.errors.email;
         //passwordError.textContent = data.errors.password;
       }
       if (data.user) {
-        window.location.assign('/');
+        history.push("/");
       }
       dispatch({type: SIGN_IN_SUCCESS,payload:cred})
     }
@@ -29,12 +31,12 @@ export const signIn = (cred) => {
   }
 }
 
-export const signOut = () => {
+export const signOut = (history) => {
   return async (dispatch) => {
     try{
     const res = await axios.get('/logout');
     const {data} = res
-    window.location.assign('/');
+    history.push("/");
     dispatch({type:SIGN_OUT_SUCCESS
       , payload: data})
     }
@@ -44,13 +46,13 @@ export const signOut = () => {
   };
 }
 
-export const signUp = (newUser) => {
+export const signUp = (newUser, history) => {
   return async (dispatch) => {
     try{
     const res = await axios.post('/Signup', newUser);
     const {data} = res
     console.log(data);
-    window.location.assign('/');
+    history.push("/");
     dispatch({type: SIGNUP_SUCCESS, payload: data})
     }
     catch(err) {
