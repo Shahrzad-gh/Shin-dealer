@@ -11,6 +11,7 @@ import  {connect} from 'react-redux'
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -111,4 +112,5 @@ const mapStateToProps = (state) => {
     auth: state
   }
 }
+
 export default connect(mapStateToProps)(Navbar)

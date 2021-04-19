@@ -7,6 +7,8 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import {signOut} from "../../../redux/actions/authActions"
+import  {connect} from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
@@ -47,6 +49,8 @@ function SignInLinks(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+
+
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -60,7 +64,7 @@ function SignInLinks(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={props.signOut}>SignOut</MenuItem>
+      <MenuItem onClick={props.SignOut}>SignOut</MenuItem>
     </Menu>
   );
 
@@ -134,4 +138,9 @@ function SignInLinks(props) {
           </div>
     )}
 
-export default SignInLinks
+    const mapDispatchToProps = (dispatch) => {
+      return{
+        signUp : () => { dispatch(signOut())}
+      }
+    }
+export default connect(null, mapDispatchToProps)(SignInLinks)

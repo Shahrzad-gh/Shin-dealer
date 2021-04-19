@@ -7,8 +7,8 @@ import { Provider } from "react-redux";
 import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './components/redux/reducers/rootReducer';
-import axios from "axios";
+import rootReducer from './redux/reducers/rootReducer';
+//import axios from "axios";
 
 const composeEnhancers = composeWithDevTools({
   // options like actionSanitizer, stateSanitizer
