@@ -5,7 +5,6 @@ import { SIGN_IN_SUCCESS,
     SIGNUP_SUCCESS, 
     SIGNUP_ERROR} 
     from './Types';
-
 import axios from 'axios';
 
 export const signIn = (cred) => {
@@ -35,8 +34,7 @@ export const signOut = () => {
     try{
     const res = await axios.get('/logout');
     const {data} = res
-    console.log(data);
-    console.log("signout success")
+    window.location.assign('/');
     dispatch({type:SIGN_OUT_SUCCESS
       , payload: data})
     }
@@ -52,6 +50,7 @@ export const signUp = (newUser) => {
     const res = await axios.post('/Signup', newUser);
     const {data} = res
     console.log(data);
+    window.location.assign('/');
     dispatch({type: SIGNUP_SUCCESS, payload: data})
     }
     catch(err) {

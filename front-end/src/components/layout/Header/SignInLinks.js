@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   }));
+
 function SignInLinks(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -49,7 +50,11 @@ function SignInLinks(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    console.log("sign out btn");
+    props.signOut();
+  }
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -64,7 +69,7 @@ function SignInLinks(props) {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={props.SignOut}>SignOut</MenuItem>
+      <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
     </Menu>
   );
 
@@ -140,7 +145,7 @@ function SignInLinks(props) {
 
     const mapDispatchToProps = (dispatch) => {
       return{
-        signUp : () => { dispatch(signOut())}
+        signOut : () => { dispatch(signOut())}
       }
     }
 export default connect(null, mapDispatchToProps)(SignInLinks)
