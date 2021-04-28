@@ -1,11 +1,22 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
+dotenv.config();
 const app = express();
-// database connection
-//const dbURI = 'mongodb+srv://admin:ymg5cyL00K0yr5j9@cluster.wfrkl.mongodb.net/Projects?retryWrites=true&w=majority';
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
 
 app.get('/', (req, res) => {
   res.send("It's works");
+});
+
+mongoose.connect(process.env.MDB_CONNECT, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+},(err) => {
+  if(err) return console.error(err);
+  console.log('connected to MongoDB')
 });
