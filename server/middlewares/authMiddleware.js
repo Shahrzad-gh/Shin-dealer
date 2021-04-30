@@ -1,30 +1,33 @@
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/userModel');
 
 const requireAuth = (req, res, next) => {
+  console.log('reguireAuth')
   const token = req.cookies.jwt;
 
   // check json web token exists & is verified
   if (token) {
-    jwt.verify(token, 'net ninja secret', (err, decodedToken) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         console.log(err.message);
-        res.redirect('/Signin');
+        res.redirect('/signin');
       } else {
         console.log(decodedToken);
         next();
       }
     });
   } else {
-    res.redirect('/Signin');
+    res.redirect('/signin');
   }
 };
 
 // check current user
 const checkUser = (req, res, next) => {
+  console.log('checkUser')
+
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, 'net ninja secret', async (err, decodedToken) => {
+    jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
       if (err) {
         res.locals.user = null;
         next();

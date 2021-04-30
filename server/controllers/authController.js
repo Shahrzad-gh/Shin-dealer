@@ -51,13 +51,22 @@ module.exports.login_get = (req, res) => {
   res.render('login');
 }
 
+module.exports.landing_post = (req, res) => {
+  async (req, res) => {
+    const { email, password } = req.body;
+  
+  }
+}
+
 module.exports.signup_post = async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
+
   try {
     const user = await User.create({ firstName, lastName, email, password });
     const token = createToken(user._id);
     res.cookie('token', token, { httpOnly: true});
     res.status(201).json({ user: user._id });
+    //res.redirect('/');
   }
   catch(err) {
     const errors = handleErrors(err);
@@ -68,12 +77,12 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
   const { email, password } = req.body;
-
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     res.cookie('token', token, { httpOnly: true});
     res.status(200).json({ user: user._id });
+    res.redirect('/');
   } 
   catch (err) {
     const errors = handleErrors(err);
@@ -83,6 +92,6 @@ module.exports.login_post = async (req, res) => {
 }
 
 module.exports.logout_get = (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+  res.cookie('token', '', { httpOnly: true, maxAge: 1 });
   res.redirect('/');
 }

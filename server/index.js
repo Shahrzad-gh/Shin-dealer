@@ -1,24 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const authRoutes = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
+const { requireAuth, checkUser } = require('./middlewares/authMiddleware');
 const dotenv = require('dotenv');
-
+const cors = require('cors')
 dotenv.config();
 const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
+// middleware
+app.use(express.static('public'));
 app.use(express.json());
+app.use(cookieParser());
+app.use(cors({
+  origin: ['http://localhost:3000'],
+  credentials: true,
+}))
 
-app.get('/', (req, res) => {
-  res.send("It's works");
-});
+// view engine
+//app.set('view engine', 'ejs');
 
-mongoose.connect(process.env.MDB_CONNECT, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-},(err) => {
-  if(err) return console.error(err);
-  console.log('connected to MongoDB')
-});
+// database connection
+mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+  .then((result) => app.listen(PORT, console.log(`app connected to MongoDB & listen to port: ${PORT}`)))
+  .catch((err) => console.log(err));
 
+// routes
+app.all('*', checkUser);
+app.get('/', (req, res) => res.render('home'));
+//app.get('/shipping', requireAuth, (req, res) => res.render('shipping'));
+app.use(authRoutes);

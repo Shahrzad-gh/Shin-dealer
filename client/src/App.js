@@ -11,10 +11,16 @@ import ProductList from "./components/ProductList";
 import SignIn from "./components/views/SignIn"
 import SignUp from "./components/views/SignUp"
 import ForgetPass from "./components/ForgetPass"
+import Shipping from "./components/views/shipping"
+import axios from 'axios';
+import { AuthContextProvider } from "./context/AuthContext";
+
+axios.defaults.withCredentials = true;
 
 function App() {
 
   return (
+    <AuthContextProvider>
     <Router>
       <div className="App">
         <Navbar />
@@ -27,8 +33,10 @@ function App() {
         <Route exact path="/Men" component={Men} />
         <Route exact path="/Women" component={Women} />
         <Route exact path="/ProductList" component={ProductList} />
+        <Route exact path="/Shipping" component={Shipping} />
       </div>
     </Router>
+    </AuthContextProvider>
   );
 }
 

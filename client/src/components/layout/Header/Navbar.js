@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
-  const user = Cookies.get('user')
+  const user = Cookies.get('token')
   console.log(user)
 
   const links = user  ? <SignInLinks/> :<SignOutLinks/>
