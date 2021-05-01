@@ -1,3 +1,3 @@
 ## Available Scripts
 
-E-commerce App using React, Redux & NodeJS as back-end
+E-commerce App using React, Context & NodeJS as back-end
