@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
-import { Redirect, Route } from "react-router";
 
 function Copyright() {
   return (
@@ -71,6 +70,11 @@ const handleSignIn =  async (e) => {
       email,
       password
     };
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
     axios.post('/signin', loginData)
   }catch(err){
     console.error(err)
