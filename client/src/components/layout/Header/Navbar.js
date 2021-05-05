@@ -71,8 +71,6 @@ function Navbar() {
     setuser(Cookies.get('token')) 
   }, [])
 
-  console.log(user);
-
   const links = user  ? <SignInLinks/> :<SignOutLinks/>
   return (
     <div className={classes.grow}>
