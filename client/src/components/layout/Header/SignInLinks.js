@@ -7,6 +7,8 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
@@ -27,6 +29,7 @@ function SignInLinks(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const history = useHistory();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -48,10 +51,18 @@ function SignInLinks(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleSignOut = (e) => {
+  const handleSignOut = async (e) => {
     e.preventDefault();
-    console.log("sign out btn");
-    handleMenuClose();
+    try{
+     await axios.get('/logout');
+     handleMenuClose();
+     history.push("/");
+     window.location.reload(true);
+      
+    }catch(err){
+      console.error(err)
+    }
+    
   }
 
   const menuId = "primary-search-account-menu";

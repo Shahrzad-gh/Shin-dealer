@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -54,6 +55,8 @@ function SignUp(props) {
     email:'',
     password:''
   })
+  const history = useHistory();
+
   const {firstName, lastName, email, password} = newUser;
 
   function handleOnChange(e){
@@ -71,7 +74,9 @@ function SignUp(props) {
         email,
         password
       };
-      await axios.post('/signup', redisterData)
+      await axios.post('/signup', redisterData);
+      history.push("/");
+      window.location.reload(true);
     }catch(err){
       console.error(err)
     }

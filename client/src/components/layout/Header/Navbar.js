@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -65,8 +65,13 @@ const useStyles = makeStyles((theme) => ({
 
 function Navbar() {
   const classes = useStyles();
-  const user = Cookies.get('token')
-  console.log(user)
+  const [user, setuser] = useState(null);
+
+  useEffect(() => {
+    setuser(Cookies.get('token')) 
+  }, [])
+
+  console.log(user);
 
   const links = user  ? <SignInLinks/> :<SignOutLinks/>
   return (

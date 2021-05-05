@@ -51,11 +51,8 @@ module.exports.login_get = (req, res) => {
   res.render('login');
 }
 
-module.exports.landing_post = (req, res) => {
-  async (req, res) => {
-    const { email, password } = req.body;
-  
-  }
+module.exports.landing_get = (req, res) => {
+  res.render('home');
 }
 
 module.exports.signup_post = async (req, res) => {
@@ -64,9 +61,8 @@ module.exports.signup_post = async (req, res) => {
   try {
     const user = await User.create({ firstName, lastName, email, password });
     const token = createToken(user._id);
-    res.cookie('token', token, { httpOnly: true});
+    res.cookie('token', token, { httpOnly: false, maxAge: maxAge * 1000});
     res.status(201).json({ user: user._id });
-    //res.redirect('/');
   }
   catch(err) {
     const errors = handleErrors(err);
@@ -80,18 +76,17 @@ module.exports.login_post = async (req, res) => {
   try {
     const user = await User.login(email, password);
     const token = createToken(user._id);
-    res.cookie('token', token, { httpOnly: true});
+    res.cookie('token', token, { httpOnly: false});
     res.status(200).json({ user: user._id });
-    res.redirect('/');
-  } 
-  catch (err) {
+    //res.redirect('/')
+  }
+  catch(err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
   }
-
 }
 
 module.exports.logout_get = (req, res) => {
-  res.cookie('token', '', { httpOnly: true, maxAge: 1 });
+  res.cookie('token', '', { httpOnly: false, maxAge: 1 });
   res.redirect('/');
 }

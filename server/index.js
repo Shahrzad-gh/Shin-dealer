@@ -14,10 +14,10 @@ const PORT = process.env.PORT || 3001;
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-// app.use(cors({
-//   origin: ['http://localhost:3000'],
-//   credentials: true,
-// }))
+app.use(cors({
+  origin: ['http://localhost:3000'],
+  credentials: true,
+}))
 
 //view engine
 app.set('view engine', 'ejs');
@@ -28,7 +28,7 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
   .catch((err) => console.log(err));
 
 // routes
-app.all('*', checkUser);
-//app.get('/', (req, res) => res.render('/'));
+app.get('*');
+app.get('/', (req, res) => console.log('home'));
 //app.get('/shipping', requireAuth, (req, res) => res.render('shipping'));
 app.use(authRoutes);
