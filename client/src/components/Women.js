@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Popular from "./Popular";
 import Footer from "./layout/Footer/Footer";
 import { Link } from "react-router-dom";
+import axios from "axios";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -24,8 +25,14 @@ const useStyles = makeStyles((theme) => ({
     padding: 3,
   },
 }));
+
 export default function Collections() {
   const classes = useStyles();
+
+    const handleGetProduct = async () => {
+      const products = await axios.get('/getproduct');
+    }
+
   return (
     <React.Fragment>
       <Container maxWidth="xl">
@@ -84,7 +91,7 @@ export default function Collections() {
               {/* //////////// */}
               <Link to="ProductList">
                 <Card className={classes.root}>
-                  <CardActionArea>
+                  <CardActionArea handleOnClick={handleGetProduct}>
                     <CardMedia
                       component="img"
                       alt="clothes"

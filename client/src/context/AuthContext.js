@@ -1,13 +1,13 @@
 //import axios from 'axios';
 import React, {useEffect, useState, createContext} from 'react'
-
+import axios from 'axios'
 const AuthContext = createContext();
 
 function AuthContextProvider(props) {
   const [isLoggedIn, setisLoggedIn] = useState(undefined);
   
   async function getLoggedIn(){
-    const loggedInRes = true;//await axios.get('/shipping');
+    const loggedInRes = await axios.get('/shipping');
     setisLoggedIn(loggedInRes);
   }
   
