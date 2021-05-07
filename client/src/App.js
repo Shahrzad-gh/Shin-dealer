@@ -14,6 +14,7 @@ import ForgetPass from "./components/ForgetPass"
 import Shipping from "./components/views/shipping"
 import axios from 'axios';
 import { AuthContextProvider } from "./context/AuthContext";
+import Dashboard from "./components/Admin/Dashboard";
 
 axios.defaults.withCredentials = true;
 
@@ -34,6 +35,7 @@ function App() {
         <Route exact path="/Women" component={Women} />
         <Route exact path="/ProductList" component={ProductList} />
         <Route exact path="/Shipping" component={Shipping} />
+        <Route exact path="/Admin" component={Dashboard} />
       </div>
     </Router>
     </AuthContextProvider>

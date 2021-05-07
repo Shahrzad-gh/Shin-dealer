@@ -18,10 +18,11 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondaryListItems } from './ListItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import AddProduct from './AddProduct';
 
 function Copyright() {
   return (
@@ -189,6 +190,12 @@ export default function Dashboard() {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <Orders />
+              </Paper>
+            </Grid>
+            {/* add Product */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <AddProduct />
               </Paper>
             </Grid>
           </Grid>

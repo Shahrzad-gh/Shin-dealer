@@ -10,49 +10,7 @@ export default function ProductList() {
         <Grid container spacing={1}>
           <Grid item xs={4} sm={4}>
             <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <ProductCard />
-          </Grid>
+          </Grid>          
         </Grid>
       </Grid>
       <Grid item sm={4}>
