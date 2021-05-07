@@ -1,9 +1,9 @@
 const Product = require("../models/productModel");
 
 module.exports.addProduct_post = async (req, res) => {
-  const { picture, name, count, description } = req.body;
+  const { picture, name, count, price, description } = req.body;
   try {
-    const product = await Product.create({ picture, name, count, description });
+    const product = await Product.create({ picture, name, count, price, description });
     res.status(201).json({ product: product._id });
     console.log("Product Add Successfully ")
 

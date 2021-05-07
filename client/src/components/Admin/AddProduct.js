@@ -33,11 +33,12 @@ export default function AddProduct() {
     picture:'',
     name:'',
     count:'',
+    price:'',
     description:''
   });
   const history = useHistory();
 
-  const {picture, name, count, description} = product;
+  const {picture, name, count, price, description} = product;
 
   function handleOnChange(e){
     setProduct({...product,[e.target.name] : e.target.value});
@@ -51,6 +52,7 @@ export default function AddProduct() {
         picture,
         name,
         count,
+        price,
         description
       };
       await axios.post('/addproduct', productData);
@@ -90,6 +92,18 @@ export default function AddProduct() {
                 label="Count"
                 name="count"
                 value={count}
+                onChange={handleOnChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="price"
+                label="Price"
+                name="price"
+                value={price}
                 onChange={handleOnChange}
               />
             </Grid>
