@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
+const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser } = require('./middlewares/authMiddleware');
 const dotenv = require('dotenv');
@@ -31,4 +33,7 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
 app.get('*');
 app.get('/', (req, res) => console.log('home'));
 //app.get('/shipping', requireAuth, (req, res) => res.render('shipping'));
+
 app.use(authRoutes);
+app.use(productRoutes);
+app.use(categoryRoutes);
