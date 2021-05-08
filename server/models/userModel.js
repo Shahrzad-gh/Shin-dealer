@@ -22,8 +22,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter a password'],
     minlength: [8, 'Minimum password length is 8 characters'],
-  }
-});
+  },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+  contactNumber: { type: String },
+  pofilePicture: { type: String },
+},
+{ timestamps: true }
+);
 
 
 // fire a function before doc saved to db
