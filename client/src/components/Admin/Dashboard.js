@@ -23,6 +23,7 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import AddProduct from './AddProduct';
+import AddCategory from './AddCategory';
 
 function Copyright() {
   return (
@@ -196,6 +197,12 @@ export default function Dashboard() {
             <Grid item xs={12}>
               <Paper className={classes.paper}>
                 <AddProduct />
+              </Paper>
+            </Grid>
+            {/* add Category */}
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <AddCategory />
               </Paper>
             </Grid>
           </Grid>

@@ -1,10 +1,10 @@
-const Product = require("../models/categoryModel");
+const Category = require("../models/categoryModel");
 
 module.exports.addCategory_post = async (req, res) => {
-  const { name, parentId } = req.body;
+  const { name } = req.body;
   try {
-    const product = await Product.create({ name, parent_Id });
-    res.status(201).json({ product: category._id });
+    const category = await Category.create({ name });
+    res.status(201).json({ category: category._id });
     console.log("category Add Successfully ")
 
   }
