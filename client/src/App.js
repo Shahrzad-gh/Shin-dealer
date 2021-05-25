@@ -11,7 +11,7 @@ import ProductList from "./components/ProductList";
 import SignIn from "./components/views/SignIn"
 import SignUp from "./components/views/SignUp"
 import ForgetPass from "./components/ForgetPass"
-import Shipping from "./components/views/shipping"
+import Cart from "./containers/cart"
 import axios from 'axios';
 import { AuthContextProvider } from "./context/AuthContext";
 import Dashboard from "./components/Admin/Dashboard";
@@ -34,7 +34,7 @@ function App() {
         <Route exact path="/Men" component={Men} />
         <Route exact path="/Women" component={Women} />
         <Route exact path="/ProductList" component={ProductList} />
-        <Route exact path="/Shipping" component={Shipping} />
+        <Route exact path="/Cart" component={Cart} />
         <Route exact path="/Admin" component={Dashboard} />
       </div>
     </Router>

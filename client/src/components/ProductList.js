@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import ShoppingBasket from "../containers/ShoppingBasket";
+import Cart from "../containers/cart";
 import Grid from "@material-ui/core/Grid";
 
 export default function ProductList() {
@@ -15,7 +15,7 @@ export default function ProductList() {
         </Grid>
       </Grid>
       <Grid item sm={4}>
-        <ShoppingBasket />
+        <Cart />
       </Grid>
     </Grid>
   );
