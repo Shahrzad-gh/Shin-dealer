@@ -2,6 +2,7 @@ const Category = require("../models/categoryModel");
 
 module.exports.addCategory_post = async (req, res) => {
   const { name } = req.body;
+  //console.log(req.body.parentId)
   try {
     const category = await Category.create({ name });
     res.status(201).json({ category: category._id });

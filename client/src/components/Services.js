@@ -32,6 +32,7 @@ export default function Services() {
               <CardContent>
                 <Typography component={'span'} className={classes.typography}>
                   <i className="fas fa-retweet fa-2x"></i>
+                  <p> بازگشت کالا </p>
                 </Typography>
               </CardContent>
               <CardContent>
