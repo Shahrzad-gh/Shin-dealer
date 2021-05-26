@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
       review:{Type: String}
     }
 ],
-  category:{type: mongoose.Schema.Types.ObjectId, ref:'Category', require: true}
+  category:{type: mongoose.Schema.Types.ObjectId, ref:'Category', required: true}
 });
 const Product = mongoose.model('product', productSchema);
 

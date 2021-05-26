@@ -2,10 +2,16 @@ const Product = require("../models/productModel");
 const nanoid  = require('nanoid');
 
 module.exports.addProduct_post = async (req, res) => {
-  const { picture, name, count, price, description } = req.body;
+  const { name, count, price, description, reviews, offer, category } = req.body;
+  let pictures = [];
+
+  if(req.files.length > 0){
+    pictures = req.files.map(file => {return {img : file.filename}})
+  }
+
   try {
-    const product = await Product.create({ picture, name, count, price, description });
-    res.status(201).json({ product: product._id });
+    const product = await Product.create({ pictures, name, count, price, description, reviews, offer, category });
+    res.status(201).json({ product});
     console.log("Product Add Successfully ")
 
   }

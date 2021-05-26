@@ -9,7 +9,6 @@ createCategories = (categories, parentId = null) => {
   }else{
     category = categories.filter(cat => cat.parentId == parentId)
   }
-
   for(let cate of category){
     categoryList.push({
       _id: cate._id,
