@@ -1,4 +1,5 @@
 const Product = require("../models/productModel");
+const nanoid  = require('nanoid');
 
 module.exports.addProduct_post = async (req, res) => {
   const { picture, name, count, price, description } = req.body;

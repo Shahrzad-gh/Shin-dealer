@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter your name'],
   },
-  pictures: [
+  ictures: [
     {
       img:{type: String}
     }
