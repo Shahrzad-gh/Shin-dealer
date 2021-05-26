@@ -5,9 +5,8 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please enter your name'],
     unique: true,
-
   },
-  parrentId: {
+  parentId: {
     type: String,
   },
 });

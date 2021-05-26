@@ -131,8 +131,6 @@ export default function AddCategory() {
                 autoFocus
               />
             </Grid>
-
-
           </Grid>
           <Button
             type="submit"
