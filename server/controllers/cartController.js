@@ -7,8 +7,6 @@ module.exports.addItemToCart_post = (req, res) => {
 
     Cart.findOne({user})
     .exec(async (error, cart) => {
-      console.log("ERRR1", error)
-      console.log("CART1", cart)
       if(error) return res.status(400).json({ error });      
       if(cart){
         const product = req.body.cartItems.product;
@@ -21,11 +19,7 @@ module.exports.addItemToCart_post = (req, res) => {
               count: item.count + req.body.cartItems.count
             }
           }};
-  
-          Cart.findByIdAndUpdate(condition, action).exec((error, _cart) => {
-            console.log("ERRR2", error)
-            console.log("CART2", _cart)
-
+          Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
             if(error) return res.status(400).json({ error });
             if(_cart){
               res.status(201).json({ _cart });
@@ -38,11 +32,8 @@ module.exports.addItemToCart_post = (req, res) => {
             "cartItems" : req.body.cartItems,
           }};
   
-          Cart.findByIdAndUpdate(condition, action ).exec((error, _cart) => {
-            console.log("ERRR3", error)
-            console.log("CART3", _cart)
+          Cart.findOneAndUpdate(condition, action ).exec((error, _cart) => {
             if(error)return res.status(400).json({ error });
-
             if(_cart){
               res.status(201).json({ _cart });
             }
