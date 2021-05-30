@@ -6,7 +6,9 @@ module.exports.addProduct_post = async (req, res) => {
   let pictures = [];
 
   if(req.files.length > 0){
-    pictures = req.files.map(file => {return {img : file.filename}})
+    pictures = req.files.map((file) => {
+      return { img : file.path }      
+    })
   }
 
   try {

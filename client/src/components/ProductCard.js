@@ -39,7 +39,7 @@ const useStyles = makeStyles({
 export default function ProductCard(props) {
   const classes = useStyles();
   const [cartItem, setCartItem] = useState();
-  console.log(props)
+  console.log(props.data.pictures[0].img)
   const handleAddToBasket = async (e) => {
     // e.preventDefault();
     // try{
@@ -58,7 +58,7 @@ export default function ProductCard(props) {
       <div className={classes.details}>
         <CardMedia
           className={classes.cover}
-          image={"https://dkstatics-public.digikala.com/digikala-products/116827044.jpg?x-oss-process=image/resize,m_lfit,h_600,w_600/quality,q_80"}
+          image={generatePublicUrL(props.data.pictures[0].img)}
           title={props.data.name}
         />
         <CardContent className={classes.content}>
