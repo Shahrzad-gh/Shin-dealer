@@ -34,8 +34,7 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
 
 // routes
 app.get('*');
-app.get('/', (req, res) => console.log('home'));
-app.get('/shipping', requireAuth, (req, res) => res.render('/shipping'));
+app.get('/shipping', requireAuth);
 
 app.use(authRoutes);
 app.use(productRoutes);

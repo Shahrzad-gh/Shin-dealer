@@ -23,6 +23,12 @@ module.exports.addProduct_post = async (req, res) => {
 
 }
 
-module.exports.addProduct_get = async (req, res) => {
-
+module.exports.getAllProducts_get = async (req, res) => {
+  Product.find({}).
+  exec((error, products) => {
+    if(error) return res.status(400).json({ error });
+    if(products) {
+      res.status(200).json({ products });
+    }
+  })
 }
