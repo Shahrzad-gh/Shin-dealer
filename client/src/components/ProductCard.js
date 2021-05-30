@@ -58,7 +58,7 @@ export default function ProductCard(props) {
       <div className={classes.details}>
         <CardMedia
           className={classes.cover}
-          image={generatePublicUrL(props.data.pictures[0].img)}
+          image={props.data.pictures[0].img}
           title={props.data.name}
         />
         <CardContent className={classes.content}>
