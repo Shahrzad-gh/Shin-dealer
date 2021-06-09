@@ -82,7 +82,7 @@ export default function AddCategory() {
   }
  
 
-  async function handleOnSubmit(e){
+  async function handleAddCategory(e){
     e.preventDefault();
     try{
       const categoryData = {
@@ -101,7 +101,7 @@ export default function AddCategory() {
     <React.Fragment>
       <Title>Add Category</Title>
       <div>
-      <form className={classes.form} onSubmit={handleOnSubmit} noValidate>
+      <form className={classes.form} onSubmit={handleAddCategory} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
             <InputLabel htmlFor="parent-category">Parent Category</InputLabel>

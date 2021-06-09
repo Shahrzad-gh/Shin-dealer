@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Title from './Title';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Title from "./Title";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Fab from "@material-ui/core/Fab";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -29,37 +30,50 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddProduct() {
   const classes = useStyles();
+  const [picture, setPicture] = useState([])
   const [product, setProduct] = useState({
-    picture:'',
-    name:'',
-    count:'',
-    price:'',
-    description:''
+    name: "",
+    count: "",
+    price: "",
+    description: "",
+    category:""
   });
   const history = useHistory();
 
-  const {picture, name, count, price, description} = product;
+  const {name, count, price, description, category } = product;
 
-  function handleOnChange(e){
-    setProduct({...product,[e.target.name] : e.target.value});
+  function handleOnChange(e) {
+    setProduct({ ...product, [e.target.name]: e.target.value });
   }
- 
 
-  async function handleOnSubmit(e){
+  function handleUploadImage(e) {
+    console.log(e.target.files[0])
+    setPicture([...picture, e.target.files]);
+  }
+
+  async function handleOnSubmit(e) {
+    console.log(picture)
+
     e.preventDefault();
-    try{
-      const productData = {
-        picture,
-        name,
-        count,
-        price,
-        description
-      };
-      await axios.post('/addproduct', productData);
-      history.push("/Admin");
-      window.location.reload(true);
-    }catch(err){
-      console.error(err)
+    const productData = new FormData()
+    productData.append('name', name)
+    productData.append('count', count)
+    productData.append('price', price)
+    productData.append('description', description)
+    productData.append('category', category)
+    
+    for (let pic of picture) {
+      productData.append('picture', pic)
+    }
+
+    console.log(productData);
+
+    try {
+      await axios.post("/addproduct",  productData);
+     // history.push("/Admin");
+      //window.location.reload(true);
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -67,7 +81,7 @@ export default function AddProduct() {
     <React.Fragment>
       <Title>Add Product</Title>
       <div>
-      <form className={classes.form} onSubmit={handleOnSubmit} noValidate>
+        <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -76,7 +90,7 @@ export default function AddProduct() {
                 variant="outlined"
                 required
                 fullWidth
-                id="name"
+                id="p-name"
                 label="Name"
                 value={name}
                 onChange={handleOnChange}
@@ -120,32 +134,38 @@ export default function AddProduct() {
               />
               <div className="email error"></div>
             </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="category"
+                label="category"
+                name="category"
+                value={category}
+                onChange={handleOnChange}
+              />
+              <div className="category error"></div>
+            </Grid>
             <Grid item xs={12} sm={6}>
-              <Button
-                variant="contained"
-                component="label"
-              >
-                Upload File
+              <label htmlFor="upload-photo">
                 <input
-                  type="image"
-                  alt="product-pic"
-                  name="picture"
-                  variant="outlined"
-                  id="picture"
-                  label="picture"
-                  value={picture}
-                  onChange={handleOnChange}
-                  hidden
+                  id="img"
+                  name="img"
+                  type="file"
+                  multiple
+                  onChange={handleUploadImage}
                 />
-              </Button>
+              </label>
             </Grid>
           </Grid>
           <Button
+            onClick={handleOnSubmit}
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}       
+            className={classes.submit}
           >
             Add Product
           </Button>
