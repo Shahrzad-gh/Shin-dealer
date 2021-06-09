@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const authController = require('../controllers/authController');
-const { requireAuth } = require('../middlewares/authMiddleware');
+const { requireAuth } = require('../middlewares/commonMiddleware');
 
 const router = Router();
 router.get('/', authController.landing_get);
