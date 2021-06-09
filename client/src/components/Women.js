@@ -30,7 +30,7 @@ export default function Collections() {
   const classes = useStyles();
 
     const handleGetProduct = async () => {
-      const products = await axios.get('/getproduct');
+      //const products = await axios.get('/getallproducts');
     }
 
   return (
@@ -87,11 +87,11 @@ export default function Collections() {
                 </CardActionArea>
               </Card>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item xs={4}  onClick={handleGetProduct}>
               {/* //////////// */}
               <Link to="ProductList">
                 <Card className={classes.root}>
-                  <CardActionArea handleOnClick={handleGetProduct}>
+                  <CardActionArea>
                     <CardMedia
                       component="img"
                       alt="clothes"
