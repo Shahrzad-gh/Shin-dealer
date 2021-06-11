@@ -39,7 +39,11 @@ const useStyles = makeStyles({
 export default function ProductCard(props) {
   const classes = useStyles();
   const [cartItem, setCartItem] = useState();
-  console.log(props.data.pictures[0].img)
+
+  if (props.data.pictures.length > 0 ){
+    console.log(props.data.pictures[0].img)
+  }
+
   const handleAddToBasket = async (e) => {
     // e.preventDefault();
     // try{
@@ -56,11 +60,11 @@ export default function ProductCard(props) {
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
-        <CardMedia
+{         props.data.pictures && (<CardMedia
           className={classes.cover}
           image={props.data.pictures[0].img}
           title={props.data.name}
-        />
+        />)}
         <CardContent className={classes.content}>
           <Typography
             component="h5"
