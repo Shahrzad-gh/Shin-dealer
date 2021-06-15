@@ -40,10 +40,6 @@ export default function ProductCard(props) {
   const classes = useStyles();
   const [cartItem, setCartItem] = useState();
 
-  if (props.data.pictures.length > 0 ){
-    console.log(props.data.pictures[0].img)
-  }
-
   const handleAddToBasket = async (e) => {
     // e.preventDefault();
     // try{
@@ -60,9 +56,9 @@ export default function ProductCard(props) {
   return (
     <Card className={classes.root}>
       <div className={classes.details}>
-{         props.data.pictures && (<CardMedia
+{         props.data.picture && (<CardMedia
           className={classes.cover}
-          image={props.data.pictures[0].img}
+          image={props.data.picture.img}
           title={props.data.name}
         />)}
         <CardContent className={classes.content}>

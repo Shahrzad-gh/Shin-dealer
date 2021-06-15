@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddProduct() {
   const classes = useStyles();
-  const [picture, setPicture] = useState([])
+  const [picture, setPicture] = useState()
   const [product, setProduct] = useState({
     name: "",
     count: "",
@@ -47,31 +47,25 @@ export default function AddProduct() {
   }
 
   function handleUploadImage(e) {
-    console.log(e.target.files[0])
-    setPicture([...picture, e.target.files]);
+    setPicture(e.target.files[0]);
   }
 
   async function handleOnSubmit(e) {
-    console.log(picture)
-
     e.preventDefault();
+
     const productData = new FormData()
     productData.append('name', name)
     productData.append('count', count)
     productData.append('price', price)
     productData.append('description', description)
     productData.append('category', category)
-    
-    for (let pic of picture) {
-      productData.append('picture', pic)
-    }
+    productData.append('pictures', picture)
 
-    console.log(productData);
 
     try {
       await axios.post("/addproduct",  productData);
-     // history.push("/Admin");
-      //window.location.reload(true);
+     history.push("/Admin");
+      window.location.reload(true);
     } catch (err) {
       console.error(err);
     }
