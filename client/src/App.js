@@ -8,6 +8,7 @@ import Men from "./components/Men";
 import Women from "./components/Women";
 import Navbar from "./components/layout/Header/Navbar";
 import ProductList from "./components/ProductList";
+import ProductDetails from "./components/ProdocutDetails";
 import SignIn from "./components/views/SignIn"
 import SignUp from "./components/views/SignUp"
 import ForgetPass from "./components/ForgetPass"
@@ -36,6 +37,7 @@ function App() {
         <Route exact path="/ProductList" component={ProductList} />
         <Route exact path="/Cart" component={Cart} />
         <Route exact path="/Admin" component={Dashboard} />
+        <Route exact path="/Product/:id" component={ProductDetails} />
       </div>
     </Router>
     </AuthContextProvider>
