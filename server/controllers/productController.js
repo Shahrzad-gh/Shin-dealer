@@ -22,6 +22,16 @@ module.exports.addProduct_post = async (req, res) => {
   }
 
 }
+module.exports.getProductById_get = async (req, res) => {
+  console.log("id",req.query.id)
+  Product.findOne({ _id : req.query.id }).
+  exec((error, product) => {
+    if(error) return res.status(400).json({ error });
+    if(product) {
+      res.status(200).json({ product });
+    }
+  })
+}
 
 module.exports.getAllProducts_get = async (req, res) => {
   Product.find({}).
