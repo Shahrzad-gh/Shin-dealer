@@ -58,12 +58,6 @@ export default function ProductCard(props) {
         />)}
         <CardContent className={classes.content}>
           <Typography
-            component="h5"
-            variant="h5"
-            className={classes.typography}>
-            {props.data.description}
-          </Typography>
-          <Typography
             variant="subtitle1"
             color="textSecondary"
             className={classes.typography}
