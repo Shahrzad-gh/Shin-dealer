@@ -17,7 +17,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Please enter price'],
   },
-  discription: {
+  description: {
     type: String,
   },
   offer:{type:Number},
