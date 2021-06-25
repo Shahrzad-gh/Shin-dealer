@@ -8,4 +8,5 @@ router.post('/addproduct', upload.single('pictures'), productController.addProdu
 router.get('/getproductById', productController.getProductById_get);
 router.get('/getallproducts', productController.getAllProducts_get);
 
+
 module.exports = router;

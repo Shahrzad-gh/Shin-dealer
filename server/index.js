@@ -9,6 +9,7 @@ const { requireAuth, checkUser } = require('./middlewares/commonMiddleware');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require("path");
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 const app = express();
@@ -39,3 +40,4 @@ app.use(authRoutes);
 app.use(productRoutes);
 app.use(categoryRoutes);
 app.use(cartRoutes);
+app.use(userRoutes);
