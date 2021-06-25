@@ -8,6 +8,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography";
+import ProductReview from "../components/ProductReview";
 
 const useStyles = makeStyles({
   root: {
@@ -37,8 +38,6 @@ const useStyles = makeStyles({
 export default function ProductList(props) {
   const classes = useStyles();
   const [product, setProduct] = useState(null);
-  const [user, setUser] = useState(null);
-  console.log(props.match.params.id)
 
     // const handleAddToBasket = async (e) => {
   //   e.preventDefault();
@@ -68,20 +67,6 @@ export default function ProductList(props) {
     }    
   }, [])
   
-  console.log(product);
-
-  async function fetchUser(id){
-    try {
-      await axios.get('/getUserById',{
-        params: {
-        id: id
-      }}).then(res => setUser(res)).catch(err => console.log(err))
-    } catch (error) {
-      console.log(error)
-    } 
-    return user
-  }
-  console.log("USER:",user)
   return (
     <>
       {product && (
@@ -109,11 +94,11 @@ export default function ProductList(props) {
                 </CardContent>
               </div>
               </Card>
-              {product.data.product.reviews && product.data.product.reviews.map(index =>    {fetchUser(index.userId)
+              {product.data.product.reviews && product.data.product.reviews.map(index =>    
                 (<li className={classes.list} key={index.userId}><Card className={classes.root}>
-                  <div>  {user} : {index.review} </div>
+                  <ProductReview data={index}/>
                 </Card></li> )
-               })}
+               )}
         </Grid>
         )}
 </>
