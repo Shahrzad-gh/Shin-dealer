@@ -2,7 +2,6 @@ import React,{ useState, useEffect } from 'react'
 import axios from 'axios';
 
 function ProductReview(props) {
-  console.log(props);
   const [userInfo, setUserInfo] = useState(null)
 
   useEffect(() => {

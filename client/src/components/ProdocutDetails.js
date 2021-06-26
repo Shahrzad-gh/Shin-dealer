@@ -9,6 +9,7 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography";
 import ProductReview from "../components/ProductReview";
+import CardActionArea from '@material-ui/core/CardActionArea';
 
 const useStyles = makeStyles({
   root: {
@@ -38,23 +39,28 @@ const useStyles = makeStyles({
 export default function ProductList(props) {
   const classes = useStyles();
   const [product, setProduct] = useState(null);
+  const [cartItem, setCartItem] = useState({
+    productId:'',
+    count: 1 });
 
-    // const handleAddToBasket = async (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target)
-  //   setCartItem({ ...cartItem, [e.target.name]: e.target.value })
-  //   console.log("cart", cartItem)
+    const handleAddToBasket = async (e) => {
+    e.preventDefault();
+    setCartItem({...cartItem, [e.target.name]: e.target.value })
 
-  //   const data = {
-  //     // user,  
-  //     cartItem
-  //    };
-  //   try{
-  //    //await axios.post('/addtocart', data);  
-  //   }catch(err){
-  //     console.error(err)
-  //   }
-  // }
+    const data = {
+      user: "608e7966d9205f2698cde28b",  
+      cartItem : {
+        count: 1, 
+        product: product.data.product._id,
+        price:product.data.product.price
+      }
+     };
+    try{
+     await axios.post('/addtocart', data);  
+    }catch(err){
+      console.error(err)
+    }
+  }
 
   useEffect(() => {
     try {
@@ -71,28 +77,34 @@ export default function ProductList(props) {
     <>
       {product && (
         <Grid>
-          <Card className={classes.root}>
+          <Card className={classes.root} >
+            <CardContent>
+              <form onSubmit={handleAddToBasket}>
             <div className={classes.details}>
             <CardMedia
               className={classes.cover}
               alt={product.data.product.name}
-              image={product.data.product.picture.img}/>
+              name={product.data.product.name}
+              image={product.data.product.picture.img}
+              />
+            <div className={classes.details}>
+                <CardContent >
+                  <div name="name">{product.data.product.name}</div>
+                  <div name="price">تومان {product.data.product.price}</div> 
+                  <div name="description">{product.data.product.description}</div> 
+                </CardContent>
+              </div>
               <CardActions className={classes.details}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" type="submit">
                   <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
                 </Button>
               </CardActions>
               </div>
-
+              </form>
+              </CardContent>
               </Card>
               <Card className={classes.root}>
-              <div className={classes.details}>
-                <CardContent >
-                  <div>{product.data.product.name}</div>
-                  <div>تومان {product.data.product.price}</div> 
-                  <div>{product.data.product.description}</div> 
-                </CardContent>
-              </div>
+
               </Card>
               {product.data.product.reviews && product.data.product.reviews.map(index =>    
                 (<li className={classes.list} key={index.userId}><Card className={classes.root}>

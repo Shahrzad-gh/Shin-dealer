@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import Cart from "../containers/cart";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
+import Basket from "./Basket";
 
 const useStyles = makeStyles({
   listStyle: {
@@ -49,7 +50,7 @@ export default function ProductList() {
         </Grid>
       </Grid>
       <Grid item sm={4}>
-        <Cart />
+        <Basket />
       </Grid>
     </Grid>
   );
