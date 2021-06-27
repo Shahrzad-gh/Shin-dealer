@@ -12,6 +12,9 @@ const useStyles = makeStyles({
   },
   displayList: {
     display: '-webkit-inline-box'
+  },
+  Nopadding:{
+    padding: 0
   }
 });
 
@@ -35,7 +38,7 @@ export default function ProductList() {
     fetchData();
     }, [])
   return (
-    <Grid container spacing={1}>
+    <Grid container spacing={0}>
       <Grid item xs={4} sm={8}>
         <Grid container spacing={1}>
           <Grid item xs={4} sm={4} className={classes.displayList}>
@@ -49,7 +52,7 @@ export default function ProductList() {
           </Grid>          
         </Grid>
       </Grid>
-      <Grid item sm={4}>
+      <Grid classes={classes.Nopadding} item sm={4}>
         <Basket />
       </Grid>
     </Grid>
