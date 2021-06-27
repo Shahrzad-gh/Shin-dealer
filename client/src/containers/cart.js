@@ -46,13 +46,12 @@ export default function Cart(props) {
       console.log(error)
     }    
   }, [])
-
   function handlePay(){
     const price = product.price;
     const count = productCount;
     return price * count;
   }
-  
+
   return (
     <Card className={classes.root} variant="outlined">
       {product && <CardContent className={classes.root}>

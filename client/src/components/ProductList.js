@@ -52,7 +52,7 @@ export default function ProductList() {
           </Grid>          
         </Grid>
       </Grid>
-      <Grid classes={classes.Nopadding} item sm={4}>
+      <Grid className={classes.Nopadding} item sm={4}>
         <Basket />
       </Grid>
     </Grid>

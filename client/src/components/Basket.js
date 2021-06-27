@@ -44,19 +44,15 @@ function Basket() {
     }
   }, []);
 
-  function handlePayment(){
-
-  }
-
   return (
     <Card className={classes.root}>
       { basket && basket.map((item, index) => 
         <div className={classes.details} key={index}>
-          {handlePayment()}
           <Cart data={item.product} count={item.count}/>
+          
           </div>)}
           <div>
-          <div className={classes.details}> قابل پرداخت : $</div>
+          <div className={classes.details}> قابل پرداخت : ${ basket && basket.reduce((a, c)=> a + c.price * c.count, 0) } </div>
           <Button variant="contained" color="primary" type="submit"> Pay </Button>
           </div>
     </Card>
