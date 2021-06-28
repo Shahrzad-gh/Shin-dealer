@@ -1,9 +1,16 @@
 const Product = require("../models/productModel");
-const cloudinary = require('../utils/cloudinary')
+const cloudinary = require('../utils/cloudinary');
 
 module.exports.addProduct_post = async (req, res) => {
   const { name, count, price, description, reviews, offer, category } = req.body;
   let picture = {img:"", id:""};
+  
+  cloudinary.config({
+    cloud_name : process.env.CLOUDINARY_CLOUDNAME,
+    api_key : process.env.CLOUDINARY_APIKEY,
+    api_secret : process.env.CLOUDINARY_APISECRET,
+
+  });
 
   try {
     const result = await cloudinary.uploader.upload(req.file.path)
@@ -12,7 +19,8 @@ module.exports.addProduct_post = async (req, res) => {
 
     const product = await Product.create({ picture , name, count, price, description, reviews, offer, category });
     res.status(201).json({ product});
-    console.log("Product Add Successfully ")
+    res.render('/admin')
+    //console.log("Product Add Successfully ")
 
   }
   catch(err) {

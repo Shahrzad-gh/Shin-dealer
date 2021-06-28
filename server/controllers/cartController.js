@@ -1,8 +1,8 @@
 const Cart = require('../models/cartModel');
 
 module.exports.addItemToCart_post = (req, res) => {
-  const { user, cartItem} = req.body;
-
+  const { cartItem } = req.body;
+  const user = res.locals.user._id;
   let condition, action;
 
     Cart.findOne({user})
@@ -54,7 +54,7 @@ module.exports.addItemToCart_post = (req, res) => {
 }
 
 module.exports.getUserCartItems_get = (req, res) => {
-  Cart.findOne({ user : req.query.id }).
+  Cart.findOne({ user : res.locals.user._id }).
   exec((error, cart) => {
     if(error) return res.status(400).json({ error });
     if(cart) {
