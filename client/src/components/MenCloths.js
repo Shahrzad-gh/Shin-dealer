@@ -1,7 +1,7 @@
 import React from "react";
 import ProductList from "./ProductList";
 
-export default function WomenClothes(props) {
+export default function MenClothes(props) {
   return (
     <div className="content">
       <div className="container">

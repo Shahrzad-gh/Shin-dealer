@@ -9,6 +9,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Popular from "./Popular";
 import Footer from "./layout/Footer/Footer";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +83,8 @@ export default function Collections() {
             </Grid>
             <Grid item xs={4}>
               {/* //////////// */}
+              <Link to={{pathname:"MenCloths", data: "60db1f8455a62c4efc177e9d"}}>
+
               <Card className={classes.root}>
                 <CardActionArea>
                   <CardMedia
@@ -103,6 +106,7 @@ export default function Collections() {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              </Link>
             </Grid>
           </Grid>
         </div>
