@@ -40,6 +40,7 @@ export default function Collections() {
           <Grid container spacing={1}>
             <Grid item xs={4}>
               {/* //////////// */}
+              <Link to={{pathname:"WomenAccesories", state: ""}}>
               <Card className={classes.root}>
                 <CardActionArea>
                   <CardMedia
@@ -61,10 +62,12 @@ export default function Collections() {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              </Link>
             </Grid>
             <Grid item xs={4}>
               {/* /////////////// */}
               {/* //////////// */}
+              <Link to={{pathname:"WomenShoes", state: ""}}>
               <Card className={classes.root}>
                 <CardActionArea>
                   <CardMedia
@@ -86,10 +89,11 @@ export default function Collections() {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              </Link>
             </Grid>
-            <Grid item xs={4}  onClick={handleGetProduct}>
+            <Grid item xs={4}>
               {/* //////////// */}
-              <Link to="ProductList">
+              <Link to={{pathname:"WomnCloths", state: "60daf6482d9c8f49c0242053"}}>
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia

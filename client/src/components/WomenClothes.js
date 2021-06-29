@@ -1,7 +1,8 @@
 import React from "react";
 import ProductList from "./ProductList";
 
-export default function WomenClothes() {
+export default function WomenClothes(props) {
+  console.log(props.location.state)
   return (
     <div className="content">
       <div className="container">
@@ -9,7 +10,7 @@ export default function WomenClothes() {
         <div className="content">
           <div className="container">
             <ul>
-              <ProductList />
+              <ProductList category={props.location.state} />
             </ul>
           </div>
         </div>

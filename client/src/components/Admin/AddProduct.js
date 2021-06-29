@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState, useEffect } from "react";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Title from "./Title";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,6 +7,46 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import Fab from "@material-ui/core/Fab";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import InputBase from '@material-ui/core/InputBase';
+
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    padding: '10px 26px 10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}))(InputBase);
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -31,16 +71,17 @@ const useStyles = makeStyles((theme) => ({
 export default function AddProduct() {
   const classes = useStyles();
   const [picture, setPicture] = useState()
+  const [categoryItems, setCategoryItems] = useState([])
+  const [selectedCategory, setSelectedCategory] = useState()
   const [product, setProduct] = useState({
     name: "",
     count: "",
     price: "",
     description: "",
-    category:""
   });
   const history = useHistory();
 
-  const {name, count, price, description, category } = product;
+  const {name, count, price, description } = product;
 
   function handleOnChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -48,6 +89,17 @@ export default function AddProduct() {
 
   function handleUploadImage(e) {
     setPicture(e.target.files[0]);
+  }
+  useEffect(() => {
+try {
+  axios.get('/getcategories').then(res => setCategoryItems(res.data.categoryList)).catch(err => console.log(err))
+} catch (err) {
+  console.log(err)
+}
+  }, [])
+
+  const handleCategory = (e) => {
+    setSelectedCategory(e.target.value)
   }
 
   async function handleOnSubmit(e) {
@@ -58,9 +110,8 @@ export default function AddProduct() {
     productData.append('count', count)
     productData.append('price', price)
     productData.append('description', description)
-    productData.append('category', category)
+    productData.append('category', selectedCategory)
     productData.append('pictures', picture)
-
 
     try {
       await axios.post("/addproduct",  productData);
@@ -129,17 +180,21 @@ export default function AddProduct() {
               <div className="email error"></div>
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="category"
-                label="category"
-                name="category"
-                value={category}
-                onChange={handleOnChange}
-              />
-              <div className="category error"></div>
+            <NativeSelect
+          value={selectedCategory}
+          onChange={handleCategory}
+          input={<BootstrapInput />}
+        >
+          <option aria-label="None" value="" />
+          {categoryItems && categoryItems.map((cat, index) => 
+            <optgroup key={index} label={cat.name}>
+            {cat.children.map((c, index) =>             
+            <option key={index} value={c._id}>{c.name}</option>)}
+          </optgroup>)}
+
+        </NativeSelect>
+
+           <div className="category error"></div>
             </Grid>
             <Grid item xs={12} sm={6}>
               <label htmlFor="upload-photo">

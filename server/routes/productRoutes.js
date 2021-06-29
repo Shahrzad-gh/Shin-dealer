@@ -7,6 +7,7 @@ const router = Router();
 router.post('/addproduct', checkUser, upload.single('pictures'), productController.addProduct_post);
 router.get('/getproductById', productController.getProductById_get);
 router.get('/getallproducts', productController.getAllProducts_get);
+router.get('/getproductsByCategory', productController.getProductsByCategory_get);
 
 
 module.exports = router;

@@ -54,7 +54,8 @@ function SignInLinks(props) {
   const handleSignOut = async (e) => {
     e.preventDefault();
     try{
-     await axios.get('/logout');
+     const res = await axios.get('/logout');
+     console.log(res)
      handleMenuClose();
      history.push("/");
      window.location.reload(true);

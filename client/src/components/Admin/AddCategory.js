@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles, withStyles  } from '@material-ui/core/styles';
 import Title from './Title';
 import Button from '@material-ui/core/Button';
@@ -70,22 +70,32 @@ export default function AddCategory() {
     name:'',
   });
   const [parentCategory, setParentCategory] = React.useState('');
+  const [categoryItems, setCategoryItems] = useState([])
+
   const handleParent = (event) => {
     setParentCategory(event.target.value);
   };
   const history = useHistory();
 
   const {name} = category;
+  const parent = parentCategory;
 
   function handleOnChange(e){
     setCategory({...category,[e.target.name] : e.target.value});
   }
- 
+  useEffect(() => {
+    try {
+      axios.get('/getcategories').then(res => setCategoryItems(res.data.categoryList)).catch(err => console.log(err))
+    } catch (err) {
+      console.log(err)
+    }
+      }, [])
 
   async function handleAddCategory(e){
     e.preventDefault();
     try{
       const categoryData = {
+        parent,
         name
       };
       console.log(categoryData)
@@ -111,13 +121,16 @@ export default function AddCategory() {
           onChange={handleParent}
           input={<BootstrapInput />}
         >
-          <option aria-label="None" value="" />
-          <option value={10}>Women</option>
-          <option value={20}>Men</option>
-          <option value={30}>Kids</option>
+                    <option aria-label="None" value="" />
+
+          {categoryItems && categoryItems.map((cat, index) => 
+            <option key={index} value={cat._id} label={cat.name}>
+          </option>)}
+
         </NativeSelect>
             </Grid>
             <Grid item xs={12} sm={6}>
+            <InputLabel htmlFor="name">Category Name</InputLabel>
               <TextField
                 autoComplete="name"
                 name="name"

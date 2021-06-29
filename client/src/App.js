@@ -17,6 +17,7 @@ import axios from 'axios';
 import { AuthContextProvider } from "./context/AuthContext";
 import Dashboard from "./components/Admin/Dashboard";
 import Basket from "./components/Basket";
+import WomenCloths from './components/WomenClothes';
 
 axios.defaults.withCredentials = true;
 
@@ -40,6 +41,7 @@ function App() {
         <Route exact path="/Admin" component={Dashboard} />
         <Route exact path="/Product/:id" component={ProductDetails} />
         <Route exact path="/Basket" component={Basket} />
+        <Route exact path="/WomenCloths" component={WomenCloths} />
       </div>
     </Router>
     </AuthContextProvider>

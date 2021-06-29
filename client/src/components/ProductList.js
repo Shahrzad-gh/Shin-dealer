@@ -18,16 +18,15 @@ const useStyles = makeStyles({
   }
 });
 
-export default function ProductList() {
+export default function ProductList(props) {
   const classes = useStyles();
-
    const [productsList, setProductsList] = useState(null);
 
-  useEffect(() => {
+   useEffect(() => {
 
     async function fetchData() {
       try{
-        const data = await axios.get('/getallproducts')
+        const data = await axios.get('/getproductsByCategory',{params:{category: props.category}})
         let p = data.data.products;
         setProductsList(p)
       }catch(err){

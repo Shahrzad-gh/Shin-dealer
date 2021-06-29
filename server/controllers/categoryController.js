@@ -22,15 +22,13 @@ createCategories = (categories, parentId = null) => {
 
 module.exports.addCategory_post = async (req, res) => {
   const categoryObject  = {
-    name : req.body.name
+    name : req.body.name,
+    //parent: req.body.parent
   }
-  categoryObject.parentId = req.body.parentId;
-  
+  categoryObject.parentId = req.body.parent;
   try {
     const category = await Category.create(categoryObject);
     res.status(201).json({ category });
-    console.log("category Add Successfully ")
-
   }
   catch(err) {
     console.log("ERROR", err)
