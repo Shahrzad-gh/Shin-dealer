@@ -93,7 +93,7 @@ export default function Collections() {
             </Grid>
             <Grid item xs={4}>
               {/* //////////// */}
-              <Link to={{pathname:"WomenCloths", data: "60daf6482d9c8f49c0242053"}}>
+              <Link to={{pathname:"WomenCloths", state: {cat_id: "60daf6482d9c8f49c0242053"}}}>
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia

@@ -21,12 +21,13 @@ const useStyles = makeStyles({
 export default function ProductList(props) {
   const classes = useStyles();
    const [productsList, setProductsList] = useState(null);
+   console.log(props.category.cat_id)
 
    useEffect(() => {
 
     async function fetchData() {
       try{
-        const data = await axios.get('/getproductsByCategory',{params:{category: props.category}})
+        const data = await axios.get('/getproductsByCategory',{params:{category: props.category.cat_id}})
         let p = data.data.products;
         setProductsList(p)
       }catch(err){

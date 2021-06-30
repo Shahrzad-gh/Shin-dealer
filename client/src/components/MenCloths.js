@@ -1,7 +1,10 @@
 import React from "react";
 import ProductList from "./ProductList";
+import { useLocation } from "react-router";
 
-export default function MenClothes(props) {
+export default function MenClothes() {
+  let location = useLocation();
+
   return (
     <div className="content">
       <div className="container">
@@ -9,7 +12,7 @@ export default function MenClothes(props) {
         <div className="content">
           <div className="container">
             <ul>
-              <ProductList category={props.location.state} />
+              <ProductList category={location.state} />
             </ul>
           </div>
         </div>
