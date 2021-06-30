@@ -12,7 +12,6 @@ const requireAuth = (req, res, next) => {
         //res.redirect('/signin');
         console.log('signin please')
       } else {
-        console.log(decodedToken);
         next();
       }
     });
@@ -42,6 +41,11 @@ const checkUser = (req, res, next) => {
   }
 };
 
+const adminMiddleware = (req, res, next) => {
+  if (res.locals.user.role !== "admin") {
+      return res.status(400).json({ message: "Admin access denied" });
+    }
+  next();
+};
 
-
-module.exports = { requireAuth, checkUser };
+module.exports = { requireAuth, checkUser, adminMiddleware };
