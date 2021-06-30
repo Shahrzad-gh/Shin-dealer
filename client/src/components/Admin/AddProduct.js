@@ -115,6 +115,7 @@ try {
 
     try {
       await axios.post("/addproduct",  productData);
+      
      history.push("/Admin");
       window.location.reload(true);
     } catch (err) {

@@ -7,7 +7,9 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import axios from 'axios';
-
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 const useStyles = makeStyles({
   root: {
     marginTop: 10,
@@ -34,9 +36,10 @@ const useStyles = makeStyles({
 export default function Cart(props) {
   const classes = useStyles();
   const [product, setProduct] = useState(null);
-  const productCount = props.count;
-  // const bull = <span className={classes.bullet}>•</span>;
+  let productCount = props.count;
+
   useEffect(() => {
+
     try {
       axios.get('/getProductById',{
         params: {
@@ -46,11 +49,17 @@ export default function Cart(props) {
       console.log(error)
     }    
   }, [])
+
   function handlePay(){
     const price = product.price;
     const count = productCount;
     return price * count;
   }
+  const handleRemoveItem =() => {console.log("remove")}
+
+  function handleAdd() {console.log("add")}
+  function handleRemove(){console.log("minus")}
+
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -68,8 +77,11 @@ export default function Cart(props) {
           <div> قیمت : {product.price}</div>
           <div> تعداد : {productCount}</div>
         </div>
-        <div className={classes.title} > جمع کل : {handlePay()}$ </div>
+        <div className={classes.title} > جمع کل : {handlePay()}$ 
+        <AddIcon onClick={handleAdd}/> {productCount} <RemoveIcon onClick={handleRemove}/>
+        <DeleteIcon onClick={handleRemoveItem}/></div>
       </CardContent>}
+
     </Card>
   );
 }
