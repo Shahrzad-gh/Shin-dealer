@@ -21,7 +21,6 @@ const useStyles = makeStyles({
 export default function ProductList(props) {
   const classes = useStyles();
    const [productsList, setProductsList] = useState(null);
-   console.log(props.category.cat_id)
 
    useEffect(() => {
 

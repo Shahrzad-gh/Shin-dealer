@@ -36,10 +36,10 @@ const useStyles = makeStyles({
 export default function Cart(props) {
   const classes = useStyles();
   const [product, setProduct] = useState(null);
-  let productCount = props.count;
+  let productCount = props.count
+
 
   useEffect(() => {
-
     try {
       axios.get('/getProductById',{
         params: {
@@ -48,18 +48,56 @@ export default function Cart(props) {
     } catch (error) {
       console.log(error)
     }    
-  }, [])
+  }, [props.count])
 
   function handlePay(){
     const price = product.price;
     const count = productCount;
     return price * count;
   }
-  const handleRemoveItem =() => {console.log("remove")}
 
-  function handleAdd() {console.log("add")}
-  function handleRemove(){console.log("minus")}
+  const handleDecrement =() => {
+    const data = {
+      cartItem : {
+        count: - 1, 
+        product: product._id,
+        price: product.price
+      }
+    }
+    try {
+      axios.post('/addtocart', data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
+  function handleIncrement() {
+    const data = {
+      cartItem : {
+        count: 1, 
+        product: product._id,
+        price: product.price
+      }
+    }
+    try {
+      axios.post('/addtocart', data)
+    } catch (error) {
+      console.log(error)
+    } 
+  }
+
+  function handleRemove(){
+    const data = {
+      cartItem : {
+        product: product._id,
+      }
+    }
+    try {
+      axios.post('/removecartItem', data)
+    } catch (error) {
+      console.log(error)
+    } 
+  }
 
   return (
     <Card className={classes.root} variant="outlined">
@@ -78,8 +116,9 @@ export default function Cart(props) {
           <div> تعداد : {productCount}</div>
         </div>
         <div className={classes.title} > جمع کل : {handlePay()}$ 
-        <AddIcon onClick={handleAdd}/> {productCount} <RemoveIcon onClick={handleRemove}/>
-        <DeleteIcon onClick={handleRemoveItem}/></div>
+        <AddIcon onClick={handleIncrement}/> {productCount} <RemoveIcon onClick={handleDecrement}/>
+        <DeleteIcon onClick={handleRemove}/></div>
+      
       </CardContent>}
 
     </Card>

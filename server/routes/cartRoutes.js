@@ -7,5 +7,6 @@ const router = Router();
 
 router.post('/addtocart', checkUser, cartController.addItemToCart_post);
 router.get('/getusercartItems', checkUser, cartController.getUserCartItems_get);
+router.post('/removecartItem', checkUser, cartController.removeCartItem_post);
 
 module.exports = router;
