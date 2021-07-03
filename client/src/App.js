@@ -19,7 +19,7 @@ import Dashboard from "./components/Admin/Dashboard";
 import Basket from "./components/Basket";
 import WomenCloths from './components/WomenClothes';
 import MenCloths from './components/MenCloths';
-
+import PrivateRoute from './HOC/privateRoutes';
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -40,6 +40,7 @@ function App() {
         <Route exact path="/ProductList" component={ProductList} />
         <Route exact path="/Cart" component={Cart} />
         <Route exact path="/Admin" component={Dashboard} />
+        <PrivateRoute path="/Admin" roles={["admin"]} component={Dashboard} />
         <Route exact path="/Product/:id" component={ProductDetails} />
         <Route exact path="/Basket" component={Basket} />
         <Route exact path="/WomenCloths" component={WomenCloths} />
