@@ -5,7 +5,7 @@ const productRoutes = require('./routes/productRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const cookieParser = require('cookie-parser');
-const { requireAuth, checkUser } = require('./middlewares/commonMiddleware');
+const { requireAuth, checkUser, adminMiddleware } = require('./middlewares/commonMiddleware');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require("path");
@@ -33,8 +33,9 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
   .catch((err) => console.log(err));
 
 // routes
-app.get('*');
-app.get('/shipping', requireAuth);
+//app.get('*');
+// app.get('/shipping', requireAuth);
+// app.get('/admin', requireAuth, checkUser, adminMiddleware);
 
 app.use(authRoutes);
 app.use(productRoutes);

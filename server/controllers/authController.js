@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const jwt = require('jsonwebtoken');
+const { model } = require("mongoose");
 
 // handle errors
 const handleErrors = (err) => {
@@ -44,16 +45,16 @@ const createToken = (id) => {
 
 // controller actions
 module.exports.signup_get = (req, res) => {
-  res.render('signup');
 
 }
 
 module.exports.login_get = (req, res) => {
-  res.render('signin');
+  //console.log(res.locals)
+  res.status(201).json({ user: res.locals.user._id });
 }
 
 module.exports.landing_get = (req, res) => {
-  res.render('landing');
+  //res.render('landing');
 
 }
 
@@ -90,4 +91,37 @@ module.exports.login_post = async (req, res) => {
 module.exports.logout_get = (req, res) => {
   res.cookie('token', '', { httpOnly: false, maxAge: 1 });
   res.redirect('/');
+}
+
+module.exports.loggedIn_get = (req, res) => {
+    try {
+      const token = req.cookies.token;
+      if (!token) return res.json(false);
+  
+      jwt.verify(token, process.env.JWT_SECRET);
+  
+      res.send(true);
+    } catch (err) {
+      console.log(err)
+      res.json(false);
+    }
+}
+module.exports.getRole_get = (req, res) => {
+    try {
+      const token = req.cookies.token;
+      if (!token) return res.json(false);
+  
+      jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+        if (err) {
+          res.locals.user = null;
+        } else {
+          let user = await User.findById(decodedToken.id);
+          //res.locals.user = user.role;  
+          res.send(user.role);
+
+        }
+      });
+    } catch (err) {
+      console.log(err)
+    }
 }

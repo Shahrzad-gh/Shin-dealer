@@ -25,6 +25,7 @@ import Orders from './Orders';
 import AddProduct from './AddProduct';
 import AddCategory from './AddCategory';
 
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -128,8 +129,9 @@ export default function Dashboard() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  
   return (
     <div className={classes.root}>
       <CssBaseline />
