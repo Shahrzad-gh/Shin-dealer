@@ -5,8 +5,8 @@ import axios from 'axios'
 const AuthContext = createContext();
 
 function AuthContextProvider(props) {
-  const [isLoggedIn, setisLoggedIn] = useState(undefined);
-  const [user, setUser] = useState(null);
+  const [isLoggedIn, setisLoggedIn] = useState(false);
+  const [user, setUser] = useState("user");
 
   async function getLoggedIn(){
     try{
@@ -23,9 +23,6 @@ function AuthContextProvider(props) {
   useEffect(() => {
       getLoggedIn();
   }, []);
-
-  console.log("USER Role",user)
-  console.log("LoggedIn",isLoggedIn)
 
   return (
       <AuthContext.Provider value={ {isLoggedIn, getLoggedIn, user}}>
