@@ -26,27 +26,26 @@ function App() {
 
   return (
     <AuthContextProvider>
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/SignIn" component={SignIn} />
-        <Route exact path="/SignUp" component={SignUp} />
-        <Route exact path="/ForgetPass" component={ForgetPass} />
-        <Route exact path="/Best" component={Best} />
-        <Route exact path="/Kids" component={Kids} />
-        <Route exact path="/Men" component={Men} />
-        <Route exact path="/Women" component={Women} />
-        <Route exact path="/ProductList" component={ProductList} />
-        <Route exact path="/Cart" component={Cart} />
-        <Route exact path="/Admin" component={Dashboard} />
-        <PrivateRoute path="/Admin" roles={["admin"]} component={Dashboard} />
-        <Route exact path="/Product/:id" component={ProductDetails} />
-        <Route exact path="/Basket" component={Basket} />
-        <Route exact path="/WomenCloths" component={WomenCloths} />
-        <Route exact path="/MenCloths" component={MenCloths} />
-      </div>
-    </Router>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/SignIn" component={SignIn} />
+          <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/ForgetPass" component={ForgetPass} />
+          <Route exact path="/Best" component={Best} />
+          <Route exact path="/Kids" component={Kids} />
+          <Route exact path="/Men" component={Men} />
+          <Route exact path="/Women" component={Women} />
+          <Route exact path="/ProductList" component={ProductList} />
+          <Route exact path="/Cart" component={Cart} />
+          <PrivateRoute path="/Admin" roles={["admin"]} component={Dashboard} />
+          <Route exact path="/Product/:id" component={ProductDetails} />
+          <Route exact path="/Basket" component={Basket} />
+          <Route exact path="/WomenCloths" component={WomenCloths} />
+          <Route exact path="/MenCloths" component={MenCloths} />
+        </div>
+      </Router>
     </AuthContextProvider>
   );
 }
