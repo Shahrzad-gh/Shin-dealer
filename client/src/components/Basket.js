@@ -43,17 +43,32 @@ function Basket() {
       console.log(error)
     }
   }, []);
+  const handleTotal = () => {
+    return basket && basket.reduce((a, b)=> a + b.payable, 0)
+  }
+  const handlePay = async () => {
+
+    const basketObj = {
+      basket,
+      total : handleTotal()
+    }
+    try{
+      await axios.get('/auth');
+      await axios.post('/setOrder', basketObj)
+    }catch(err){console.log(err)}
+  }
+
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root}  >
       <div className={classes.typography}> سبد خرید </div>
       { basket && basket.map((item, index) => 
         <div className={classes.details} key={index}>
-          <Cart data={item.product} count={item.count}/>
+          <Cart data={item.product} count={item.count} payable={item.payable}/>
           
           </div>)}
           <div>
-          <div className={classes.details}> قابل پرداخت : ${ basket && basket.reduce((a, c)=> a + c.price * c.count, 0) } </div>
-          <Button variant="contained" color="primary" type="submit"> Pay </Button>
+          <div className={classes.details}> قابل پرداخت : ${ handleTotal() } </div>
+          <Button variant="contained" color="primary" type="submit" onClick={handlePay}> Pay </Button>
           </div>
     </Card>
   )

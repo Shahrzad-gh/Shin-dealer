@@ -37,6 +37,7 @@ export default function Cart(props) {
   const classes = useStyles();
   const [product, setProduct] = useState(null);
   let productCount = props.count
+  let payable = props.payable
 
 
   useEffect(() => {
@@ -49,12 +50,6 @@ export default function Cart(props) {
       console.log(error)
     }    
   }, [props.count])
-
-  function handlePay(){
-    const price = product.price;
-    const count = productCount;
-    return price * count;
-  }
 
   const handleDecrement =() => {
     const data = {
@@ -115,7 +110,7 @@ export default function Cart(props) {
           <div> قیمت : {product.price}</div>
           <div> تعداد : {productCount}</div>
         </div>
-        <div className={classes.title} > جمع کل : {handlePay()}$ 
+        <div className={classes.title} > جمع کل : {payable}$ 
         <AddIcon onClick={handleIncrement}/> {productCount} <RemoveIcon onClick={handleDecrement}/>
         <DeleteIcon onClick={handleRemove}/></div>
       
