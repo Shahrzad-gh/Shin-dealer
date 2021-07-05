@@ -15,7 +15,8 @@ module.exports.addItemToCart_post = (req, res) => {
           action = {"$set" : {
             "cartItems.$" : {
               ...req.body.cartItem,
-              count: item.count + req.body.cartItem.count
+              count: item.count + req.body.cartItem.count,
+              payable: item.price + count
             }
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {

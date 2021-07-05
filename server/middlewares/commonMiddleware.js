@@ -12,7 +12,6 @@ const requireAuth = (req, res, next) => {
         //res.redirect('/signin');
         console.log('signin please')
       } else {
-        console.log('requireAuth')
         next();
       }
     });
@@ -33,8 +32,6 @@ const checkUser = (req, res, next) => {
       } else {
         let user = await User.findById(decodedToken.id);
         res.locals.user = user;
-        console.log('checkUser')
-
         next();
       }
     });
@@ -49,8 +46,6 @@ const adminMiddleware = (req, res, next) => {
   if (res.locals.user.role !== "admin") {
       return res.status(400).json({ message: "Admin access denied" });
     }
-    console.log('admin')
-
   next();
 };
 

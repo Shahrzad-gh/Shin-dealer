@@ -5,6 +5,7 @@ import Cart from "../containers/cart";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import Basket from "./Basket";
+import Order from '../containers/order';
 
 const useStyles = makeStyles({
   listStyle: {
@@ -36,6 +37,7 @@ export default function ProductList(props) {
 
     fetchData();
     }, [])
+    
   return (
     <Grid container spacing={0}>
       <Grid item xs={4} sm={8}>
@@ -53,6 +55,7 @@ export default function ProductList(props) {
       </Grid>
       <Grid className={classes.Nopadding} item sm={4}>
         <Basket />
+        <Order />
       </Grid>
     </Grid>
   );
