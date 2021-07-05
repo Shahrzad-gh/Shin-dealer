@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
     enum: ["user", "admin"],
     default: "user",
   },
+  address: {
+    type: String
+  },
   contactNumber: { type: String },
   profilePicture: { type: String },
 },
