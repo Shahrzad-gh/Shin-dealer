@@ -10,6 +10,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require("path");
 const userRoutes = require('./routes/userRoutes');
+const orderRoutes = require('./routes/orderRoutes')
 
 dotenv.config();
 const app = express();
@@ -42,3 +43,4 @@ app.use(productRoutes);
 app.use(categoryRoutes);
 app.use(cartRoutes);
 app.use(userRoutes);
+app.use(orderRoutes);
