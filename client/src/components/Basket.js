@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 function Basket() {
   const classes = useStyles();
   const [basket, setBasket] = useState(null);
-
+  const [paymentOption, setPaymentOption] = useState()
   useEffect(() => {
     try {
       //console.log(cookie.get('token'))
@@ -54,10 +54,46 @@ function Basket() {
     }
     try{
       await axios.get('/auth');
-      await axios.post('/setOrder', basketObj)
+      axios.post('/setOrder', basketObj).then(res => setPaymentOption(res)).catch(err => console.log(err))
     }catch(err){console.log(err)}
+  
+var options = {
+  key: process.env.RAZORPAY_KEY_ID,
+  amount: paymentOption && paymentOption.data.amount,
+  currency: "INR",
+  name: "Acme Corp",
+  description: "Test Transaction",
+  image: "https://example.com/your_logo",
+  order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  handler: function (response){
+      alert(response.razorpay_payment_id);
+      alert(response.razorpay_order_id);
+      alert(response.razorpay_signature)
+  },
+  prefill: {
+      name: "Gaurav Kumar",
+      email: "gaurav.kumar@example.com",
+      contact: "9999999999"
+  },
+  notes: {
+      address: "Razorpay Corporate Office"
+  },
+  theme: {
+      color: "#3399cc"
   }
-
+};
+var rzp1 = new window.Razorpay(options);
+rzp1.open()
+rzp1.on('payment.failed', function (response){
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+});
+  }
   return (
     <Card className={classes.root}  >
       <div className={classes.typography}> سبد خرید </div>

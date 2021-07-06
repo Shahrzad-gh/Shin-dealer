@@ -1,5 +1,11 @@
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
+const Razorpay = require('razorpay');
+
+const instance = new Razorpay({
+  key_id: "rzp_test_Tb9TLvCcWoJY1q",
+  key_secret: "RKIXzOGhM4QJGnE3JNbg90au"  
+})
 
 module.exports.setOrder_post = async (req, res) => {
   Cart.deleteOne({user : res.locals.user}).exec(async (error, result) => {
@@ -30,10 +36,18 @@ module.exports.setOrder_post = async (req, res) => {
         paymentStatus: "pending",
         paymentType: "card",
       };
-
+      const currency ="EUR"
+      const amount = orderObject.totalAmount;
+      const notes = 'Description'
       try {
         const order = await Order.create(orderObject);
-        res.status(201).json({ order });
+        //res.status(201).json({ order });
+
+        const receipt = "order._id";
+        instance.orders.create({ amount, currency, receipt, notes }, (err, result) => {
+          if(err) {return res.status(500).json(err);}
+          return res.status(200).json(result);
+        })
       }
       catch(err) {
         console.log("ERROR", err)

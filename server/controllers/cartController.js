@@ -2,6 +2,7 @@ const Cart = require('../models/cartModel');
 
 module.exports.addItemToCart_post = (req, res) => {
   const { cartItem } = req.body;
+  cartItem.payable = cartItem.price;
   const user = res.locals.user._id;
   let condition, action;
     Cart.findOne({user})
@@ -16,7 +17,7 @@ module.exports.addItemToCart_post = (req, res) => {
             "cartItems.$" : {
               ...req.body.cartItem,
               count: item.count + req.body.cartItem.count,
-              payable: item.price + count
+              payable: item.price * (item.count + req.body.cartItem.count)
             }
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
@@ -30,6 +31,7 @@ module.exports.addItemToCart_post = (req, res) => {
           condition = { user };
           action = {"$push" : {
             "cartItems" : cartItem,
+            payable: product.price
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
             if(error)return res.status(400).json({ error });

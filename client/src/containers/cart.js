@@ -71,10 +71,12 @@ export default function Cart(props) {
       cartItem : {
         count: 1, 
         product: product._id,
-        price: product.price
+        price: product.price,
+        payable: product.price,
       }
     }
     try {
+      console.log(data)
       axios.post('/addtocart', data)
     } catch (error) {
       console.log(error)

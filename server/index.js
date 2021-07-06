@@ -11,6 +11,7 @@ const cors = require('cors');
 const path = require("path");
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes')
+const razorPayRoutes = require('./routes/razorPayRoutes');
 
 dotenv.config();
 const app = express();
@@ -44,3 +45,4 @@ app.use(categoryRoutes);
 app.use(cartRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
+app.use(razorPayRoutes);
