@@ -106,7 +106,7 @@ module.exports.loggedIn_get = (req, res) => {
       res.json(false);
     }
 }
-module.exports.getRole_get = (req, res) => {
+module.exports.getUser_get = (req, res) => {
     try {
       const token = req.cookies.token;
       if (!token) return res.json(false);
@@ -117,7 +117,8 @@ module.exports.getRole_get = (req, res) => {
         } else {
           let user = await User.findById(decodedToken.id);
           //res.locals.user = user.role;  
-          res.send(user.role);
+          user.password = undefined,
+          res.send(user);
 
         }
       });

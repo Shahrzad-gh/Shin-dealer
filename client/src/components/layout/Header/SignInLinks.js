@@ -120,6 +120,7 @@ function SignInLinks(props) {
     return (
         <div>
          <div className={classes.sectionDesktop}>
+           <p>{}</p>
             <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
               <Badge badgeContent={0} color="secondary">
                 {/* badgeContent */}
