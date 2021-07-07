@@ -58,13 +58,13 @@ function Basket() {
     }catch(err){console.log(err)}
   
 var options = {
-  key: process.env.RAZORPAY_KEY_ID,
-  amount: paymentOption && paymentOption.data.amount,
+  key: "rzp_test_Tb9TLvCcWoJY1q",
+  amount: "500",
   currency: "INR",
-  name: "Acme Corp",
+  name: "Fashion",
   description: "Test Transaction",
   image: "https://example.com/your_logo",
-  order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  //order_id: "60e4311c64676c0d5415b6c6", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
   handler: function (response){
       alert(response.razorpay_payment_id);
       alert(response.razorpay_order_id);
