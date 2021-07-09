@@ -1,0 +1,11 @@
+{
+  "env": {
+    "MDB_CONNECT" : "mongodb+srv://admin:ymg5cyL00K0yr5j9@cluster.wfrkl.mongodb.net/Projects?retryWrites=true&w=majority",
+    "JWT_SECRET" : "net ninja",
+    "CLOUDINARY_CLOUDNAME" : "dw8wf8gps",
+    "CLOUDINARY_APIKEY" : "699299826684562",
+    "CLOUDINARY_APISECRET" : "n3PEwxGgQVfvVxBviYKTYN6v8l0",
+    "RAZORPAY_SECRET":"RKIXzOGhM4QJGnE3JNbg90au",
+    "RAZORPAY_KEY_ID":"rzp_test_Tb9TLvCcWoJY1q"
+  }
+}
