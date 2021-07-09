@@ -3,8 +3,8 @@ const Cart = require('../models/cartModel');
 const Razorpay = require('razorpay');
 
 const instance = new Razorpay({
-  key_id: "rzp_test_Tb9TLvCcWoJY1q",
-  key_secret: "RKIXzOGhM4QJGnE3JNbg90au"  
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET
 })
 
 module.exports.setOrder_post = async (req, res) => {
@@ -36,16 +36,16 @@ module.exports.setOrder_post = async (req, res) => {
         paymentStatus: "pending",
         paymentType: "card",
       };
+      console.log(orderObject);
       const currency ="EUR"
-      const amount = orderObject.totalAmount;
+      const amount = parseInt(orderObject.totalAmount); 
       const notes = 'Description'
       try {
         const order = await Order.create(orderObject);
         //res.status(201).json({ order });
-
-        const receipt = "order._id";
+        const receipt = toString(order._id)
         instance.orders.create({ amount, currency, receipt, notes }, (err, result) => {
-          if(err) {return res.status(500).json(err);}
+          if(err) {return res.status(500).json(err); }
           return res.status(200).json(result);
         })
       }
@@ -55,10 +55,9 @@ module.exports.setOrder_post = async (req, res) => {
         res.status(400).json({ err });
       }
     }
-  }
-
-)};
-
+  })
+}
+    
 module.exports.getOrder_get = async (req, res) => {
   Order.find({user: res.locals.user._id}).
   exec((error, order) => {

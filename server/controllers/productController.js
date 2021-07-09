@@ -10,7 +10,7 @@ module.exports.addProduct_post = async (req, res) => {
     api_key : process.env.CLOUDINARY_APIKEY,
     api_secret : process.env.CLOUDINARY_APISECRET,
   });
-
+  
   try {
     const result = await cloudinary.uploader.upload(req.file.path)
     picture.img = result.secure_url;

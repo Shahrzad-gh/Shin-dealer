@@ -12,6 +12,7 @@ const path = require("path");
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes')
 const razorPayRoutes = require('./routes/razorPayRoutes');
+const crypto = require('crypto');
 
 dotenv.config();
 const app = express();
@@ -38,6 +39,10 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
 //app.get('*');
 // app.get('/shipping', requireAuth);
 // app.get('/admin', requireAuth, checkUser, adminMiddleware);
+app.post('/verification' , (req, res) => {
+  console.log('RES', res)
+  res.json({status: 'OK' })
+})
 
 app.use(authRoutes);
 app.use(productRoutes);
