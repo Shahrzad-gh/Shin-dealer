@@ -36,14 +36,13 @@ module.exports.setOrder_post = async (req, res) => {
         paymentStatus: "pending",
         paymentType: "card",
       };
-      console.log(orderObject);
       const currency ="EUR"
       const amount = parseInt(orderObject.totalAmount); 
       const notes = 'Description'
       try {
         const order = await Order.create(orderObject);
         //res.status(201).json({ order });
-        const receipt = toString(order._id)
+        const receipt = order._id + ""
         instance.orders.create({ amount, currency, receipt, notes }, (err, result) => {
           if(err) {return res.status(500).json(err); }
           return res.status(200).json(result);

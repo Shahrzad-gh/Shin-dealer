@@ -24,6 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
   origin: ['http://localhost:3000'],
+  preflightContinue : false,
   credentials: true,
 }))
 
@@ -40,7 +41,6 @@ mongoose.connect(process.env.MDB_CONNECT, { useNewUrlParser: true, useUnifiedTop
 // app.get('/shipping', requireAuth);
 // app.get('/admin', requireAuth, checkUser, adminMiddleware);
 app.post('/verification' , (req, res) => {
-  console.log('RES', res)
   res.json({status: 'OK' })
 })
 
