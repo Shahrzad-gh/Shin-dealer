@@ -44,8 +44,7 @@ function Basket() {
   const [orderId, setOrderId] = useState(null)
   const [signature, setSignature] = useState(null)
   const [paymentStatus, setPaymentStatus] = useState(null)
-  const key_id = process.env.REACT_APP_RAZORPAY_KEY_ID;
-  const key_secret = process.env.REACT_APP_RAZORPAY_SECRET;
+
   useEffect(() => {
     try {
       //console.log(cookie.get('token'))
@@ -103,18 +102,14 @@ function Basket() {
     }
   }
 
-  const handlepaymentStatus = (paymentId) =>{
-    paymentId && axios.get(`https://${key_id}:${key_secret}@api.razorpay.com/v1/payments/${paymentId}`,{ 
-      headers:{
-      'Access-Control-Allow-Origin': '*'    
-    }
-  })
-    .then(res => { console.log(res);setPaymentStatus(res.data.status)}).catch(err => console.log(err))
+  const handlepaymentStatus = async (paymentId) =>{
+    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId }})
+    .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
   }
 
   handlepaymentStatus(paymentId)
 
-  //console.log("status",paymentStatus);
+  console.log("status",paymentStatus);
 
   return (
     <Card className={classes.root}>

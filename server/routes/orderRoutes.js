@@ -6,5 +6,6 @@ const router = Router();
 
 router.post('/setOrder', checkUser, orderController.setOrder_post);
 router.get('/getOrder', checkUser, orderController.getOrder_get);
+router.get('/getpaymentstatus', orderController.getPaymentStatus_get);
 
 module.exports = router;

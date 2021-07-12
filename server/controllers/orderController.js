@@ -1,6 +1,7 @@
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
 const Razorpay = require('razorpay');
+const { default: axios } = require('axios');
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -65,4 +66,12 @@ module.exports.getOrder_get = async (req, res) => {
       res.status(200).json({ order });
     }
   })
+}
+
+module.exports.getPaymentStatus_get = async (req, res) => {
+  instance.payments.fetch(req.query.id, (err, result)=>{
+    if(err) {return res.status(500).json(err); }
+    return res.status(200).json(result);
+  });
+
 }
