@@ -45,6 +45,7 @@ export default function Order(props) {
     async function fetchData() {
       try{
         const data = await axios.get('/getorder')
+        console.log(data);
         let o = data.data.order;
         setOrder(o)
       }catch(err){
@@ -65,9 +66,10 @@ export default function Order(props) {
           <section key={index}>
               <div> Payment Satus: {item.paymentStatus}</div>
               <div> Total: {item.totalAmount}</div>
-              {item.items.map((i) => 
+              <div> OrderId: {item._id}</div>
+              {/* {item.items.map((i) => 
                 <div key={i._id}> item: {i.product}</div>
-              )}
+              )} */}
           </section>
             )}
         </CardContent>

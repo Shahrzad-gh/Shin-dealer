@@ -5,10 +5,9 @@ import Button from "@material-ui/core/Button";
 import Cart from '../containers/cart';
 import axios from 'axios';
 import cookie from 'js-cookie';
-import dotenv from 'dotenv';
 import { Typography } from '@material-ui/core';
+import Chip from "@material-ui/core/Chip";
 
-dotenv.config();
 
 const useStyles = makeStyles({
   root: {
@@ -32,7 +31,7 @@ const useStyles = makeStyles({
     },
     list:{
       listStyle: 'none'
-    }
+    },
 });
 
 function Basket() {
@@ -43,7 +42,7 @@ function Basket() {
   const [paymentId, setPaymentId]=  useState(null)
   const [orderId, setOrderId] = useState(null)
   const [signature, setSignature] = useState(null)
-  const [paymentStatus, setPaymentStatus] = useState(null)
+  const [paymentStatus, setPaymentStatus] = useState("pending")
 
   useEffect(() => {
     try {
@@ -56,6 +55,13 @@ function Basket() {
   const handleTotal = () => {
     return basket && basket.reduce((a, b)=> a + b.payable, 0)
   }
+
+  const handlepaymentStatus = async (paymentId, amount, currency) =>{
+    console.log("check status")
+    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId, amount, currency }})
+    .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
+  }
+
   const handlePay = async () => {
 
     const basketObj = {
@@ -64,7 +70,7 @@ function Basket() {
     }
     try{
       await axios.get('/auth');
-      axios.post('/setOrder', basketObj).then(res => {setPaymentOption(res)}).catch(err => console.log(err));
+      axios.post('/setOrder', basketObj).then(res => {console.log(res);setPaymentOption(res)}).catch(err => console.log(err));
 
       var options = {
         key: "rzp_test_Tb9TLvCcWoJY1q",
@@ -79,6 +85,7 @@ function Basket() {
             setPaymentId(response.razorpay_payment_id)
             setOrderId(response.razorpay_order_id)
             setSignature(response.razorpay_signature)
+
         },
         prefill: {
             name: '',
@@ -102,12 +109,9 @@ function Basket() {
     }
   }
 
-  const handlepaymentStatus = async (paymentId) =>{
-    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId }})
-    .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
-  }
+  console.log("option", paymentOption)
 
-  handlepaymentStatus(paymentId)
+  handlepaymentStatus(paymentId, handleTotal() , "EUR")
 
   console.log("status",paymentStatus);
 
@@ -117,7 +121,14 @@ function Basket() {
       { basket ? basket.map((item, index) => 
         <div className={classes.details} key={index}>
           <Cart data={item.product} count={item.count} payable={item.payable}/>
-          Status : {paymentId}:{paymentStatus}
+          <Card>
+            <Typography className={classes.typography}>
+            Status : 
+            <Chip
+              label={paymentStatus}
+              color="primary" />
+              </Typography>
+              </Card>
           </div>) :
           <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>}
           <div>

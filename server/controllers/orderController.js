@@ -1,7 +1,6 @@
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
 const Razorpay = require('razorpay');
-const { default: axios } = require('axios');
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -42,7 +41,6 @@ module.exports.setOrder_post = async (req, res) => {
       const notes = 'Description'
       try {
         const order = await Order.create(orderObject);
-        //res.status(201).json({ order });
         const receipt = order._id + ""
         instance.orders.create({ amount, currency, receipt, notes }, (err, result) => {
           if(err) {return res.status(500).json(err); }
@@ -71,7 +69,12 @@ module.exports.getOrder_get = async (req, res) => {
 module.exports.getPaymentStatus_get = async (req, res) => {
   instance.payments.fetch(req.query.id, (err, result)=>{
     if(err) {return res.status(500).json(err); }
-    return res.status(200).json(result);
-  });
-
+    console.log(result)
+    if(result.status === 'authorized'){
+      instance.payments.capture(req.query.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
+        if (err){return res.status(500).json(err);}
+        return res.status(200).json(paymentStatus);
+      })
+    }
+  })
 }
