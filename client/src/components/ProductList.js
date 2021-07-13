@@ -55,7 +55,7 @@ export default function ProductList(props) {
       </Grid>
       <Grid className={classes.Nopadding} item sm={4}>
         <Basket />
-        <Order />
+        {/* <Order /> */}
       </Grid>
     </Grid>
   );

@@ -33,18 +33,20 @@ const useStyles = makeStyles({
   },
   timeline: {
     paddingTop: 40,
-    transform: "rotate(90deg)"
+    // transform: "rotate(90deg)"
   },
 });
 
 export default function Order(props) {
   const classes = useStyles();
   const [order, setOrder] = useState(null);
+  
+  console.log("order-id",props.match.params.id)
 
   useEffect(() => {
     async function fetchData() {
       try{
-        const data = await axios.get('/getorder')
+        const data = await axios.get('/getorder', {params:{id:props.match.params.id}})
         console.log(data);
         let o = data.data.order;
         setOrder(o)
@@ -55,7 +57,6 @@ export default function Order(props) {
 
     fetchData();
     }, [])
-
   return (
     <Card className={classes.root} variant="outlined">
       <Typography className={classes.typography}>Track your Order</Typography>
@@ -67,9 +68,9 @@ export default function Order(props) {
               <div> Payment Satus: {item.paymentStatus}</div>
               <div> Total: {item.totalAmount}</div>
               <div> OrderId: {item._id}</div>
-              {/* {item.items.map((i) => 
+              {item.items.map((i) => 
                 <div key={i._id}> item: {i.product}</div>
-              )} */}
+              )}
           </section>
             )}
         </CardContent>
@@ -77,17 +78,10 @@ export default function Order(props) {
     <Timeline align="right" className={classes.timeline}>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+          <TimelineDot color="primary"/>
           <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent>Delivered</TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Shipped</TimelineContent>
+        <TimelineContent>Ordered</TimelineContent>
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
@@ -98,9 +92,16 @@ export default function Order(props) {
       </TimelineItem>
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot color="primary"/>
+          <TimelineDot />
+          <TimelineConnector />
         </TimelineSeparator>
-        <TimelineContent >Ordered</TimelineContent>
+        <TimelineContent>Shipped</TimelineContent>
+      </TimelineItem>
+      <TimelineItem>
+        <TimelineSeparator>
+          <TimelineDot/>
+        </TimelineSeparator>
+        <TimelineContent>Delivered</TimelineContent>
       </TimelineItem>
     </Timeline> 
     </Card>

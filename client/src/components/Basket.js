@@ -7,7 +7,7 @@ import axios from 'axios';
 import cookie from 'js-cookie';
 import { Typography } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
-
+import {Link} from "react-router-dom"
 
 const useStyles = makeStyles({
   root: {
@@ -121,19 +121,20 @@ function Basket() {
       { basket ? basket.map((item, index) => 
         <div className={classes.details} key={index}>
           <Cart data={item.product} count={item.count} payable={item.payable}/>
-          <Card>
-            <Typography className={classes.typography}>
+          <Card className={classes.root}>
             Status : 
             <Chip
               label={paymentStatus}
               color="primary" />
-              </Typography>
               </Card>
           </div>) :
           <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>}
           <div>
           <div className={classes.details}> قابل پرداخت : ${ handleTotal() } </div>
-          <Button variant="contained" color="primary" type="submit" onClick={handlePay}> Pay </Button>
+          {paymentStatus === 'pending' ? 
+          (<Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>Pay </Button>
+          ) : (<Link to={`Order/${paymentOption.data.receipt}`}><Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button></Link>
+          )}
           </div>
     </Card>
   )

@@ -56,8 +56,18 @@ module.exports.setOrder_post = async (req, res) => {
   })
 }
     
-module.exports.getOrder_get = async (req, res) => {
+module.exports.getAllOrders_get = async (req, res) => {
   Order.find({user: res.locals.user._id}).
+  exec((error, order) => {
+    if(error) return res.status(400).json({ error });
+    if(order) {
+      res.status(200).json({ order });
+    }
+  })
+}
+
+module.exports.getOrder_get = async (req, res) => {
+  Order.find({_id: req.query.id}).
   exec((error, order) => {
     if(error) return res.status(400).json({ error });
     if(order) {
@@ -69,9 +79,9 @@ module.exports.getOrder_get = async (req, res) => {
 module.exports.getPaymentStatus_get = async (req, res) => {
   instance.payments.fetch(req.query.id, (err, result)=>{
     if(err) {return res.status(500).json(err); }
-    console.log(result)
     if(result.status === 'authorized'){
       instance.payments.capture(req.query.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
+        //تغییر وضعیت پرداخت سفارش از pending به compelet در orderModel
         if (err){return res.status(500).json(err);}
         return res.status(200).json(paymentStatus);
       })

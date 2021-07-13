@@ -20,6 +20,7 @@ import Basket from "./components/Basket";
 import WomenCloths from './components/WomenClothes';
 import MenCloths from './components/MenCloths';
 import PrivateRoute from './HOC/privateRoutes';
+import Order from "./containers/order";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/Basket" component={Basket} />
           <Route exact path="/WomenCloths" component={WomenCloths} />
           <Route exact path="/MenCloths" component={MenCloths} />
+          <Route exact path="/Order/:id" component={Order} />
         </div>
       </Router>
     </AuthContextProvider>
