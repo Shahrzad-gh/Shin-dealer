@@ -40,7 +40,7 @@ function App() {
           <Route exact path="/Women" component={Women} />
           <Route exact path="/ProductList" component={ProductList} />
           <Route exact path="/Cart" component={Cart} />
-          <PrivateRoute path="/Admin" roles={["admin"]} component={Dashboard} />
+          <Route path="/Admin" roles={["admin"]} component={Dashboard} />
           <Route exact path="/Product/:id" component={ProductDetails} />
           <Route exact path="/Basket" component={Basket} />
           <Route exact path="/WomenCloths" component={WomenCloths} />

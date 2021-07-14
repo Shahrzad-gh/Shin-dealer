@@ -58,10 +58,10 @@ module.exports.setOrder_post = async (req, res) => {
     
 module.exports.getAllOrders_get = async (req, res) => {
   Order.find({user: res.locals.user._id}).
-  exec((error, order) => {
+  exec((error, orders) => {
     if(error) return res.status(400).json({ error });
-    if(order) {
-      res.status(200).json({ order });
+    if(orders) {
+      res.status(200).json({ orders });
     }
   })
 }
