@@ -81,9 +81,21 @@ module.exports.getPaymentStatus_get = async (req, res) => {
     if(err) {return res.status(500).json(err); }
     if(result.status === 'authorized'){
       instance.payments.capture(req.query.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
-        //تغییر وضعیت پرداخت سفارش از pending به compelet در orderModel
         if (err){return res.status(500).json(err);}
-        return res.status(200).json(paymentStatus);
+        if(paymentStatus){
+          condition = { _id : req.query.orderId };
+          action = {"$set" : {
+              paymentStatus: "complete"
+            }
+          };
+          Order.findOneAndUpdate(condition, action).exec((err, _order) => {
+            if(err){return res.status(500).json(err);}
+            if(_order){
+              console.log("order update")
+            }
+          })            
+          return res.status(200).json(paymentStatus);
+        }
       })
     }
   })

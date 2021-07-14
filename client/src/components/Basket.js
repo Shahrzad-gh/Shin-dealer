@@ -56,9 +56,9 @@ function Basket() {
     return basket && basket.reduce((a, b)=> a + b.payable, 0)
   }
 
-  const handlepaymentStatus = async (paymentId, amount, currency) =>{
+  const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
     console.log("check status")
-    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId, amount, currency }})
+    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId, amount, currency, orderId }})
     .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
   }
 
@@ -110,8 +110,8 @@ function Basket() {
   }
 
   console.log("option", paymentOption)
-
-  handlepaymentStatus(paymentId, handleTotal() , "EUR")
+  const o_id = paymentOption && paymentOption.data.receipt;
+  handlepaymentStatus(paymentId, handleTotal() , "EUR", o_id)
 
   console.log("status",paymentStatus);
 
