@@ -44,7 +44,7 @@ export default function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders && orders.slice(0).reverse().map((row) => (
+          {orders && orders.reverse().slice(0, 10).map((row) => (
             <TableRow key={row._id}>
               <TableCell>{moment().calendar(row.createdAt)}</TableCell>
               <TableCell>{row.user}</TableCell>

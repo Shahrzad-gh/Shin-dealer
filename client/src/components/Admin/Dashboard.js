@@ -207,11 +207,6 @@ export default function Dashboard() {
                 <AddCategory />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
           </Grid>
           <Box pt={4}>
             <Copyright />
