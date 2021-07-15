@@ -1,11 +1,9 @@
 import React, { useState,  useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductCard from "./ProductCard";
-import Cart from "../containers/cart";
 import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import Basket from "./Basket";
-import Order from '../containers/order';
 
 const useStyles = makeStyles({
   listStyle: {
@@ -36,7 +34,7 @@ export default function ProductList(props) {
     }
 
     fetchData();
-    }, [])
+    },[props.category.cat_id])
     
   return (
     <Grid container spacing={0}>

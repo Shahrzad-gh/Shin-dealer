@@ -9,6 +9,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
+import authContext from "../../../context/AuthContext"
 
 const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
         display: "none",
       },
     },
+    typography : {
+      padding: 12,
+      margin: 0
+    }
   }));
 
 function SignInLinks(props) {
@@ -118,9 +123,10 @@ function SignInLinks(props) {
 
 
     return (
+      <authContext.Consumer>
+        {(user) => ( 
         <div>
          <div className={classes.sectionDesktop}>
-           <p>{}</p>
             <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
               <Badge badgeContent={0} color="secondary">
                 {/* badgeContent */}
@@ -134,9 +140,10 @@ function SignInLinks(props) {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
-            >
+              >
               <AccountCircle />
-            </IconButton>
+            </IconButton>             
+            <p className={classes.typography}>{user.user.firstName}</p>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton
@@ -151,7 +158,8 @@ function SignInLinks(props) {
           </div>
         {renderMobileMenu}
         {renderMenu}
-          </div>
+        </div>)}      
+</authContext.Consumer>
     )}
 
 export default SignInLinks

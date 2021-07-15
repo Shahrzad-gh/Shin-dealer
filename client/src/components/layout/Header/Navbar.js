@@ -73,7 +73,8 @@ function Navbar() {
 
   const links = user  ? <SignInLinks/> :<SignOutLinks/>
   return (
-    <div className={classes.grow}>
+      
+      <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -106,6 +107,7 @@ function Navbar() {
       </AppBar>
 
     </div>
+
   );
 }
 

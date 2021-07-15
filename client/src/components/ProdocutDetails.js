@@ -9,7 +9,6 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography";
 import ProductReview from "../components/ProductReview";
-import CardActionArea from '@material-ui/core/CardActionArea';
 
 const useStyles = makeStyles({
   root: {
@@ -71,7 +70,7 @@ export default function ProductList(props) {
     } catch (error) {
       console.log(error)
     }    
-  }, [])
+  }, [props.match.params.id])
   
   return (
     <>

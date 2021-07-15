@@ -41,22 +41,19 @@ export default function Order(props) {
   const classes = useStyles();
   const [order, setOrder] = useState(null);
   
-  console.log("order-id",props.match.params.id)
-
   useEffect(() => {
     async function fetchData() {
       try{
         const data = await axios.get('/getorder', {params:{id:props.match.params.id}})
-        console.log(data);
         let o = data.data.order;
         setOrder(o)
       }catch(err){
         console.error(err)
       }
     }
-
     fetchData();
-    }, [])
+    })
+
   return (
     <Card className={classes.root} variant="outlined">
       <Typography className={classes.typography}>Track your Order</Typography>

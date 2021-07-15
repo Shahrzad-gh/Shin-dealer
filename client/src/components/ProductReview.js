@@ -13,7 +13,7 @@ function ProductReview(props) {
     } catch (error) {
       console.log(error)
     }    
-  }, []);
+  },[props.data.userId]);
   
   return (
     <div>

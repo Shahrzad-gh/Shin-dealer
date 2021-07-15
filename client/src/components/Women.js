@@ -10,7 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Popular from "./Popular";
 import Footer from "./layout/Footer/Footer";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -28,10 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Collections() {
   const classes = useStyles();
-
-    const handleGetProduct = async () => {
-      //const products = await axios.get('/getallproducts');
-    }
 
   return (
     <React.Fragment>

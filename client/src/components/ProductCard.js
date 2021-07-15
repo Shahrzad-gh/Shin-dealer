@@ -1,9 +1,8 @@
-import React , {useState} from "react";
+import React  from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
@@ -42,8 +41,8 @@ const useStyles = makeStyles({
 
 export default function ProductCard(props) {
   const classes = useStyles();
-  const [cartItem, setCartItem] = useState({picture:"", name:"", price:"", count: 1});
-  const {picture, name, price, count} = cartItem
+ // const [cartItem, setCartItem] = useState({picture:"", name:"", price:"", count: 1});
+  //const {picture, name, price} = cartItem
   return (
     <Link to={`Product/${props.data._id}`}>
     <Card className={classes.root}>
@@ -54,7 +53,7 @@ export default function ProductCard(props) {
           image={props.data.picture.img}
           title={props.data.name}
           name="picture"
-          value={picture}
+          //value={picture}
         />)}
         <CardContent className={classes.content}>
           <Typography
@@ -62,7 +61,7 @@ export default function ProductCard(props) {
             color="textSecondary"
             className={classes.typography}
             name="name"
-            value={name}
+            //value={name}
             >
           {props.data.name}
           </Typography>
@@ -71,7 +70,7 @@ export default function ProductCard(props) {
             color="textSecondary"
             className={classes.typography}
             name="price"
-            value={price}
+            //value={price}
             >
           {props.data.price}$
           </Typography>
