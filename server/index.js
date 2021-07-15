@@ -26,6 +26,7 @@ app.use(cors({
   origin: 'http://localhost:3000',
   preflightContinue : false,
   credentials: true,
+  
 }))
 
 //view engine
