@@ -24,7 +24,7 @@ import Deposits from './Deposits';
 import Orders from './Orders';
 import AddProduct from './AddProduct';
 import AddCategory from './AddCategory';
-
+import AuthContext from '../../context/AuthContext';
 
 function Copyright() {
   return (
@@ -131,9 +131,11 @@ export default function Dashboard() {
   };
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  
+
   return (
-    <div className={classes.root}>
+    <AuthContext.Consumer>
+      {(user) => user.user.role === 'admin' ? 
+      <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
@@ -214,5 +216,10 @@ export default function Dashboard() {
         </Container>
       </main>
     </div>
+    :
+    <div>Admin access deined</div>
+    }
+    </AuthContext.Consumer>
+    
   );
 }
