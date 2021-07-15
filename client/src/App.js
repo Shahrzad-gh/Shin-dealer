@@ -19,7 +19,7 @@ import Dashboard from "./components/Admin/Dashboard";
 import Basket from "./components/Basket";
 import WomenCloths from './components/WomenClothes';
 import MenCloths from './components/MenCloths';
-import PrivateRoute from './HOC/privateRoutes';
+// import PrivateRoute from './HOC/privateRoutes';
 import Order from "./containers/order";
 axios.defaults.withCredentials = true;
 
