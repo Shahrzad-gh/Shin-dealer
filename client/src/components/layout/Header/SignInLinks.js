@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     typography : {
+      fontFamily: "Almarai", fontSize: "1rem",
       padding: 12,
       margin: 0
     }
