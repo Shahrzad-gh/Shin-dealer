@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Typography } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
 import {Link} from "react-router-dom"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +38,7 @@ function Basket() {
   const classes = useStyles();
   const [basket, setBasket] = useState(null);
   const [paymentOption, setPaymentOption] = useState();
-
+  const [loadding, setLoadding] = useState(false);
   const [paymentId, setPaymentId]=  useState(null)
   //const [orderId, setOrderId] = useState(null)
   //const [signature, setSignature] = useState(null)
@@ -45,7 +46,7 @@ function Basket() {
 
   useEffect(() => {
     try {
-      axios.get('/getusercartItems').then(res => setBasket(res.data.cart.cartItems)).catch(err => console.log(err));
+      axios.get('/getusercartItems').then(res => {setLoadding(true);setBasket(res.data.cart.cartItems)}).catch(err => console.log(err));
     } catch (error) {
       console.log(error)
     }
@@ -111,23 +112,24 @@ function Basket() {
   return (
     <Card className={classes.root}>
       <div className={classes.typography}> سبد خرید </div>
-      { basket ? basket.map((item, index) => 
-        <div className={classes.details} key={index}>
-          <Cart data={item.product} count={item.count} payable={item.payable}/>
-          <Card className={classes.root}>
-            Status : 
-            <Chip
-              label={paymentStatus}
-              color="primary" />
-              </Card>
-          </div>) :
-          <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>}
+       {loadding ?   
+              basket !== null ? basket.map((item, index) => 
+              <div className={classes.details} key={index}>
+                <Cart data={item.product} count={item.count} payable={item.payable}/>
+                <Card className={classes.root}>
+                  Status : 
+                  <Chip
+                    label={paymentStatus}
+                    color="primary" />
+                    </Card>
+                </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
+       : <CircularProgress />} 
           <div>
           <div className={classes.details}> قابل پرداخت : ${ handleTotal() } </div>
           {paymentStatus === 'pending' ? 
           (<Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>Pay </Button>
           ) : (<Link to={`Order/${paymentOption.data.receipt}`}><Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button></Link>
-          )}
+          )}          
           </div>
     </Card>
   )

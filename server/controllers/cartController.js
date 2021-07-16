@@ -59,6 +59,9 @@ module.exports.getUserCartItems_get = (req, res) => {
   res.locals.user && Cart.findOne({ user : res.locals.user._id }).
   exec((error, cart) => {
     if(error) return res.status(400).json({ error });
+    if(cart === null){
+      res.status(304).json( {cart});
+    }
     if(cart) {
       res.status(200).json({ cart });
     }
