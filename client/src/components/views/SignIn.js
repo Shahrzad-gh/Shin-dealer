@@ -46,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  error: {
+    color: 'red'
+  }
 }));
 
 function SignIn() {
@@ -61,10 +64,8 @@ function SignIn() {
   function handleChange(e){
     setFormData({...formData, [e.target.name]: e.target.value})
   }
-  const authError = null
-  //const emailError = document.querySelector('.email.error');
-//const passwordError = document.querySelector('.password.error');
 
+const [authError, setAuthError] = useState({email:'', password: ''})
 const handleSignIn =  async (e) => {
   e.preventDefault();
   try{
@@ -72,19 +73,23 @@ const handleSignIn =  async (e) => {
       email,
       password
     };
-    // const config = {
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   }
-    // }
-   await axios.post('/signin', loginData);
-   history.push("/");
+
+    axios.post('/signin', loginData).then(res => {
+         history.push("/");
    window.location.reload(true);
+    }).catch(err => {
+      setAuthError(err.response.data.errors)
+      // authError.email = err.response.data.errors.email;
+      // authError.password = err.response.data.errors.password;
+    }
+      );
 
   }catch(err){
-    console.error(err)
+    console.error("catch",err)
   }
 }
+
+console.log(authError);
 
   return (
     <Container component="main" maxWidth="xs">
@@ -110,7 +115,9 @@ const handleSignIn =  async (e) => {
             onChange={handleChange}
             value={email}
           />
-          <div className="email error"></div>
+          <div className="email error">
+          { authError ? <p className={classes.error}>{authError.email}</p> : null }
+          </div>
           <TextField
             variant="outlined"
             margin="normal"
@@ -124,7 +131,9 @@ const handleSignIn =  async (e) => {
             onChange={e => handleChange(e)}
             autoComplete="current-password"
           />
-          <div className="password error"></div>
+          <div className="password error">
+          { authError ? <p className={classes.error}>{authError.password}</p> : null }
+          </div>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
@@ -140,7 +149,7 @@ const handleSignIn =  async (e) => {
           </Button>
           <Grid container>
             <Grid item xs>
-              { authError ? <p>{authError}</p> : null }
+              { authError ? <p>{authError.password}</p> : null }
               <Link to="forgetPass" variant="body2">
                 Forgot password?
               </Link>

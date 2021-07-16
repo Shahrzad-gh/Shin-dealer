@@ -81,10 +81,11 @@ module.exports.login_post = async (req, res) => {
     const token = createToken(user._id);
     res.cookie('token', token, { httpOnly: false});
     res.status(200).json({ user: user._id});
-    //res.render('/')
   }
   catch(err) {
-    res.status(400).json({ error: err });
+    const errors = handleErrors(err)
+    console.log(errors)
+    res.status(400).json({ errors });
   }
 }
 
@@ -102,7 +103,7 @@ module.exports.loggedIn_get = (req, res) => {
   
       res.send(true);
     } catch (err) {
-      console.log(err)
+      handleErrors(err)
       res.json(false);
     }
 }
