@@ -58,3 +58,25 @@ module.exports.getProductsByCategory_get = async (req, res) => {
     }
   })
 }
+
+module.exports.getproductsByCategoryASD_get = (req, res) => {
+  Product.find({category: req.query.category}).
+  exec((error, products) => {
+    if(error) return res.status(400).json({ error });
+    if(products) {
+      products.sort((a,b) =>  {return a.price - b.price;})
+      res.status(200).json({ products });
+    }
+  })
+}
+
+module.exports.getproductsByCategoryDSD_get = (req, res) => {
+  Product.find({category: req.query.category}).
+  exec((error, products) => {
+    if(error) return res.status(400).json({ error });
+    if(products) {
+      products.sort((a,b) =>  {return b.price - a.price;})
+      res.status(200).json({ products });
+    }
+  })
+}

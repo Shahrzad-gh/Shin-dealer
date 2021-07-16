@@ -8,6 +8,8 @@ router.post('/addproduct', requireAuth, checkUser, adminMiddleware, upload.singl
 router.get('/getproductById', productController.getProductById_get);
 router.get('/getallproducts', productController.getAllProducts_get);
 router.get('/getproductsByCategory', productController.getProductsByCategory_get);
+router.get('/getproductsByCategoryASD', productController.getproductsByCategoryASD_get);
+router.get('/getproductsByCategoryDSD', productController.getproductsByCategoryDSD_get);
 
 
 module.exports = router;
