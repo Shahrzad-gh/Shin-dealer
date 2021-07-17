@@ -63,6 +63,7 @@ module.exports.getUserCartItems_get = (req, res) => {
       res.status(304).json( {cart});
     }
     if(cart) {
+      console.log(cart)
       res.status(200).json({ cart });
     }
   })

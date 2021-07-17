@@ -89,8 +89,6 @@ const handleSignIn =  async (e) => {
   }
 }
 
-console.log(authError);
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

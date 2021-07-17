@@ -8,6 +8,8 @@ import { Typography } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
 import {Link} from "react-router-dom"
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { useDispatch, useSelector  } from 'react-redux';
+import { getUserCartItems } from '../Store/actions/cartActions';
 
 const useStyles = makeStyles({
   root: {
@@ -36,21 +38,21 @@ const useStyles = makeStyles({
 
 function Basket() {
   const classes = useStyles();
-  const [basket, setBasket] = useState(null);
+  //const [basket, setBasket] = useState(null);
   const [paymentOption, setPaymentOption] = useState();
-  const [loadding, setLoadding] = useState(false);
+  //const [loadding, setLoadding] = useState(false);
   const [paymentId, setPaymentId]=  useState(null)
   //const [orderId, setOrderId] = useState(null)
   //const [signature, setSignature] = useState(null)
-  const [paymentStatus, setPaymentStatus] = useState("pending")
+  const [paymentStatus, setPaymentStatus] = useState("pending");
+  const dispatch = useDispatch();
+  const basket = useSelector(state => state.cart);
+  const loadding = useSelector(state => state.loadding)
 
   useEffect(() => {
-    try {
-      axios.get('/getusercartItems').then(res => {setLoadding(true);setBasket(res.data.cart.cartItems)}).catch(err => console.log(err));
-    } catch (error) {
-      console.log(error)
-    }
+    dispatch(getUserCartItems())
   }, []);
+console.log(basket)
   const handleTotal = () => {
     return basket && basket.reduce((a, b)=> a + b.payable, 0)
   }

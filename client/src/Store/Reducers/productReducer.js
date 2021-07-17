@@ -21,17 +21,17 @@ export default (state = initState, action) => {
         loading: false,
         error : action.payload.error
     }
-    case productConstants.GET_PRODUCT_BY_CATEGORY_SUCCESS:
+    case productConstants.GET_PRODUCTS_BY_CATEGORY_SUCCESS:
       return state = {
         ...state,
         loading: false,
         products: action.payload.products
       }
-    case productConstants.GET_PRODUCT_BY_CATEGORY_FAILURE:
+    case productConstants.GET_PRODUCTS_BY_CATEGORY_FAILURE:
       return state = {
         ...state,
         loading: false,
-        products: action.payload.products
+        error: action.payload.error
       }
     default:
       return state;

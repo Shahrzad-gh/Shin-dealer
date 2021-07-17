@@ -27,12 +27,12 @@ export const getProductsByCategory = (payload) => {
     try {
        res = await axios.get(`/getProductsByCategory/${cat_id}`)
         dispatch({
-          type: productConstants.GET_PRODUCT_BY_CATEGORY_SUCCESS,
+          type: productConstants.GET_PRODUCTS_BY_CATEGORY_SUCCESS,
           payload: { products: res.data.products }
         })
     } catch (error) {
       dispatch({
-        type: productConstants.GET_PRODUCT_BY_CATEGORY_FAILURE,
+        type: productConstants.GET_PRODUCTS_BY_CATEGORY_FAILURE,
         payload: { error: res.data.error }
     });
     }    

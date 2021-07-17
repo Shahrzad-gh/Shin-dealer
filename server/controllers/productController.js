@@ -49,12 +49,10 @@ module.exports.getAllProducts_get = async (req, res) => {
   })
 }
 module.exports.getProductsByCategory_get = async (req, res) => {
-console.log(req.params)
   Product.find({category: req.params.id}).
   exec((error, products) => {
     if(error) return res.status(400).json({ error });
     if(products) {
-      console.log(products)
       res.status(200).json({ products });
     }
   })
