@@ -73,7 +73,7 @@ export default function ProductList(props) {
       },
     };
     dispatch(getProductDetailsById(payload));
-  });
+  },[dispatch, props.match.params]);
 
   return (
     <>

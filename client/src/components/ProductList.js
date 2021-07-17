@@ -1,8 +1,8 @@
-import React, { useState,  useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
-import axios from 'axios';
+//import axios from 'axios';
 import Basket from "./Basket";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -47,24 +47,25 @@ export default function ProductList(props) {
     }
 
     dispatch(getProductsByCategory(payload))
-    },)
+    },[dispatch, props.category])
         
     const handleSortASD = async() => {
-      try{
-        const data = await axios.get('/getproductsByCategoryASD',{params:{category: props.category.cat_id}})
-        let p = data.data.products;
+      // try{
+      //   const data = await axios.get('/getproductsByCategoryASD',{params:{category: props.category.cat_id}})
+        //let p = data.data.products;
         //setProductsList(p)
-      }catch(err){        console.error(err)
-      }
+      // }catch(err){        console.error(err)
+      // }
 
     }
     const handleSortDSD = async() => {
-    try{
-      const data = await axios.get('/getproductsByCategoryDSD',{params:{category: props.category.cat_id}})
-      let p = data.data.products;
+    //try{
+      //const data = await axios.get('/getproductsByCategoryDSD',{params:{category: props.category.cat_id}})
+      //let p = data.data.products;
      // setProductsList(p)
-    }catch(err){        console.error(err)
-    }}
+    //}catch(err){        console.error(err)
+    ////}
+  }
 
   return (
     <Grid container spacing={1}>
