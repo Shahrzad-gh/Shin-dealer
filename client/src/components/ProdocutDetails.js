@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import ProductReview from "../components/ProductReview";
 import { useSelector, useDispatch } from 'react-redux'
 import { getProductDetailsById } from "../Store/actions/productActions";
+import {addItemToCart} from "../Store/actions/cartActions"
+
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -36,35 +38,45 @@ const useStyles = makeStyles({
     }
 });
 
-export default function ProductList(props) {
+export default function ProductDetails(props) {
   const classes = useStyles();
-  //const [product, setProduct] = useState(null);
-  const [cartItem, setCartItem] = useState({
-    productId:'',
-    count: 1 });
-    const dispatch = useDispatch()
 
+  //const [product, setProduct] = useState(null);
+  // const [cartItem, setCartItem] = useState({
+  //   productId:'',
+  //   count: 1 });
+    const dispatch = useDispatch()
   const product = useSelector((state) => state.product)
 
     const handleAddToBasket = async (e) => {
     e.preventDefault();
-    setCartItem({...cartItem, [e.target.name]: e.target.value })
+    //setCartItem({...cartItem, [e.target.name]: e.target.value })
 
-    const data = {
-      //user: "608cf207d655320b7c7f58b2",  
-      cartItem : {
-        count: 1, 
-        product: product.data.product._id,
-        price:product.data.product.price
+    // const data = {
+    //   //user: "608cf207d655320b7c7f58b2",  
+    //   cartItem : {
+    //     count: 1, 
+    //     product: product.data.product._id,
+    //     price:product.data.product.price
+    //   }
+    //  };
+    // try{
+    //  await axios.post('/addtocart', data);  
+    // }catch(err){
+    //   console.error(err)
+    // }
+
+   const payload = {
+      params : {
+        cartItem : {
+        product: product.productDetails._id,
+        price : product.productDetails.price,
+        count: 1} 
       }
-     };
-    try{
-     await axios.post('/addtocart', data);  
-    }catch(err){
-      console.error(err)
     }
+    dispatch(addItemToCart(payload));
   }
-
+  
   useEffect(() => {
     const { id } = props.match.params;
     const payload = {
