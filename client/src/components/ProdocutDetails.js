@@ -9,7 +9,8 @@ import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button"
 import Typography from "@material-ui/core/Typography";
 import ProductReview from "../components/ProductReview";
-
+import { useSelector, useDispatch } from 'react-redux'
+import { getProductDetailsById } from "../Store/actions/productActions";
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -37,10 +38,13 @@ const useStyles = makeStyles({
 
 export default function ProductList(props) {
   const classes = useStyles();
-  const [product, setProduct] = useState(null);
+  //const [product, setProduct] = useState(null);
   const [cartItem, setCartItem] = useState({
     productId:'',
     count: 1 });
+    const dispatch = useDispatch()
+
+  const product = useSelector((state) => state.product)
 
     const handleAddToBasket = async (e) => {
     e.preventDefault();
@@ -62,16 +66,15 @@ export default function ProductList(props) {
   }
 
   useEffect(() => {
-    try {
-      axios.get('/getProductById',{
-        params: {
-        id: props.match.params.id
-      }}).then(res => setProduct(res)).catch(err => console.log(err));
-    } catch (error) {
-      console.log(error)
-    }    
-  }, [props.match.params.id])
-  
+    const { id } = props.match.params;
+    const payload = {
+      params: {
+        id,
+      },
+    };
+    dispatch(getProductDetailsById(payload));
+  });
+
   return (
     <>
       {product && (
@@ -80,17 +83,17 @@ export default function ProductList(props) {
             <CardContent>
               <form onSubmit={handleAddToBasket}>
             <div className={classes.details}>
-            <CardMedia
+            <CardMedia component="img"
               className={classes.cover}
-              alt={product.data.product.name}
-              name={product.data.product.name}
-              image={product.data.product.picture.img}
+              alt={product.productDetails.name}
+              name={product.productDetails.name}
+              image={product.productDetails.picture && product.productDetails.picture.img}
               />
             <div className={classes.details}>
                 <CardContent >
-                  <div name="name">{product.data.product.name}</div>
-                  <div name="price">تومان {product.data.product.price}</div> 
-                  <div name="description">{product.data.product.description}</div> 
+                  <div name="name">{product.productDetails.name}</div>
+                  <div name="price">تومان {product.productDetails.price}</div> 
+                  <div name="description">{product.productDetails.description}</div> 
                 </CardContent>
               </div>
               <CardActions className={classes.details}>
@@ -105,7 +108,7 @@ export default function ProductList(props) {
               <Card className={classes.root}>
 
               </Card>
-              {product.data.product.reviews && product.data.product.reviews.map(index =>    
+              {product.productDetails.reviews && product.productDetails.reviews.map(index =>    
                 (<li className={classes.list} key={index.userId}><Card className={classes.root}>
                   <ProductReview data={index}/>
                 </Card></li> )
