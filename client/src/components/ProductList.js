@@ -10,6 +10,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import { useSelector, useDispatch } from 'react-redux'
+import { getProductsByCategory} from "../Store/actions/productActions";
 
 const useStyles = makeStyles({
   listStyle: {
@@ -32,28 +34,26 @@ const useStyles = makeStyles({
 
 export default function ProductList(props) {
   const classes = useStyles();
-   const [productsList, setProductsList] = useState(null);
+   //const [productsList, setProductsList] = useState(null);
+   const dispatch = useDispatch();
+   const productsList = useSelector(state => state.product.products)
 
    useEffect(() => {
-
-    async function fetchData() {
-      try{
-        const data = await axios.get('/getproductsByCategory',{params:{category: props.category.cat_id}})
-        let p = data.data.products;
-        setProductsList(p)
-      }catch(err){
-        console.error(err)
-      }
+    const {cat_id} = props.category
+    const payload = {
+      params: {
+        cat_id,
+      },
     }
 
-    fetchData();
-    },[props.category.cat_id])
-    
+    dispatch(getProductsByCategory(payload))
+    },)
+        
     const handleSortASD = async() => {
       try{
         const data = await axios.get('/getproductsByCategoryASD',{params:{category: props.category.cat_id}})
         let p = data.data.products;
-        setProductsList(p)
+        //setProductsList(p)
       }catch(err){        console.error(err)
       }
 
@@ -62,10 +62,9 @@ export default function ProductList(props) {
     try{
       const data = await axios.get('/getproductsByCategoryDSD',{params:{category: props.category.cat_id}})
       let p = data.data.products;
-      setProductsList(p)
+     // setProductsList(p)
     }catch(err){        console.error(err)
     }}
-
 
   return (
     <Grid container spacing={1}>

@@ -19,3 +19,22 @@ export const getProductDetailsById = (payload) => {
     }    
   }
 }
+
+export const getProductsByCategory = (payload) => {
+  return async (dispatch) => {
+    const {cat_id} = payload.params
+    let res;
+    try {
+       res = await axios.get(`/getProductsByCategory/${cat_id}`)
+        dispatch({
+          type: productConstants.GET_PRODUCT_BY_CATEGORY_SUCCESS,
+          payload: { products: res.data.products }
+        })
+    } catch (error) {
+      dispatch({
+        type: productConstants.GET_PRODUCT_BY_CATEGORY_FAILURE,
+        payload: { error: res.data.error }
+    });
+    }    
+  }
+}
