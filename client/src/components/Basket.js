@@ -46,15 +46,16 @@ function Basket() {
   //const [signature, setSignature] = useState(null)
   const [paymentStatus, setPaymentStatus] = useState("pending");
   const dispatch = useDispatch();
-  const basket = useSelector(state => state.cart);
-  const loadding = useSelector(state => state.loadding)
+  const cart = useSelector(state => state.cart.cart);
 
   useEffect(() => {
     dispatch(getUserCartItems())
   }, []);
-console.log(basket)
+  
+  console.log("cart",cart.cartItems)
+
   const handleTotal = () => {
-    return basket && basket.reduce((a, b)=> a + b.payable, 0)
+     return cart.cartItem &&  cart.cartItem.reduce((a, b)=> a + b.payable, 0)
   }
 
   const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
@@ -65,7 +66,7 @@ console.log(basket)
   const handlePay = async () => {
 
     const basketObj = {
-      basket,
+      cart,
       total : handleTotal()
     }
     try{
@@ -109,13 +110,15 @@ console.log(basket)
   }
 
   const o_id = paymentOption && paymentOption.data.receipt;
-  handlepaymentStatus(paymentId, handleTotal() , "EUR", o_id)
+  handlepaymentStatus(paymentId, 
+    handleTotal() ,
+     "EUR", o_id)
 
   return (
     <Card className={classes.root}>
       <div className={classes.typography}> سبد خرید </div>
-       {loadding ?   
-              basket !== null ? basket.map((item, index) => 
+       {cart.cartItems ?   
+              cart.cartItems && cart.cartItems.map((item, index) => 
               <div className={classes.details} key={index}>
                 <Cart data={item.product} count={item.count} payable={item.payable}/>
                 <Card className={classes.root}>
@@ -125,9 +128,12 @@ console.log(basket)
                     color="primary" />
                     </Card>
                 </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
-       : <CircularProgress />} 
+       //: <CircularProgress />
+       } 
           <div>
-          <div className={classes.details}> قابل پرداخت : ${ handleTotal() } </div>
+          <div className={classes.details}> قابل پرداخت : 
+          ${ handleTotal() } 
+          </div>
           {paymentStatus === 'pending' ? 
           (<Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>Pay </Button>
           ) : (<Link to={`Order/${paymentOption.data.receipt}`}><Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button></Link>

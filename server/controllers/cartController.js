@@ -2,17 +2,21 @@ const Cart = require('../models/cartModel');
 
 module.exports.addItemToCart_post = (req, res) => {
   const { cartItem } = req.body;
+  console.log(cartItem)
   cartItem.payable = cartItem.price;
   const user = res.locals.user._id;
+  console.log(cartItem)
+
   let condition, action;
+
     Cart.findOne({user})
     .exec(async (error, cart) => {
       if(error) return res.status(400).json({ error });      
       if(cart){
-        const product = req.body.cartItem.product;
-        const item = cart.cartItems.find( c => c.product == product);
+        const product_id = req.body.cartItem.productId;
+        const item = cart.cartItems.find( c => c.productId == product_id);
         if(item){
-          condition = { user, "cartItems.product": product };
+          condition = { user, "cartItems.product": product_id };
           action = {"$set" : {
             "cartItems.$" : {
               ...req.body.cartItem,
@@ -23,6 +27,7 @@ module.exports.addItemToCart_post = (req, res) => {
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
             if(error) return res.status(400).json({ error });
             if(_cart){
+              console.log("set",_cart)
               res.status(201).json({ _cart });
             }
           })
@@ -31,18 +36,21 @@ module.exports.addItemToCart_post = (req, res) => {
           condition = { user };
           action = {"$push" : {
             "cartItems" : cartItem,
-            payable: product.price
+            payable: cartItem.price
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
             if(error)return res.status(400).json({ error });
             if(_cart){
+              console.log("push",_cart)
               res.status(201).json({ _cart });
             }
           })
         }
       }else{
         try {
+          console.log(cartItem)
           const cart = await Cart.create({ user, cartItem });
+          console.log("create",cart)
           res.status(201).json({ cart });
         }
         catch(err) {
@@ -59,11 +67,7 @@ module.exports.getUserCartItems_get = (req, res) => {
   res.locals.user && Cart.findOne({ user : res.locals.user._id }).
   exec((error, cart) => {
     if(error) return res.status(400).json({ error });
-    if(cart === null){
-      res.status(304).json( {cart});
-    }
     if(cart) {
-      console.log(cart)
       res.status(200).json({ cart });
     }
   })

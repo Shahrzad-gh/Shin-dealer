@@ -34,7 +34,6 @@ const useStyles = makeStyles({
 
 export default function ProductList(props) {
   const classes = useStyles();
-   //const [productsList, setProductsList] = useState(null);
    const dispatch = useDispatch();
    const productsList = useSelector(state => state.product.products)
 

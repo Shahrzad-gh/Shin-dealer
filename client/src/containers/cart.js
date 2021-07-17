@@ -7,6 +7,10 @@ import axios from 'axios';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
+import { useSelector, useDispatch } from 'react-redux'
+import { getProductDetailsById } from "../Store/actions/productActions";
+
+
 const useStyles = makeStyles({
   root: {
     marginTop: 10,
@@ -31,23 +35,29 @@ const useStyles = makeStyles({
 });
 
 export default function Cart(props) {
+  console.log(props)
+
   const classes = useStyles();
-  const [product, setProduct] = useState(null);
+  //const [product, setProduct] = useState(null);
   let productCount = props.count
   let payable = props.payable
+  const dispatch = useDispatch()
 
+  const product = useSelector((state) => state.product)
 
   useEffect(() => {
-    try {
-      axios.get('/getProductById',{
-        params: {
-        id: props.data
-      }}).then(res => setProduct(res.data.product)).catch(err => console.log(err));
-    } catch (error) {
-      console.log(error)
-    }    
-  }, [props.data])
+    const  id  = props.data;
+    const payload = {
+      params: {
+        id,
+      },
+    };
 
+    dispatch(getProductDetailsById(payload));
+  },[dispatch, props]);
+
+  console.log("p", product)
+  
   const handleDecrement =() => {
     const data = {
       cartItem : {
@@ -73,7 +83,7 @@ export default function Cart(props) {
       }
     }
     try {
-      console.log(data)
+
       axios.post('/addtocart', data)
     } catch (error) {
       console.log(error)
@@ -95,18 +105,18 @@ export default function Cart(props) {
 
   return (
     <Card className={classes.root} variant="outlined">
-      {product && <CardContent className={classes.root}>
+      {product.productDetails && <CardContent className={classes.root}>
         <div>
-        <CardMedia
+        <CardMedia component="img"
         className={classes.cover}
-        image={product.picture.img}
+        image={product.productDetails.picture && product.productDetails.picture.img}
         alt="img"
         >
         </CardMedia>
         </div>
         <div className={classes.typography}>
-          <div > نام کالا : {product.name}</div>
-          <div> قیمت : {product.price}</div>
+          <div > نام کالا : {product.productDetails.name}</div>
+          <div> قیمت : {product.productDetails.price}</div>
           <div> تعداد : {productCount}</div>
         </div>
         <div className={classes.title} > جمع کل : {payable}$ 
