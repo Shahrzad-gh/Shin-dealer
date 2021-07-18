@@ -2,19 +2,17 @@ const Cart = require('../models/cartModel');
 
 module.exports.addItemToCart_post = (req, res) => {
   const { cartItem } = req.body;
-  console.log(cartItem)
   cartItem.payable = cartItem.price;
   const user = res.locals.user._id;
-  console.log(cartItem)
 
   let condition, action;
 
     Cart.findOne({user})
     .exec(async (error, cart) => {
-      if(error) return res.status(400).json({ error });      
+      if(error) {return res.status(400).json({ error });}      
       if(cart){
-        const product_id = req.body.cartItem.productId;
-        const item = cart.cartItems.find( c => c.productId == product_id);
+        const product_id = req.body.cartItem.product;
+        const item = cart.cartItems.find( c => c.product == product_id);
         if(item){
           condition = { user, "cartItems.product": product_id };
           action = {"$set" : {
@@ -25,9 +23,8 @@ module.exports.addItemToCart_post = (req, res) => {
             }
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
-            if(error) return res.status(400).json({ error });
+            if(error) { return res.status(400).json({ error });}
             if(_cart){
-              console.log("set",_cart)
               res.status(201).json({ _cart });
             }
           })
@@ -39,28 +36,24 @@ module.exports.addItemToCart_post = (req, res) => {
             payable: cartItem.price
           }};
           Cart.findOneAndUpdate(condition, action).exec((error, _cart) => {
-            if(error)return res.status(400).json({ error });
+            if(error) { return res.status(400).json({ error });}
             if(_cart){
-              console.log("push",_cart)
               res.status(201).json({ _cart });
             }
           })
         }
       }else{
         try {
-          console.log(cartItem)
-          const cart = await Cart.create({ user, cartItem });
-          console.log("create",cart)
+          const cartItems = cartItem
+          const cart = await Cart.create({ user, cartItems });
           res.status(201).json({ cart });
         }
-        catch(err) {
-          //const errors = handleErrors(err);
-          res.status(400).json({ err });
+        catch(err){
+          return res.status(400).json({ error });
         }
       }
     }
   )
-
 }
 
 module.exports.getUserCartItems_get = (req, res) => {
