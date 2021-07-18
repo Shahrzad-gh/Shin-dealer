@@ -11,3 +11,9 @@ export const cartConstants = {
   ADD_TO_CART_SUCCESS : "ADD_TO_CART_SUCCESS",
   ADD_TO_CART_FAILURE : "ADD_TO_CART_FAILURE",
 };
+
+export const userConstants = {
+  GET_USER_BY_ID_SUCCESS : "GET_USER_BY_ID_SUCCESS",
+  GET_USER_BY_ID_FAILURE : "GET_USER_BY_ID_FAILURE",
+
+}
