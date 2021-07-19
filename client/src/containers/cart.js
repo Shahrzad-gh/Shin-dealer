@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -35,28 +35,24 @@ const useStyles = makeStyles({
 });
 
 export default function Cart(props) {
-  console.log(props)
+  console.count("props",props)
 
   const classes = useStyles();
-  //const [product, setProduct] = useState(null);
   let productCount = props.count
   let payable = props.payable
   const dispatch = useDispatch()
 
   const product = useSelector((state) => state.product)
-
+  const  id  = props.data;
+  const payload = {
+    params: {
+      id,
+    },
+  };
   useEffect(() => {
-    const  id  = props.data;
-    const payload = {
-      params: {
-        id,
-      },
-    };
-
     dispatch(getProductDetailsById(payload));
-  },[dispatch, props]);
+  },[dispatch], payload);
 
-  console.log("p", product)
   
   const handleDecrement =() => {
     const data = {
@@ -83,7 +79,6 @@ export default function Cart(props) {
       }
     }
     try {
-
       axios.post('/addtocart', data)
     } catch (error) {
       console.log(error)
@@ -121,10 +116,8 @@ export default function Cart(props) {
         </div>
         <div className={classes.title} > جمع کل : {payable}$ 
         <AddIcon onClick={handleIncrement}/> {productCount} <RemoveIcon onClick={handleDecrement}/>
-        <DeleteIcon onClick={handleRemove}/></div>
-      
+        <DeleteIcon onClick={handleRemove}/></div>      
       </CardContent>}
-
     </Card>
   );
 }

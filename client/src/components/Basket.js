@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Typography } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
 import {Link} from "react-router-dom"
-import CircularProgress from '@material-ui/core/CircularProgress';
+//import CircularProgress from '@material-ui/core/CircularProgress';
 import { useDispatch, useSelector  } from 'react-redux';
 import { getUserCartItems } from '../Store/actions/cartActions';
 
@@ -49,10 +49,18 @@ function Basket() {
   const cart = useSelector(state => state.cart.cart);
 
   useEffect(() => {
+    // const  id  = props.data;
+    // const payload = {
+    //   params: {
+    //     id,
+    //   },
+    // };
+
+    // dispatch(getProductDetailsById(payload));
     dispatch(getUserCartItems())
-  }, []);
+  }, [dispatch]);
   
-  console.log("cart",cart.cartItems)
+  //console.log("cart",cart.cartItems)
 
   const handleTotal = () => {
      return cart.cartItem &&  cart.cartItem.reduce((a, b)=> a + b.payable, 0)
@@ -64,7 +72,6 @@ function Basket() {
   }
 
   const handlePay = async () => {
-
     const basketObj = {
       cart,
       total : handleTotal()
@@ -121,15 +128,15 @@ function Basket() {
               cart.cartItems && cart.cartItems.map((item, index) => 
               <div className={classes.details} key={index}>
                 <Cart data={item.product} count={item.count} payable={item.payable}/>
-                <Card className={classes.root}>
+                </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
+       //: <CircularProgress />
+       } 
+                       <Card className={classes.root}>
                   Status : 
                   <Chip
                     label={paymentStatus}
                     color="primary" />
                     </Card>
-                </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
-       //: <CircularProgress />
-       } 
           <div>
           <div className={classes.details}> قابل پرداخت : 
           ${ handleTotal() } 

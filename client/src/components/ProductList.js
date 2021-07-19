@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ProductCard from "./ProductCard";
 import Grid from "@material-ui/core/Grid";
-//import axios from 'axios';
 import Basket from "./Basket";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
