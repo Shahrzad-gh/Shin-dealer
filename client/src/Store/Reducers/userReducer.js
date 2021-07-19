@@ -7,6 +7,7 @@ const initState = {
 };
 
 export default (state = initState, action) => {
+  console.log(action.payload)
   switch(action.type){
     case userConstants.GET_USER_BY_ID_SUCCESS:
       return state = {

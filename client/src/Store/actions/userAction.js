@@ -6,7 +6,8 @@ export const getUSerById = (payload) => {
     const id = payload.params.userId
     let res;
     try {
-      res = await axios.get(`/getUserById/${id}`)
+      res = await axios.get(`/getUserById/${id}`);
+      console.log(res.data.user.firstName)
       dispatch({
         type: userConstants.GET_USER_BY_ID_SUCCESS,
         payload: {user : res.data.user},
