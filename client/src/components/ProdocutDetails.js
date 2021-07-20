@@ -164,12 +164,15 @@ export default function ProductDetails(props) {
         <Tab className={classes.typography} label="سوالات" />
       </Tabs>
     </Paper>
-
+{/* 
               {product.productDetails.reviews && product.productDetails.reviews.map((item , index) =>    
                 (<li className={classes.list} key={item.userId}>
                     <ProductReview key={item.userId} userId={item.userId} review={item.review}/>
                 </li> )
-               )}
+               )} */}
+
+<ProductReview data={product.productDetails.reviews}/>
+
         </Grid>
         )}
 </>
