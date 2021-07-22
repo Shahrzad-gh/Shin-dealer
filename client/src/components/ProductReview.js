@@ -1,13 +1,10 @@
 import React,{ useState, useEffect } from 'react'
-import { getUSerById } from '../Store/actions/userAction';
+import { getUserById } from '../Store/actions/userAction';
 import {useDispatch , useSelector} from 'react-redux'
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import { Typography } from '@material-ui/core';
-//import ReviewCard from './ReviewCard';
-//import { createSelector } from 'reselect'
-import { connect } from 'react-redux';
-import axios from 'axios'
+
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -24,57 +21,29 @@ const useStyles = makeStyles({
     },
   });
 
-  //const selectUserName = createSelector(state => console.log(state))
 
 function ProductReview(props) {
-
-  console.log(props)
   const classes = useStyles();
-  //const [userInfo, setUserInfo] = useState(null)
   const dispatch = useDispatch()
-  const user = useSelector(state => state.user.user)
-  const [userFirstName, setUserFirstName] = useState(user.firstName)
-console.log(userFirstName)
+  const user = useSelector(state => state.user)
+  const userFirstName = user.user[props.userId]
   const {userId} = props;
   
-
-  // useEffect(() => {
-  //   setUserFirstName(user.firstName);
-  // }, [user.firstName]);
-
-  // useEffect(() => {
-  //   const payload = {
-  //     params : {
-  //       userId
-  //     }
-  //   }
-  //   dispatch(getUSerById(payload))  
-  // },[]);
+  useEffect(() => {
+    const payload = {
+      params : {
+        userId
+      }
+    }
+    dispatch(getUserById(payload))  
+  },[userId]);
   
-  
-  // useEffect(() => {
-  //   const id = props.userId
-  //   try {
-  //     axios.get(`/getUserById/${id}`).then(res => setUserInfo(res)).catch(err => console.log(err));
-  //   } catch (error) {
-  //     console.log(error)
-  //   }    
-  // }, []);
-
-  //console.log("userInfo",userInfo)
+  console.log("Info",userFirstName)
 
   return (
     <div>
       <Card className={classes.root}>
-        {/* <Typography className={classes.typography}>
-        {userFirstName && userFirstName } : {props.review}
-          </Typography> */}
-      {/* <ReviewCard user={user && user.user} review={props.review} />  */}
-      {props.data && props.data.map((item, index) => 
-        <div key={index}>
-          {item.userId} : {item.review}
-        </div>
-      )}
+          {userFirstName && userFirstName.firstName } : {props.review}
       </Card>
     </div>
   )
