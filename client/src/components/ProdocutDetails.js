@@ -66,6 +66,8 @@ export default function ProductDetails(props) {
   const classes = useStyles();
     const dispatch = useDispatch()
   const product = useSelector((state) => state.product)
+  const productInfo = product.productDetails[props.match.params.id];
+  
   const [value, setValue] = React.useState(2);
 
   const [tabValue, setTabValue] = React.useState(0);
@@ -101,7 +103,7 @@ export default function ProductDetails(props) {
 
   return (
     <>
-      {product && (
+      {productInfo && (
         <Grid>
           <Card className={classes.root} >
             <CardContent>
@@ -109,15 +111,15 @@ export default function ProductDetails(props) {
             <div className={classes.details}>
             <CardMedia component="img"
               className={classes.cover}
-              alt={product.productDetails.name}
-              name={product.productDetails.name}
-              image={product.productDetails.picture && product.productDetails.picture.img}
+              alt={productInfo.name}
+              name={productInfo.name}
+              image={productInfo.picture && productInfo.picture.img}
               />
             <div className={classes.details}>
                 <CardContent >
-                  <div name="name">{product.productDetails.name}</div>
-                  <div name="price">تومان {product.productDetails.price}</div> 
-                  <div name="description">{product.productDetails.description}</div> 
+                  <div name="name">{productInfo.name}</div>
+                  <div name="price">تومان {productInfo.price}</div> 
+                  <div name="description">{productInfo.description}</div> 
                 </CardContent>
               </div>
               <CardActions className={classes.details}>
@@ -164,7 +166,7 @@ export default function ProductDetails(props) {
       </Tabs>
     </Paper>
 
-              {product.productDetails.reviews && product.productDetails.reviews.map((item , index) =>    
+              {productInfo.reviews && productInfo.reviews.map((item , index) =>    
                 (<li className={classes.list} key={item.userId}>
                     <ProductReview key={item.userId} userId={item.userId} review={item.review}/>
                 </li> )

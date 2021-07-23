@@ -49,18 +49,9 @@ function Basket() {
   const cart = useSelector(state => state.cart.cart);
 
   useEffect(() => {
-    // const  id  = props.data;
-    // const payload = {
-    //   params: {
-    //     id,
-    //   },
-    // };
-
-    // dispatch(getProductDetailsById(payload));
     dispatch(getUserCartItems())
   }, [dispatch]);
   
-  //console.log("cart",cart.cartItems)
 
   const handleTotal = () => {
      return cart.cartItem &&  cart.cartItem.reduce((a, b)=> a + b.payable, 0)

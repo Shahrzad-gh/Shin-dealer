@@ -35,14 +35,14 @@ const useStyles = makeStyles({
 });
 
 export default function Cart(props) {
-  console.count("props",props)
-
   const classes = useStyles();
   let productCount = props.count
   let payable = props.payable
   const dispatch = useDispatch()
 
   const product = useSelector((state) => state.product)
+  const productInfo = product.productDetails[props.data]
+
   const  id  = props.data;
   const payload = {
     params: {
@@ -100,18 +100,19 @@ export default function Cart(props) {
 
   return (
     <Card className={classes.root} variant="outlined">
-      {product.productDetails && <CardContent className={classes.root}>
+      {productInfo && 
+      <CardContent className={classes.root}>
         <div>
         <CardMedia component="img"
         className={classes.cover}
-        image={product.productDetails.picture && product.productDetails.picture.img}
+        image={productInfo.picture && productInfo.picture.img}
         alt="img"
         >
         </CardMedia>
         </div>
         <div className={classes.typography}>
-          <div > نام کالا : {product.productDetails.name}</div>
-          <div> قیمت : {product.productDetails.price}</div>
+          <div > نام کالا : {productInfo.name}</div>
+          <div> قیمت : {productInfo.price}</div>
           <div> تعداد : {productCount}</div>
         </div>
         <div className={classes.title} > جمع کل : {payable}$ 
