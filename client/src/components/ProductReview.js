@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React,{ useEffect } from 'react'
 import { getUserById } from '../Store/actions/userAction';
 import {useDispatch , useSelector} from 'react-redux'
 import { makeStyles } from "@material-ui/core/styles";
@@ -36,12 +36,12 @@ function ProductReview(props) {
       }
     }
     dispatch(getUserById(payload))  
-  },[userId]);
+  },[dispatch,userId]);
   
   return (
     <div>
       <Card className={classes.root}>
-          {userFirstName && userFirstName.firstName } : {props.review}
+          <Typography className={classes.typography}>{userFirstName && userFirstName.firstName } : {props.review} </Typography>
       </Card>
     </div>
   )

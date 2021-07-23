@@ -51,7 +51,7 @@ export default function Cart(props) {
   };
   useEffect(() => {
     dispatch(getProductDetailsById(payload));
-  },[dispatch], payload);
+  },[dispatch, payload]);
 
   
   const handleDecrement =() => {
