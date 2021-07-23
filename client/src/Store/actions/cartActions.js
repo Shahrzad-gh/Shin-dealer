@@ -6,7 +6,6 @@ export const getUserCartItems = ()=> {
     let res;
     try {
       res = await axios.get('/getusercartItems')
-      console.log(res)
        dispatch({
          type: cartConstants.GET_USER_CART_ITEMS_SUCCESS,
          payload: { cart: res.data.cart }
@@ -23,11 +22,9 @@ export const getUserCartItems = ()=> {
 export const addItemToCart = (payload) => {
   return async (dispatch) => {
     const cartItem = payload.params
-    console.log("addtocart",cartItem)
     let res;
     try {
       res = await axios.post('/addtocart', cartItem);
-      console.log(res)
       dispatch({
         type:cartConstants.ADD_TO_CART_SUCCESS,
         payload: {cart : res.data.cart.cartItems},

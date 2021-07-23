@@ -13,7 +13,7 @@ export default (state = initState, action) => {
       return state = {
         ...state,
         loading: false,
-        productDetails : action.payload.productDetails
+        productDetails : {...state.productDetails, [action.payload.productDetails._id]:action.payload.productDetails}
       }
     case productConstants.GET_PRODUCT_DETAILS_BY_ID_FAILURE:
       return state = {
