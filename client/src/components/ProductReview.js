@@ -38,8 +38,6 @@ function ProductReview(props) {
     dispatch(getUserById(payload))  
   },[userId]);
   
-  console.log("Info",userFirstName)
-
   return (
     <div>
       <Card className={classes.root}>
