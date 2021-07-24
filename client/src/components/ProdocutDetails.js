@@ -17,6 +17,9 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import authContext from "../context/AuthContext"
+import { Link } from "react-router-dom";
+import Snackbar from '@material-ui/core/Snackbar';
 
 const useStyles = makeStyles({
   root: {
@@ -67,8 +70,14 @@ export default function ProductDetails(props) {
     const dispatch = useDispatch()
   const product = useSelector((state) => state.product)
   const productInfo = product.productDetails[props.match.params.id];
-  
+  console.log("p",productInfo)
   const [value, setValue] = React.useState(2);
+  const [state, setState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+  const { vertical, horizontal, open } = state;
 
   const [tabValue, setTabValue] = React.useState(0);
 
@@ -83,28 +92,40 @@ export default function ProductDetails(props) {
         id,
       },
     };
+    console.log("payload", payload)
     dispatch(getProductDetailsById(payload));
     
   },[dispatch, props.match.params]);
 
   const handleAddToBasket = async (e) => {
     e.preventDefault();
-
    const payload = {
       params : {
         cartItem : {
-        product: product.productDetails._id,
-        price : product.productDetails.price,
+        product: productInfo._id,
+        price : productInfo.price,
         count: 1} 
       }
     }
     dispatch(addItemToCart(payload));
   }
+  const handleClose = () => {
+    setState({ ...state, open: false });
+  };
 
   return (
-    <>
-      {productInfo && (
+    <authContext.Consumer>
+    {(user) => 
+      productInfo && (  
+     
         <Grid>
+        <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="با موفقیت به سبد خرید اضافه شد. بررسی نمایید!"
+        key={vertical + horizontal}
+      />
           <Card className={classes.root} >
             <CardContent>
               <form onSubmit={handleAddToBasket}>
@@ -123,9 +144,16 @@ export default function ProductDetails(props) {
                 </CardContent>
               </div>
               <CardActions className={classes.details}>
-                <Button variant="contained" color="primary" type="submit">
+                {user.isLoggedIn ? <Button variant="contained" color="primary" type="submit">
                   <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
                 </Button>
+                :
+                  <Link to="/Signin" ><Button variant="contained" color="primary">
+                      <Typography className={classes.typography}> Sign in </Typography>
+                  </Button></Link>}
+                {/* <Button variant="contained" color="primary" type="submit">
+                  <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
+                </Button> */}
               </CardActions>
               </div>
               </form>
@@ -175,6 +203,7 @@ export default function ProductDetails(props) {
 
         </Grid>
         )}
-</>
+        </authContext.Consumer>
+        
   );
 }
