@@ -6,7 +6,6 @@ module.exports.addItemToCart_post = (req, res) => {
   const user = res.locals.user._id;
 
   let condition, action;
-
     Cart.findOne({user})
     .exec(async (error, cart) => {
       if(error) {return res.status(400).json({ error });}      
@@ -57,13 +56,15 @@ module.exports.addItemToCart_post = (req, res) => {
 }
 
 module.exports.getUserCartItems_get = (req, res) => {
-  res.locals.user && Cart.findOne({ user : res.locals.user._id }).
+  console.log(res.locals)
+  res.locals.user !== undefined ? Cart.findOne({ user : res.locals.user._id }).
   exec((error, cart) => {
     if(error) return res.status(400).json({ error });
     if(cart) {
       res.status(200).json({ cart });
     }
   })
+  : res.status(200).json({cart: null});
 }
 
 module.exports.removeCartItem_post = (req, res) => {
