@@ -54,7 +54,7 @@ function Basket() {
   
 
   const handleTotal = () => {
-     return cart.cartItem &&  cart.cartItem.reduce((a, b)=> a + b.payable, 0)
+     return cart !== null ? cart.cartItem && cart.cartItem.reduce((a, b)=> a + b.payable, 0) : 0
   }
 
   const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
@@ -115,7 +115,7 @@ function Basket() {
   return (
     <Card className={classes.root}>
       <div className={classes.typography}> سبد خرید </div>
-       {cart.cartItems ?   
+       {cart !== null ?   
               cart.cartItems && cart.cartItems.map((item, index) => 
               <div className={classes.details} key={index}>
                 <Cart data={item.product} count={item.count} payable={item.payable}/>
