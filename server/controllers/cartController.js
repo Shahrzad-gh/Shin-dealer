@@ -56,15 +56,17 @@ module.exports.addItemToCart_post = (req, res) => {
 }
 
 module.exports.getUserCartItems_get = (req, res) => {
-  console.log(res.locals)
-  res.locals.user !== undefined ? Cart.findOne({ user : res.locals.user._id }).
+  console.log(res.locals.user._id)
+  Cart.findOne({ user : res.locals.user._id }).
   exec((error, cart) => {
-    if(error) return res.status(400).json({ error });
+    if(error) {return res.status(400).json({ error });}
     if(cart) {
+      console.log(cart)
       res.status(200).json({ cart });
     }
+    if(cart === null)
+    res.status(200).json({ cart });
   })
-  : res.status(200).json({cart: null});
 }
 
 module.exports.removeCartItem_post = (req, res) => {

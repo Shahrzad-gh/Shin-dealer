@@ -45,7 +45,7 @@ export default function ProductList(props) {
     }
 
     dispatch(getProductsByCategory(payload))
-    },[dispatch, props.category])
+    },[])
         
     const handleSortASD = async() => {
       // try{

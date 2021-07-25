@@ -43,15 +43,16 @@ export default function Cart(props) {
   const product = useSelector((state) => state.product)
   const productInfo = product.productDetails[props.data]
 
-  const  id  = props.data;
-  const payload = {
-    params: {
-      id,
-    },
-  };
+
   useEffect(() => {
+    const  id  = props.data;
+    const payload = {
+      params: {
+        id,
+      },
+    };
     dispatch(getProductDetailsById(payload));
-  },[dispatch, payload]);
+  },[dispatch, props.data]);
 
   
   const handleDecrement =() => {

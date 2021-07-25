@@ -20,7 +20,7 @@ import Tab from '@material-ui/core/Tab';
 import authContext from "../context/AuthContext"
 import { Link } from "react-router-dom";
 import Snackbar from '@material-ui/core/Snackbar';
-
+import Alert from '@material-ui/lab/Alert'
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -112,20 +112,26 @@ export default function ProductDetails(props) {
   const handleClose = () => {
     setState({ ...state, open: false });
   };
+  const handleClick = (newState) => () => {
+    setState({ open: true, ...newState });
+  };
 
   return (
     <authContext.Consumer>
     {(user) => 
       productInfo && (  
-     
         <Grid>
+
         <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
+        autoHideDuration={6000} 
         open={open}
         onClose={handleClose}
-        message="با موفقیت به سبد خرید اضافه شد. بررسی نمایید!"
-        key={vertical + horizontal}
-      />
+      >
+          <Alert onClose={handleClose} variant="filled" severity="success">
+          <Typography className={classes.typography}>با موفقیت به سبد خرید اضافه شد. بررسی نمایید</Typography>
+  </Alert>
+      </Snackbar>
+
           <Card className={classes.root} >
             <CardContent>
               <form onSubmit={handleAddToBasket}>
@@ -144,7 +150,7 @@ export default function ProductDetails(props) {
                 </CardContent>
               </div>
               <CardActions className={classes.details}>
-                {user.isLoggedIn ? <Button variant="contained" color="primary" type="submit">
+                {user.isLoggedIn ? <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })} variant="contained" color="primary" type="submit">
                   <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
                 </Button>
                 :

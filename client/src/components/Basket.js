@@ -50,11 +50,12 @@ function Basket() {
 
   useEffect(() => {
     dispatch(getUserCartItems())
-  }, [dispatch]);
+  },[dispatch]);
   
 
   const handleTotal = () => {
-     return cart !== null ? cart.cartItem && cart.cartItem.reduce((a, b)=> a + b.payable, 0) : 0
+    console.log(cart)
+     return cart !== null ? cart.cartItems && cart.cartItems.reduce((a, b)=> a + b.payable, 0) : 0
   }
 
   const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
