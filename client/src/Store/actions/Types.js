@@ -17,3 +17,9 @@ export const userConstants = {
   GET_USER_BY_ID_FAILURE : "GET_USER_BY_ID_FAILURE",
 
 }
+
+export const orderConstants = {
+  GET_All_ORDERS_SUCCESS : "GET_All_ORDERS_SUCCESS",
+  GET_All_ORDERS_FAILURE : "GET_All_ORDERS_FAILURE",
+
+}
