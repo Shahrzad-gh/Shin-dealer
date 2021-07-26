@@ -11,6 +11,7 @@ import moment from 'moment';
 import {useDispatch , useSelector} from 'react-redux'
 import { getAllOrders } from '../../Store/actions/orderActions';
 import UserInfo from './UserInfo';
+import { Typography } from '@material-ui/core';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -20,6 +21,16 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  paymentPending: {
+    color: 'blue',
+    fontWeight: 'bold'
+  },
+  paymentDone: {
+    color: 'green',
+    fontWeight: 'bold'
+
+
+  }
 }));
 
 
@@ -58,7 +69,8 @@ export default function Orders() {
             <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
             <TableCell>{row.shipTo}</TableCell>
             <TableCell>{row.paymentType}</TableCell>
-            <TableCell>{row.paymentStatus}</TableCell>
+            <TableCell>{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
+             : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
             <TableCell align="right">{row.totalAmount}</TableCell>
           </TableRow>
         ))}
