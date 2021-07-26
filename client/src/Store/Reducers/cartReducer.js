@@ -29,7 +29,7 @@ export default (state = initState, action) => {
       case cartConstants.ADD_TO_CART_FAILURE:
         return state = {
           ...state,
-          error : action,
+          error : action.payload.error,
           loading: false
         }  
     default:
