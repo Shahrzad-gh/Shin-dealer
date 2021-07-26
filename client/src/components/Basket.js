@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useDispatch, useSelector  } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
@@ -8,7 +9,6 @@ import { Typography } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
 import {Link} from "react-router-dom"
 //import CircularProgress from '@material-ui/core/CircularProgress';
-import { useDispatch, useSelector  } from 'react-redux';
 import { getUserCartItems } from '../Store/actions/cartActions';
 
 const useStyles = makeStyles({
@@ -54,7 +54,6 @@ function Basket() {
   
 
   const handleTotal = () => {
-    console.log(cart)
      return cart !== null ? cart.cartItems && cart.cartItems.reduce((a, b)=> a + b.payable, 0) : 0
   }
 
@@ -99,7 +98,9 @@ function Basket() {
         }
       };
 
-      var rzp1 = new window.Razorpay(options);
+      console.log("OP",paymentOption)
+      
+      var rzp1 = paymentOption && new window.Razorpay(options);
       
       rzp1.open();
 
