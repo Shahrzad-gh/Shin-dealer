@@ -48,10 +48,9 @@ module.exports.setOrder_post = async (req, res) => {
         })
       }
       catch(err) {
-        console.log("ERROR", err)
         //const errors = handleErrors(err);
         res.status(400).json({ err });
-      }
+      }``
     }
   })
 }

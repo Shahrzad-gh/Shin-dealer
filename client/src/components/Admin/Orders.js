@@ -7,8 +7,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import axios from 'axios';
 import moment from 'moment';
+import {useDispatch , useSelector} from 'react-redux'
+import { getAllOrders } from '../../Store/actions/orderActions';
+import UserInfo from './UserInfo';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -23,11 +25,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Orders() {
   const classes = useStyles();
-  const [orders, setOrders] =useState()
-  
+ 
+  const dispatch = useDispatch()
+
+  const orders = useSelector((state) => state.orders)
+
   useEffect(() => {
-    axios.get('/getAllOrders').then(res => setOrders(res.data.orders)).catch(err => console.log(err))
-    }, [])
+    dispatch(getAllOrders())
+    }, [dispatch])
+
+
+
 
   return (
     <React.Fragment>
@@ -37,23 +45,23 @@ export default function Orders() {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
-            {/* <TableCell>Ship To</TableCell> */}
+            <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell>Payment Status</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders && orders.reverse().slice(0, 10).map((row) => (
-            <TableRow key={row._id}>
-              <TableCell>{moment().calendar(row.createdAt)}</TableCell>
-              <TableCell>{row.user}</TableCell>
-              {/* <TableCell>{row.shipTo}</TableCell> */}
-              <TableCell>{row.paymentType}</TableCell>
-              <TableCell>{row.paymentStatus}</TableCell>
-              <TableCell align="right">{row.totalAmount}</TableCell>
-            </TableRow>
-          ))}
+         {orders.orders.orders && orders.orders.orders.reverse().slice(0,10).map((row, index) => (
+          <TableRow key={index}>
+            <TableCell>{moment().calendar(row.createdAt)}</TableCell>
+            <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
+            <TableCell>{row.shipTo}</TableCell>
+            <TableCell>{row.paymentType}</TableCell>
+            <TableCell>{row.paymentStatus}</TableCell>
+            <TableCell align="right">{row.totalAmount}</TableCell>
+          </TableRow>
+        ))}
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
