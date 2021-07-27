@@ -15,11 +15,16 @@ export const cartConstants = {
 export const userConstants = {
   GET_USER_BY_ID_SUCCESS : "GET_USER_BY_ID_SUCCESS",
   GET_USER_BY_ID_FAILURE : "GET_USER_BY_ID_FAILURE",
-
 }
 
 export const orderConstants = {
   GET_All_ORDERS_SUCCESS : "GET_All_ORDERS_SUCCESS",
   GET_All_ORDERS_FAILURE : "GET_All_ORDERS_FAILURE",
+  SET_ORDER_SUCCESS : "SET_ORDER_SUCCESSS",
+  SET_ORDER_FAILURE : "SET_ORDER_FAILURE",
+}
 
+export const paymentConstants = {
+  SET_PAYMENT_SUCCESS : "SET_PAYMENT_SUCCESS",
+  SET_PAYMENT_FAILURE : "SET_PAYMENT_FAILURE",
 }
