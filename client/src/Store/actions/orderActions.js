@@ -18,3 +18,22 @@ export const getAllOrders = ()=> {
    }    
   }
 }
+
+export const setOrder = (basketObj) => {
+  return async (dispatch) => {
+    let res;
+    try {
+      res = await axios.post('/setOrder/', {basketObj})
+      console.log(res)
+      dispatch({
+        type: orderConstants.SET_ORDER_SUCCESS,
+        payload: { orderDetails: res.data.order }
+    });      
+    } catch (error) {
+      dispatch({
+        type: orderConstants.SET_ORDER_FAILURE,
+        payload: { error: res.data.error }
+    });
+    }
+  }
+}
