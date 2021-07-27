@@ -62,8 +62,6 @@ module.exports.getUserCartItems_get = (req, res) => {
     if(cart) {
       res.status(200).json({ cart });
     }
-    if(cart === null)
-    res.status(200).json({ cart });
   })
 }
 

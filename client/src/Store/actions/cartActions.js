@@ -6,13 +6,11 @@ export const getUserCartItems = ()=> {
     let res;
     try {
       res = await axios.get('/getusercartItems')
-      console.log(res)
        dispatch({
          type: cartConstants.GET_USER_CART_ITEMS_SUCCESS,
          payload: { cart: res.data.cart }
        })
    } catch (error) {
-     console.log(res)
      dispatch({
        type: cartConstants.GET_USER_CART_ITEMS_FAILURE,
        payload: { error: res.data.error }
