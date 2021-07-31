@@ -2,13 +2,14 @@ import axios from "axios";
 import { paymentConstants } from "./Types";
 
 export const setPayment = (data) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     let res;
     try{
-      res = axios.post(`setpayment/${data}`)
+      res = await axios.post('setpayment', {data})
+      console.log(res)
       dispatch({
         type: paymentConstants.SET_PAYMENT_SUCCESS,
-        payload: res.data.payment
+        payload: {payment: res.data.payment}
       })
     }
     catch(error){

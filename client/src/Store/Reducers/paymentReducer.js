@@ -1,24 +1,29 @@
 import { paymentConstants } from "../actions/Types";
 
-const initialState ={
-  payment: {},
-  loading: false,
-  error: null
-}
+const initState = {
+payment : {},
+loadding: false,
+error: null
 
-export default (state = initialState, action) => {
-  switch(action.type){
-    case paymentConstants.SET_PAYMENT_SUCCESS: 
-    return state = {
-      ...state,
-      payment : action.payload
-    }
-    case paymentConstants.SET_PAYMENT_FAILURE : 
-    return state = {
-      ...state,
-      error : null
-    }
-    default :
-     return state
+};
+
+export default (state = initState, action) => {
+  console.log(action.payload)
+  switch (action.type) {
+      case paymentConstants.SET_PAYMENT_SUCCESS:
+        return state = {
+          ...state,
+          payment : action.payload,
+          loading: false,
+        }   
+      case paymentConstants.SET_PAYMENT_FAILURE:
+        return state = {
+          ...state,
+          error : action.payload,
+          loading: false
+        }         
+    default:
+      return state
   }
 }
+
