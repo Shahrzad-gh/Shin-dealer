@@ -23,7 +23,7 @@ export const setOrder = (basketObj) => {
   return async (dispatch) => {
     let res;
     try {
-      res = await axios.post('/setOrder/', {basketObj})
+      res = await axios.post('/setOrder', {basketObj})
       console.log(res)
       dispatch({
         type: orderConstants.SET_ORDER_SUCCESS,

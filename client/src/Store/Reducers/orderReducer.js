@@ -8,6 +8,7 @@ const initState = {
 };
 
 export default (state = initState, action) => {
+  console.log(action.payload)
   switch (action.type) {
       case orderConstants.GET_All_ORDERS_SUCCESS:
         return state = {

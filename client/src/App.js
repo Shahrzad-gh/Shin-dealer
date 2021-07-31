@@ -22,7 +22,7 @@ import MenCloths from './components/MenCloths';
 // import PrivateRoute from './HOC/privateRoutes';
 import Order from "./containers/order";
 import AllOrders from "./components/Admin/AllOrders";
-import Payment from "./components/Payment";
+import PaymentPanel from "./components/PaymentPanel";
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -49,7 +49,7 @@ function App() {
           <Route exact path="/MenCloths" component={MenCloths} />
           <Route exact path="/Order/:id" component={Order} />
           <Route exact path="/allOrders" component={AllOrders} />
-          <Route exact path="/Payment" component={Payment} />
+          <Route exact path="/PaymentPanel" component={PaymentPanel} />
         </div>
       </Router>
     </AuthContextProvider>

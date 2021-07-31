@@ -88,7 +88,7 @@ console.log(orderDetails)
           ${ handleTotal() } 
           </div>
           <Link to={{
-            pathname : '/payment',
+            pathname : '/paymentPanel',
             query: { total : handleTotal()}
           }}>
             <Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>
