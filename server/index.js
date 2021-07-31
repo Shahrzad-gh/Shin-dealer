@@ -12,6 +12,7 @@ const path = require("path");
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes')
 const razorPayRoutes = require('./routes/razorPayRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
 const crypto = require('crypto');
 
 dotenv.config();
@@ -52,6 +53,7 @@ app.use(cartRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
 app.use(razorPayRoutes);
+app.use(paymentRoutes);
 
 // app.use(function(req, res, next){
 //   res.header('Access-Control-Allow-Origin','*');
