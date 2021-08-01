@@ -42,6 +42,7 @@ function PaymentPanel(props) {
   const [paymentId, setPaymentId]=  useState(null)
 
   const payment = useSelector(state => state.payment)
+  console.log("p",payment)
 
       // const receipt = order._id + ""
       // const currency ="EUR"
@@ -55,12 +56,12 @@ function PaymentPanel(props) {
     .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
   }
 
-  const handlePay = async () => {
+  const handlePay = () => {
 
     try{
       const payload = {
         params: {
-          amount : props.location.query.total,
+          amount : 40000,
           currency: 'EUR',
           receipt : 'Tb9TLvCcWoJY1q',
           notes: "payment"
@@ -71,13 +72,11 @@ function PaymentPanel(props) {
     }catch(err){
       console.log(err)
     }    
-    
-    payment ? handleRazorPay() : alert("Somthing went wrong")
   }
 
   const handleRazorPay = ()   => {
     
-    var options = payment && {
+    var options = {
       key: "rzp_test_Tb9TLvCcWoJY1q",
       amount: payment.payment.amount,
       currency: payment.payment.currency,
@@ -112,11 +111,13 @@ function PaymentPanel(props) {
 
   }
     
+  console.log("out", payment)
+  payment.payment !==null ? handleRazorPay() : alert("Somthing went wrong")
 
-  const o_id = paymentOption && paymentOption.data.receipt;
-  handlepaymentStatus(paymentId, 
-    4000,//handleTotal() ,
-     "EUR", o_id)
+  // const o_id = paymentOption && paymentOption.data.receipt;
+  // handlepaymentStatus(paymentId, 
+  //   4000,//handleTotal() ,
+  //    "EUR", o_id)
 
   return (
     <div>

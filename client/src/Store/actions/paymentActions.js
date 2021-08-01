@@ -15,7 +15,7 @@ export const setPayment = (data) => {
     catch(error){
       dispatch({
         type: paymentConstants.SET_PAYMENT_FAILURE,
-        payload: res.data.error
+        payload: { error: res.data.error }
       })
     }
   }
