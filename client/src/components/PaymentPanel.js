@@ -60,7 +60,7 @@ function PaymentPanel(props) {
   try{
     const payload = {
       params: {
-        amount : 40000,
+        amount : props.location.query.total,
         currency: 'EUR',
         receipt : 'Tb9TLvCcWoJY1q',
         notes: "payment"
