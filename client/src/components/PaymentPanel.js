@@ -38,12 +38,12 @@ function PaymentPanel(props) {
   const dispatch = useDispatch();
 
   const [paymentStatus, setPaymentStatus] = useState("pending");
-  const [paymentOption, setPaymentOption] = useState();
+  //const [paymentOption, setPaymentOption] = useState();
   const [paymentId, setPaymentId]=  useState(null)
 
   const payment = useSelector(state => state.payment)
   console.log("p",payment)
-
+  const paymentOption = payment.payment.payment
       // const receipt = order._id + ""
       // const currency ="EUR"
       // const amount = parseInt(orderObject.totalAmount); 
@@ -52,6 +52,7 @@ function PaymentPanel(props) {
 
 
   const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
+    "getstatus"
     paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId, amount, currency, orderId }})
     .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
   }
@@ -77,7 +78,7 @@ function PaymentPanel(props) {
     
     var options = {
       key: "rzp_test_AjdjKCRh2xA9Jv",
-      amount: 40000,
+      amount: paymentOption.amount,
       currency: 'EUR',
       name: "Fashion",
       description: "Transaction",
@@ -106,23 +107,28 @@ function PaymentPanel(props) {
     var rzp1 = payment && new window.Razorpay(options);
     
     rzp1.open();
+    console.log("paymentOption - In ", paymentOption)
 
+    const o_id = paymentOption && paymentOption.receipt;
+    handlepaymentStatus(paymentId, 
+      paymentOption.amount,
+       "EUR", o_id)
 
   }
     
-  console.log("out", payment)
+  console.log("payment", payment)
+  console.log("paymentOption", paymentOption)
 
-  // const o_id = paymentOption && paymentOption.data.receipt;
-  // handlepaymentStatus(paymentId, 
-  //   4000,//handleTotal() ,
-  //    "EUR", o_id)
+
 
   return (
     <div>
       <Card>
           {paymentStatus === 'pending' ? 
           (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
-          ) : (<Link to={`Order/${paymentOption.data.receipt}`}><Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button></Link>
+          ) : (<Link to={`Order/${paymentOption.receipt}`}>
+            <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
+            </Link>
           )} 
       </Card>
     </div>

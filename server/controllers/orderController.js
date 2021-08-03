@@ -66,6 +66,7 @@ module.exports.getOrder_get = async (req, res) => {
 }
 
 module.exports.getPaymentStatus_get = async (req, res) => {
+  console.log("run")
   instance.payments.fetch(req.query.id, (err, result)=>{
     if(err) {return res.status(500).json(err); }
     if(result.status === 'authorized'){
