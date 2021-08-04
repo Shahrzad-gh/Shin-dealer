@@ -5,8 +5,9 @@ import {Link} from "react-router-dom"
 import Card from "@material-ui/core/Card";
 import { useDispatch, useSelector  } from 'react-redux';
 import axios from 'axios'
-import { setPayment
- } from '../Store/actions/paymentActions';
+import {setPayment} from '../Store/actions/paymentActions';
+import { getOrderStatus } from '../Store/actions/orderActions';
+
 const useStyles = makeStyles({
   root: {
     padding: 15,
@@ -37,13 +38,15 @@ function PaymentPanel(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const [paymentStatus, setPaymentStatus] = useState("pending");
+  //const [paymentStatus, setPaymentStatus] = useState("pending");
   //const [paymentOption, setPaymentOption] = useState();
   const [paymentId, setPaymentId]=  useState(null)
 
   const payment = useSelector(state => state.payment)
   console.log("p",payment)
-  const paymentOption = payment.payment.payment
+  const paymentOption = payment.payment.payment;
+  const orderDetails = useSelector(state => state.orders.orderDetail)
+
       // const receipt = order._id + ""
       // const currency ="EUR"
       // const amount = parseInt(orderObject.totalAmount); 
@@ -53,8 +56,8 @@ function PaymentPanel(props) {
 
   const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
     "getstatus"
-    paymentId && await axios.get('/getpaymentstatus', {params:{ id: paymentId, amount, currency, orderId }})
-    .then(res => setPaymentStatus(res.data.status)).catch(err => console.log(err))
+    const payload = {params:{ id: paymentId, amount, currency, orderId }}
+    dispatch(getOrderStatus(payload))
   }
 
  useEffect(() => {
@@ -67,7 +70,7 @@ function PaymentPanel(props) {
         notes: "payment"
       }
     }
-    dispatch(setPayment(payload))      
+    dispatch(setPayment(payload))   
     
   }catch(err){
     console.log(err)
@@ -78,7 +81,7 @@ function PaymentPanel(props) {
     
     var options = {
       key: "rzp_test_AjdjKCRh2xA9Jv",
-      amount: paymentOption.amount,
+      amount: 4000,
       currency: 'EUR',
       name: "Fashion",
       description: "Transaction",
@@ -101,30 +104,18 @@ function PaymentPanel(props) {
           color: "#3399cc"
       }
     };
-
-    console.log("OP",options)
     
     var rzp1 = payment && new window.Razorpay(options);
-    
     rzp1.open();
-    console.log("paymentOption - In ", paymentOption)
-
-    const o_id = paymentOption && paymentOption.receipt;
-    handlepaymentStatus(paymentId, 
-      paymentOption.amount,
-       "EUR", o_id)
-
   }
+  console.log(paymentId)
+  // const o_id = payment && payment.payment.payment.receipt;
+  // handlepaymentStatus(paymentId, 4000, "EUR", o_id)
     
-  console.log("payment", payment)
-  console.log("paymentOption", paymentOption)
-
-
-
   return (
     <div>
       <Card>
-          {paymentStatus === 'pending' ? 
+          { orderDetails && orderDetails.paymentStatus === 'pending' ? 
           (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
           ) : (<Link to={`Order/${paymentOption.receipt}`}>
             <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
