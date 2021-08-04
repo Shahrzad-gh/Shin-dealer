@@ -34,6 +34,20 @@ export default (state = initState, action) => {
           error : action.payload,
           loading: false
         }  
+        case orderConstants.GET_ORDER_STATUS_SUCCESS:
+          return state = {
+            ...state,
+            orderDetails : {
+              ...state.orderDetails, 
+              paymentStatus : action.payload.paymentStatus},
+            loading: false,
+          }   
+        case orderConstants.GET_ORDER_STATUS_FAILURE:
+          return state = {
+            ...state,
+            error : action.payload,
+            loading: false
+          } 
     default:
       return state
   }

@@ -37,3 +37,22 @@ export const setOrder = (basketObj) => {
     }
   }
 }
+
+export const getOrderStatus = (data) => {
+  return async (dispatch) => {
+    let res;
+    try {
+      res = await axios.get('getOrderstatus', {data})
+      console.log(res)
+      dispatch({
+        type: orderConstants.GET_PAYMENT_STATUS_SUCCESS,
+        payload: {paymentStatus: res.data.paymentStatus}
+      })      
+    } catch (error) {
+      dispatch({
+        type: orderConstants.GET_PAYMENT_STATUS_FAILURE,
+        payload: {error: res.data.error}
+      })
+    }
+  }
+}

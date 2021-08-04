@@ -65,12 +65,12 @@ module.exports.getOrder_get = async (req, res) => {
   })
 }
 
-module.exports.getPaymentStatus_get = async (req, res) => {
-  console.log("run")
-  instance.payments.fetch(req.query.id, (err, result)=>{
+module.exports.getOrderStatus_get = async (req, res) => {
+  console.log("run",req)
+  instance.payments.fetch(req.params.id, (err, result)=>{
     if(err) {return res.status(500).json(err); }
     if(result.status === 'authorized'){
-      instance.payments.capture(req.query.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
+      instance.payments.capture(req.params.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
         if (err){return res.status(500).json(err);}
         if(paymentStatus){
           condition = { _id : req.query.orderId };
