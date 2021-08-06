@@ -44,8 +44,8 @@ function PaymentPanel(props) {
 
   const payment = useSelector(state => state.payment)
   console.log("p",payment)
-  const paymentOption = payment.payment.payment;
-  const orderDetails = useSelector(state => state.orders.orderDetail)
+  //const paymentOption = payment.payment.payment;
+  const orderDetails = useSelector(state => state.orders)
 
       // const receipt = order._id + ""
       // const currency ="EUR"
@@ -54,9 +54,9 @@ function PaymentPanel(props) {
 
 
 
-  const handlepaymentStatus = async (paymentId, amount, currency, orderId) =>{
+  const handlepaymentStatus = async (id, amount, currency, orderId) =>{
     "getstatus"
-    const payload = {params:{ id: paymentId, amount, currency, orderId }}
+    const payload = {params:{ id, amount, currency, orderId }}
     dispatch(getOrderStatus(payload))
   }
 
@@ -104,26 +104,34 @@ function PaymentPanel(props) {
           color: "#3399cc"
       }
     };
-    
+
     var rzp1 = payment && new window.Razorpay(options);
     rzp1.open();
+
+
   }
-  console.log(paymentId)
-  // const o_id = payment && payment.payment.payment.receipt;
-  // handlepaymentStatus(paymentId, 4000, "EUR", o_id)
-    
+
+  console.log("paymentId",paymentId)
+  console.log("PAYMENT", payment.payment)
+
+  const o_id = payment.payment.payment && payment.payment.payment.receipt;
+  console.log("ID", o_id)
+  payment.payment.payment && handlepaymentStatus(paymentId, 4000, "EUR", o_id)
+  console.log("details",orderDetails)
+
   return (
     <div>
       <Card>
-          { orderDetails && orderDetails.paymentStatus === 'pending' ? 
-          (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
-          ) : (<Link to={`Order/${paymentOption.receipt}`}>
-            <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
-            </Link>
-          )} 
+          { payment && <Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>}
+
       </Card>
     </div>
   )
 }
 
 export default PaymentPanel
+          // (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
+          // ) : (<Link to={`Order/`}>
+          //   <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
+          //   </Link>
+          // )} 
