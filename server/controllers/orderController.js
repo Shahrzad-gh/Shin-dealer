@@ -1,7 +1,11 @@
 const Order = require('../models/orderModel');
 const Cart = require('../models/cartModel');
-const Razorpay = require('razorpay');
+const Razorpay = require("razorpay");
 
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET
+})
 
 module.exports.setOrder_post = async (req, res) => {
   const {basketObj} = req.body;
@@ -66,27 +70,26 @@ module.exports.getOrder_get = async (req, res) => {
   })
 }
 
-const instance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_SECRET
-})
-
 module.exports.getOrderStatus_get = async (req, res) => {
-  console.log("run",req.query.id)
-  instance.payments.fetch(req.query.id, (err, result)=>{
+  console.log("GET_ORDER_STATUS", instance)
+
+  console.log("run",req.query)
+  const paymentId = req.query.id
+  instance.payments.fetch(paymentId, (err, result)=>{
     if(err) {console.log("errr",err);return res.status(500).json(err); }
     if(result.status === 'authorized'){
       console.log("r",result)
-      instance.payments.capture(req.query.id, req.query.amount, req.query.currency, (err, paymentStatus) => {
-        if (err){return res.status(500).json(err);}
+      instance.payments.capture(paymentId, req.query.amount, req.query.currency, (err, paymentStatus) => {
+        if (err){console.log("ER",err);return res.status(500).json(err);}
         if(paymentStatus){
+          console.log("paymentStatus",paymentStatus)
           condition = { _id : req.query.orderId };
           action = {"$set" : {
               paymentStatus: "complete"
             }
           };
           Order.findOneAndUpdate(condition, action).exec((err, _order) => {
-            if(err){return res.status(500).json(err);}
+            if(err){console.log("ER2",err);return res.status(500).json(err);}
             if(_order){
               console.log("order update")
             }

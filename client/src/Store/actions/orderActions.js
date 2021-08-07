@@ -45,12 +45,12 @@ export const getOrderStatus = (data) => {
       res = await axios.get('getOrderstatus', data)
       console.log(res)
       dispatch({
-        type: orderConstants.GET_PAYMENT_STATUS_SUCCESS,
+        type: orderConstants.GET_ORDER_STATUS_SUCCESS,
         payload: {paymentStatus: res.data.paymentStatus}
       })      
     } catch (error) {
       dispatch({
-        type: orderConstants.GET_PAYMENT_STATUS_FAILURE,
+        type: orderConstants.GET_ORDER_STATUS_FAILURE,
         payload: {error: res.data.error}
       })
     }

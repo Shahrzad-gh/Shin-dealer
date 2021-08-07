@@ -89,11 +89,11 @@ console.log(orderDetails)
           </div>
           <Link to={{
             pathname : '/paymentPanel',
-            query: { total : handleTotal()}
+            query: { total : handleTotal(),}
           }}>
             <Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>
             ثبت سفارش 
-            </Button> </Link>         
+            </Button> </Link>    
           </div>
     </Card>
   )

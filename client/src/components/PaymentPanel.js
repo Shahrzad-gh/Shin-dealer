@@ -43,7 +43,7 @@ function PaymentPanel(props) {
   const [paymentId, setPaymentId]=  useState(null)
 
   const payment = useSelector(state => state.payment)
-  console.log("p",payment)
+  console.log("p",props)
   //const paymentOption = payment.payment.payment;
   const orderDetails = useSelector(state => state.orders)
 
@@ -57,6 +57,7 @@ function PaymentPanel(props) {
   const handlepaymentStatus = async (id, amount, currency, orderId) =>{
     "getstatus"
     const payload = {params:{ id, amount, currency, orderId }}
+    console.log(payload)
     dispatch(getOrderStatus(payload))
   }
 
@@ -66,7 +67,7 @@ function PaymentPanel(props) {
       params: {
         amount : props.location.query.total,
         currency: 'EUR',
-        receipt : 'Tb9TLvCcWoJY1q',
+        receipt : props.location.query.orderId,
         notes: "payment"
       }
     }
@@ -114,15 +115,21 @@ function PaymentPanel(props) {
   console.log("paymentId",paymentId)
   console.log("PAYMENT", payment.payment)
 
-  const o_id = payment.payment.payment && payment.payment.payment.receipt;
+  const o_id = orderDetails.orderDetails && orderDetails.orderDetails._id
   console.log("ID", o_id)
-  payment.payment.payment && handlepaymentStatus(paymentId, 4000, "EUR", o_id)
+  paymentId && handlepaymentStatus(paymentId, 4000, "EUR", o_id)
   console.log("details",orderDetails)
 
   return (
     <div>
       <Card>
-          { payment && <Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>}
+          { payment ? 
+          //<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
+          (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
+          ) : (<Link to={`Order/`}>
+          <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
+           </Link>
+          )} 
 
       </Card>
     </div>
@@ -130,8 +137,3 @@ function PaymentPanel(props) {
 }
 
 export default PaymentPanel
-          // (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
-          // ) : (<Link to={`Order/`}>
-          //   <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
-          //   </Link>
-          // )} 

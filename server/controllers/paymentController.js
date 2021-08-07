@@ -1,4 +1,4 @@
-const Razorpay = require('razorpay');
+const Razorpay = require("razorpay");
 
 const instance = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -6,6 +6,7 @@ const instance = new Razorpay({
 })
 
 module.exports.setPayment = async (req, res) => {
+  console.log("SET", instance)
         const {amount, currency, receipt, notes} = req.body.data.params
         try{
           await instance.orders.create({ amount, currency, receipt, notes }, (err, payment) => {
