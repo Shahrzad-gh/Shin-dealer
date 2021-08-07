@@ -123,12 +123,13 @@ function PaymentPanel(props) {
   return (
     <div>
       <Card>
-          { payment ? 
+          { orderDetails.orderDetails.paymentStatus == 'captured' ? 
           //<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
-          (<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
-          ) : (<Link to={`Order/`}>
+          (<Link to={`Order/${orderDetails.orderDetails._id}`}>
           <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
            </Link>
+          )
+          :(<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
           )} 
 
       </Card>

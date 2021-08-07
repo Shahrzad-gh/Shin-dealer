@@ -94,7 +94,7 @@ module.exports.getOrderStatus_get = async (req, res) => {
               console.log("order update")
             }
           })            
-          return res.status(200).json(paymentStatus);
+          return res.status(200).json(paymentStatus.status);
         }
       })
     }

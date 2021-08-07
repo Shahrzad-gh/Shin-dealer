@@ -46,7 +46,7 @@ export const getOrderStatus = (data) => {
       console.log(res)
       dispatch({
         type: orderConstants.GET_ORDER_STATUS_SUCCESS,
-        payload: {paymentStatus: res.data.paymentStatus}
+        payload: {paymentStatus: res.data}
       })      
     } catch (error) {
       dispatch({
