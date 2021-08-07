@@ -8,14 +8,14 @@ const cookieParser = require('cookie-parser');
 const { requireAuth, checkUser, adminMiddleware } = require('./middlewares/commonMiddleware');
 const dotenv = require('dotenv');
 const cors = require('cors');
-const path = require("path");
+//const path = require("path");
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes')
-const razorPayRoutes = require('./routes/razorPayRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
-const crypto = require('crypto');
+//const crypto = require('crypto');
 
 dotenv.config();
+console.log(process.env)
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -52,11 +52,4 @@ app.use(categoryRoutes);
 app.use(cartRoutes);
 app.use(userRoutes);
 app.use(orderRoutes);
-app.use(razorPayRoutes);
 app.use(paymentRoutes);
-
-// app.use(function(req, res, next){
-//   res.header('Access-Control-Allow-Origin','*');
-//   res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept*');
-//   next();
-// })
