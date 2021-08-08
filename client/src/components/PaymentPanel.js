@@ -43,7 +43,6 @@ const useStyles = makeStyles({
 });
 
 function PaymentPanel(props) {
-  console.log(props)
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -52,7 +51,6 @@ function PaymentPanel(props) {
   const [paymentId, setPaymentId]=  useState(null)
 
   const payment = useSelector(state => state.payment)
-  console.log("p",props)
   //const paymentOption = payment.payment.payment;
   const orderDetails = useSelector(state => state.orders)
 
@@ -66,7 +64,6 @@ function PaymentPanel(props) {
   const handlepaymentStatus = async (id, amount, currency, orderId) =>{
     "getstatus"
     const payload = {params:{ id, amount, currency, orderId }}
-    console.log(payload)
     dispatch(getOrderStatus(payload))
   }
 
@@ -120,14 +117,8 @@ function PaymentPanel(props) {
 
 
   }
-
-  console.log("paymentId",paymentId)
-  console.log("PAYMENT", payment.payment)
-
   const o_id = orderDetails.orderDetails && orderDetails.orderDetails._id
-  console.log("ID", o_id)
   paymentId && handlepaymentStatus(paymentId, 4000, "EUR", o_id)
-  console.log("details",orderDetails)
 
   return (
     <div>
