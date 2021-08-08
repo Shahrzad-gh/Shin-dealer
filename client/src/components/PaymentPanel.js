@@ -4,9 +4,11 @@ import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom"
 import Card from "@material-ui/core/Card";
 import { useDispatch, useSelector  } from 'react-redux';
-import axios from 'axios'
 import {setPayment} from '../Store/actions/paymentActions';
 import { getOrderStatus } from '../Store/actions/orderActions';
+//import Chip from "@material-ui/core/Chip";
+import TextField from '@material-ui/core/TextField';
+import { CardContent } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +32,13 @@ const useStyles = makeStyles({
     },
     list:{
       listStyle: 'none'
+    },
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    textField: {
+      width: 400,
     },
 });
 
@@ -76,7 +85,7 @@ function PaymentPanel(props) {
   }catch(err){
     console.log(err)
   }  
- }, [setPayment])
+ }, [dispatch])
 
   const handleRazorPay = ()   => {
     
@@ -122,8 +131,30 @@ function PaymentPanel(props) {
 
   return (
     <div>
+      <Card className={classes.root}>
+        {/* Status : 
+        <Chip
+         //label={paymentStatus}
+          color="primary" /> */}
+          <form className={classes.container} noValidate>
+      <TextField
+        id="datetime-local"
+        label="Choose Shipping Date and Time :"
+        type="datetime-local"
+        defaultValue="2021-05-24T10:30"
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+    </form>
+      </Card>
       <Card>
-          { orderDetails.orderDetails.paymentStatus == 'captured' ? 
+        <CardContent>
+          مبلغ قابل پرداخت 
+           <p className={classes.typography}>${`${props.location.query.total}`} </p>
+        </CardContent>
+          { orderDetails.orderDetails.paymentStatus === 'captured' ? 
           //<Button variant="contained" color="primary" type="submit" onClick={handleRazorPay} className={classes.typography}> پرداخت  </Button>
           (<Link to={`Order/${orderDetails.orderDetails._id}`}>
           <Button variant="contained" color="primary" type="submit" className={classes.typography}> پیگیری سفارش </Button>
