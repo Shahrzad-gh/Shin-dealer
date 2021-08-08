@@ -71,25 +71,20 @@ module.exports.getOrder_get = async (req, res) => {
 }
 
 module.exports.getOrderStatus_get = async (req, res) => {
-  console.log("GET_ORDER_STATUS", instance)
-
-  console.log("run",req.query)
   const paymentId = req.query.id
   instance.payments.fetch(paymentId, (err, result)=>{
-    if(err) {console.log("errr",err);return res.status(500).json(err); }
+    if(err) {return res.status(500).json(err); }
     if(result.status === 'authorized'){
-      console.log("r",result)
       instance.payments.capture(paymentId, req.query.amount, req.query.currency, (err, paymentStatus) => {
-        if (err){console.log("ER",err);return res.status(500).json(err);}
+        if (err){return res.status(500).json(err);}
         if(paymentStatus){
-          console.log("paymentStatus",paymentStatus)
           condition = { _id : req.query.orderId };
           action = {"$set" : {
               paymentStatus: "complete"
             }
           };
           Order.findOneAndUpdate(condition, action).exec((err, _order) => {
-            if(err){console.log("ER2",err);return res.status(500).json(err);}
+            if(err){return res.status(500).json(err);}
             if(_order){
               console.log("order update")
             }
