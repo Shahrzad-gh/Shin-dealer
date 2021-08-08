@@ -3,9 +3,7 @@ import { useDispatch, useSelector  } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import Cart from '../containers/cart';
-import axios from 'axios';
 import { Typography } from '@material-ui/core';
-import Chip from "@material-ui/core/Chip";
 import {Link} from "react-router-dom"
 //import CircularProgress from '@material-ui/core/CircularProgress';
 import { getUserCartItems } from '../Store/actions/cartActions';
@@ -77,12 +75,6 @@ console.log(orderDetails)
                 </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
        //: <CircularProgress />
        } 
-       <Card className={classes.root}>
-        Status : 
-        <Chip
-         //label={paymentStatus}
-          color="primary" />
-      </Card>
           <div>
           <div className={classes.details}> قابل پرداخت : 
           ${ handleTotal() } 
