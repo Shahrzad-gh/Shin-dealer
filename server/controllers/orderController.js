@@ -80,7 +80,9 @@ module.exports.getOrderStatus_get = async (req, res) => {
         if(paymentStatus){
           condition = { _id : req.query.orderId };
           action = {"$set" : {
-              paymentStatus: "complete"
+              paymentStatus: "complete",
+              isCompleted : true,
+              Date : req.query.dt
             }
           };
           Order.findOneAndUpdate(condition, action).exec((err, _order) => {
