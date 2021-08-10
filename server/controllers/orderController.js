@@ -9,9 +9,11 @@ const instance = new Razorpay({
 
 module.exports.setOrder_post = async (req, res) => {
   const {basketObj} = req.body;
-  Cart.deleteOne({user : res.locals.user}).exec(async (error, result) => {
-    if(error) return  res.status(400).json({ error });
-    if(result){
+  console.log(req.body)
+  console.log(res.locals)
+  // Cart.deleteOne({user : res.locals.user}).exec(async (error, result) => {
+  //   if(error) return  res.status(400).json({ error });
+  //   if(result){
       const orderObject = {
         user : res.locals.user,
         items : basketObj.cart.cartItems,
@@ -39,16 +41,18 @@ module.exports.setOrder_post = async (req, res) => {
       };
 
       try {
+        console.log(orderObject)
         const order = await Order.create(orderObject);
         return res.status(200).json({order});
       }
       catch(err) {
         //const errors = handleErrors(err);
+console.log(err)
         res.status(400).json({ err });
       }
     }
-  })
-}
+//   })
+// }
     
 module.exports.getAllOrders_get = async (req, res) => {
   Order.find().
@@ -72,6 +76,9 @@ module.exports.getOrder_get = async (req, res) => {
 
 module.exports.getOrderStatus_get = async (req, res) => {
   const paymentId = req.query.id
+    Cart.deleteOne({user : res.locals.user}).exec(async (error, result) => {
+    if(error) return  res.status(400).json({ error });
+    if(result){
   instance.payments.fetch(paymentId, (err, result)=>{
     if(err) {return res.status(500).json(err); }
     if(result.status === 'authorized'){
@@ -96,4 +103,6 @@ module.exports.getOrderStatus_get = async (req, res) => {
       })
     }
   })
+}
+})
 }
