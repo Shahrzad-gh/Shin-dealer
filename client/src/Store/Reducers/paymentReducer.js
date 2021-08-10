@@ -8,7 +8,6 @@ error: null
 };
 
 export default (state = initState, action) => {
-  console.log(action.payload)
   switch (action.type) {
       case paymentConstants.SET_PAYMENT_SUCCESS:
         return state = {

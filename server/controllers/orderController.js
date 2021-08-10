@@ -9,11 +9,6 @@ const instance = new Razorpay({
 
 module.exports.setOrder_post = async (req, res) => {
   const {basketObj} = req.body;
-  console.log(req.body)
-  console.log(res.locals)
-  // Cart.deleteOne({user : res.locals.user}).exec(async (error, result) => {
-  //   if(error) return  res.status(400).json({ error });
-  //   if(result){
       const orderObject = {
         user : res.locals.user,
         items : basketObj.cart.cartItems,
@@ -41,13 +36,11 @@ module.exports.setOrder_post = async (req, res) => {
       };
 
       try {
-        console.log(orderObject)
         const order = await Order.create(orderObject);
         return res.status(200).json({order});
       }
       catch(err) {
         //const errors = handleErrors(err);
-console.log(err)
         res.status(400).json({ err });
       }
     }

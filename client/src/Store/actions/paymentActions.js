@@ -6,7 +6,6 @@ export const setPayment = (data) => {
     let res;
     try{
       res = await axios.post('setpayment', {data})
-      console.log(res)
       dispatch({
         type: paymentConstants.SET_PAYMENT_SUCCESS,
         payload: {payment: res.data.payment}
