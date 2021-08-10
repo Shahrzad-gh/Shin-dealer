@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import LinkMui from '@material-ui/core/Link';
+import React, {useEffect} from 'react';
+//import LinkMui from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -13,10 +13,14 @@ import { getAllOrders } from '../../Store/actions/orderActions';
 import UserInfo from './UserInfo';
 import { Typography } from '@material-ui/core';
 import { Link } from "react-router-dom";
+import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-function preventDefault(event) {
-  event.preventDefault();
-}
+// function preventDefault(event) {
+//   event.preventDefault();
+// }
 
 const useStyles = makeStyles((theme) => ({
   seeMore: {
@@ -51,9 +55,6 @@ export default function Orders() {
     dispatch(getAllOrders())
     }, [dispatch])
 
-
-
-
   return (
     <React.Fragment>
       <Title>Recent Orders</Title>
@@ -61,8 +62,9 @@ export default function Orders() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
+            {/* <TableCell>Name</TableCell>
+            <TableCell>Ship To</TableCell> */}
+            <TableCell>OrderId</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell>Payment Status</TableCell>
             <TableCell align="right">Sale Amount</TableCell>
@@ -72,12 +74,14 @@ export default function Orders() {
          {orders.orders.orders && orders.orders.orders.reverse().slice(0,10).map((row, index) => (
           <TableRow key={index}>
             <TableCell className={classes.typography}>{moment().calendar(row.createdAt)}</TableCell>
-            <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
-            <TableCell className={classes.typography}>{row.shipTo}</TableCell>
+            {/* <TableCell><UserInfo key ={index} data={row.user} /></TableCell> */}
+            {/* <TableCell className={classes.typography}>{row.shipTo}</TableCell> */}
+            <TableCell className={classes.typography}>{row._id}</TableCell>
             <TableCell className={classes.typography}>{row.paymentType}</TableCell>
             <TableCell >{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
              : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
             <TableCell className={classes.typography} align="right">${row.totalAmount}</TableCell>
+            <TableCell className={classes.typography} align="right"></TableCell>
           </TableRow>
         ))}
         </TableBody>

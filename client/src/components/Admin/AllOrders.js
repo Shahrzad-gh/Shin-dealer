@@ -7,8 +7,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/core/styles';
-import UserInfo from './UserInfo';
-import { Typography } from '@material-ui/core';
+//import UserInfo from './UserInfo';
+import { Button, Typography } from '@material-ui/core';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
   paymentPending: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function AllOrders(props) {
+  console.log(props)
   const classes = useStyles();
   const orders = props.location.query && props.location.query.orders
   return (
@@ -38,23 +40,27 @@ function AllOrders(props) {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
+            {/* <TableCell>Name</TableCell>
+            <TableCell>Ship To</TableCell> */}
+            <TableCell>OrderId</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell>Payment Status</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Sale Amount</TableCell>
+            <TableCell>Manage</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
          {orders && orders.map((row, index) => (
           <TableRow key={index}>
             <TableCell className={classes.typography}>{moment().calendar(row.createdAt)}</TableCell>
-            <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
-            <TableCell className={classes.typography}>{row.shipTo}</TableCell>
+            {/* <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
+            <TableCell className={classes.typography}>{row.shipTo}</TableCell> */}
+            <TableCell className={classes.typography}>{row._id}</TableCell> 
             <TableCell className={classes.typography}>{row.paymentType}</TableCell>
             <TableCell >{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
              : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
             <TableCell className={classes.typography} align="right">${row.totalAmount}</TableCell>
+            <TableCell className={classes.typography}><Link to={`ManageOrder/${row._id}`}><Button variant="contained" color="primary" >Manage</Button></Link></TableCell>
           </TableRow>
         ))}
         </TableBody>
