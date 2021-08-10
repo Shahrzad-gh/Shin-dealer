@@ -23,6 +23,8 @@ import MenCloths from './components/MenCloths';
 import Order from "./containers/order";
 import AllOrders from "./components/Admin/AllOrders";
 import PaymentPanel from "./components/PaymentPanel";
+import ManageOrder from "./components/Admin/ManageOrder";
+
 axios.defaults.withCredentials = true;
 
 function App() {
@@ -50,6 +52,7 @@ function App() {
           <Route exact path="/Order/:id" component={Order} />
           <Route exact path="/allOrders" component={AllOrders} />
           <Route exact path="/PaymentPanel" component={PaymentPanel} />
+          <Route exact path="/ManageOrder/:id" component={ManageOrder} />
         </div>
       </Router>
     </AuthContextProvider>
