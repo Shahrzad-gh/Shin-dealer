@@ -38,12 +38,31 @@ export const setOrder = (basketObj) => {
   }
 }
 
+export const setOrder = (basketObj) => {
+  return async (dispatch) => {
+    let res;
+    try {
+      res = await axios.post('/updateOrderStatus', {basketObj})
+      console.log(res)
+      dispatch({
+        type: orderConstants.UPDATE_ORDER_STATUS_SUCCESS,
+        payload: { orderDetails: res.data.order }
+    });      
+    } catch (error) {
+      dispatch({
+        type: orderConstants.UPDATE_ORDER_STATUS_FAILURE,
+        payload: { error: res.data.error }
+    });
+    }
+  }
+}
+
+
 export const getOrderStatus = (data) => {
   return async (dispatch) => {
     let res;
     try {
       res = await axios.get('getOrderstatus', data)
-      console.log(res)
       dispatch({
         type: orderConstants.GET_ORDER_STATUS_SUCCESS,
         payload: {paymentStatus: res.data}
