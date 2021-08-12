@@ -10,7 +10,8 @@ import { makeStyles } from '@material-ui/core/styles';
 //import UserInfo from './UserInfo';
 import { Button, Typography } from '@material-ui/core';
 import { Link } from "react-router-dom";
-
+import DoneIcon from '@material-ui/icons/Done';
+import ClearIcon from '@material-ui/icons/Clear';
 const useStyles = makeStyles(() => ({
   paymentPending: {
     fontFamily: "Almarai",
@@ -33,6 +34,7 @@ function AllOrders(props) {
   console.log(props)
   const classes = useStyles();
   const orders = props.location.query && props.location.query.orders
+  console.log(orders)
   return (
     <React.Fragment>
       <Title>All Orders</Title>
@@ -43,6 +45,7 @@ function AllOrders(props) {
             {/* <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell> */}
             <TableCell>OrderId</TableCell>
+            <TableCell>OrderNext</TableCell>
             <TableCell>Payment Method</TableCell>
             <TableCell>Payment Status</TableCell>
             <TableCell>Sale Amount</TableCell>
@@ -56,6 +59,12 @@ function AllOrders(props) {
             {/* <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
             <TableCell className={classes.typography}>{row.shipTo}</TableCell> */}
             <TableCell className={classes.typography}>{row._id}</TableCell> 
+            <TableCell className={classes.typography}>{row.orderStatus.map((item, index) => 
+            <p key={index}> {item.type}
+            {item.isCompleted ? <DoneIcon color="primary" />
+            : <ClearIcon color="secondary" />}</p>
+          
+            )}</TableCell> 
             <TableCell className={classes.typography}>{row.paymentType}</TableCell>
             <TableCell >{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
              : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
