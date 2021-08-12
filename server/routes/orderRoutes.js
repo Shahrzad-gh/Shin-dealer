@@ -8,5 +8,6 @@ router.post('/setOrder', requireAuth ,checkUser, orderController.setOrder_post);
 router.get('/getOrder', checkUser, orderController.getOrder_get);
 router.get('/getAllOrders', checkUser, orderController.getAllOrders_get);
 router.get('/getOrderstatus', checkUser, orderController.getOrderStatus_get);
+router.put('/updateOrderStatus', checkUser, orderController.updateOrderStatus_put);
 
 module.exports = router;
