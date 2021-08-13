@@ -50,13 +50,13 @@ function getSteps() {
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return "Order is set";
+      return "Ordered";
     case 1:
-      return "Order is packed.";
+      return "packed";
     case 2:
-      return "Order is shipped";
+      return "shipped";
     case 3:
-      return "Order is delivered";
+      return "delivered";
     default:
       return "Wrong";
   }
@@ -70,23 +70,23 @@ function ManageOrder(props) {
   const steps = getSteps();
   const orders = useSelector((state) => state.orders);
 
-  const [orderStatus, setOrderStatus] = useState("ordered");
-
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleChangeOrderStatus = () => {
+    const step = getStepContent(activeStep);
     const payload = {
       params: {
-        orderStatus,
+        step,
         id: props.match.params.id,
       },
     };
-    console.log(orderStatus);
+    console.log(activeStep);
 
     dispatch(updateOrderStatus(payload));
   };
+
+  // const handleChangeOrderStatus = () => {
+
+  // };
 
   console.log(orders);
   const handleBack = () => {

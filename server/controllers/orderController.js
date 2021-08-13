@@ -15,7 +15,7 @@ module.exports.setOrder_post = async (req, res) => {
         totalAmount: basketObj.total,
         orderStatus: [
           {
-            type: 'ordered',
+            type: 'Ordered',
             isCompleted: true
           },
           {
@@ -101,21 +101,16 @@ module.exports.getOrderStatus_get = async (req, res) => {
 }
 
 module.exports.updateOrderStatus_put = async (req, res) => {
-  console.log(req.body.updatedStatus.params.orderStatus)
-  condition = { _id : req.body.updatedStatus.params.id , "orderStatus.type": req.body.updatedStatus.params.orderStatus };
+  condition = { _id : req.body.updatedStatus.params.id , "orderStatus.type": req.body.updatedStatus.params.step};
   action = {"$set" : {
     "orderStatus.$.isCompleted" : 
-      //type : req.body.updatedStatus.params.orderStatus,
-      true
-    
-  //   {'orderStatus.$[outer].items.$[inner].quantity': 5}
+      true    
   // }
   }};
   Order.findOneAndUpdate(condition, action).
   exec((error, order) => {
     if(error) {console.log(error);return res.status(400).json({ error });}
     if(order) {
-      console.log(order)
       res.status(200).json({ order });
     }
   })
