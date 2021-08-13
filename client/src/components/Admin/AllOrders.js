@@ -34,7 +34,8 @@ function AllOrders(props) {
   console.log(props)
   const classes = useStyles();
   const orders = props.location.query && props.location.query.orders
-  console.log(orders)
+  console.log(orders);
+  var status = "";
   return (
     <React.Fragment>
       <Title>All Orders</Title>
@@ -61,7 +62,8 @@ function AllOrders(props) {
             <TableCell className={classes.typography}>{row._id}</TableCell> 
             <TableCell className={classes.typography}>{row.orderStatus.map((item, index) => 
             <p key={index}> {item.type}
-            {item.isCompleted ? <DoneIcon color="primary" />
+            {item.isCompleted ? status = item.type
+            //<DoneIcon color="primary" />
             : <ClearIcon color="secondary" />}</p>
           
             )}</TableCell> 
@@ -69,7 +71,11 @@ function AllOrders(props) {
             <TableCell >{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
              : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
             <TableCell className={classes.typography} align="right">${row.totalAmount}</TableCell>
-            <TableCell className={classes.typography}><Link to={`ManageOrder/${row._id}`}><Button variant="contained" color="primary" >Manage</Button></Link></TableCell>
+            <TableCell className={classes.typography}>
+              <Link to={{pathname:`ManageOrder/${row._id}`, param:{status}}}>
+                <Button variant="contained" color="primary" >Manage</Button>
+                </Link>
+                </TableCell>
           </TableRow>
         ))}
         </TableBody>
