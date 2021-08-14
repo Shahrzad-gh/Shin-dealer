@@ -47,6 +47,19 @@ function getSteps() {
   ];
 }
 
+function getStepNum(step) {
+  switch(step){
+    case 'Ordered':
+      return 0;
+    case 'packed':
+      return 1;
+    case 'shipped':
+      return 2;
+    case 'delivered':
+      return 3;  
+  }
+}
+
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
@@ -63,10 +76,9 @@ function getStepContent(stepIndex) {
 }
 
 function ManageOrder(props) {
-  console.log(props);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(props.location.param.status && getStepNum(props.location.param.status));
   const steps = getSteps();
   const orders = useSelector((state) => state.orders);
 
@@ -90,7 +102,7 @@ function ManageOrder(props) {
 
   console.log(orders);
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    setActiveStep((prevActiveStep) => prevActiveStep );
   };
 
   const handleReset = () => {

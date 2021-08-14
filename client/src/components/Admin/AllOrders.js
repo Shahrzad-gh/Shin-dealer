@@ -60,12 +60,8 @@ function AllOrders(props) {
             {/* <TableCell><UserInfo key ={index} data={row.user} /></TableCell>
             <TableCell className={classes.typography}>{row.shipTo}</TableCell> */}
             <TableCell className={classes.typography}>{row._id}</TableCell> 
-            <TableCell className={classes.typography}>{row.orderStatus.map((item, index) => 
-            <p key={index}> {item.type}
-            {item.isCompleted ? status = item.type
-            //<DoneIcon color="primary" />
-            : <ClearIcon color="secondary" />}</p>
-          
+            <TableCell className={classes.typography}>{row.orderStatus.map((item) => 
+            item.isCompleted ? status = item.type : status = "Ordered"
             )}</TableCell> 
             <TableCell className={classes.typography}>{row.paymentType}</TableCell>
             <TableCell >{row.paymentStatus === 'complete' ? <Typography className={classes.paymentDone}>{row.paymentStatus}</Typography>
