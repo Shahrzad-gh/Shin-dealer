@@ -96,10 +96,6 @@ function ManageOrder(props) {
     dispatch(updateOrderStatus(payload));
   };
 
-  // const handleChangeOrderStatus = () => {
-
-  // };
-
   console.log(orders);
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep );

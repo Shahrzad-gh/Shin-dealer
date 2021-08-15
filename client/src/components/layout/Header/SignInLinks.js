@@ -10,6 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import axios from 'axios';
 import { useHistory } from "react-router-dom";
 import authContext from "../../../context/AuthContext"
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     sectionDesktop: {
@@ -83,7 +84,7 @@ function SignInLinks(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <Link to="profile"><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
     </Menu>
@@ -117,7 +118,7 @@ function SignInLinks(props) {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>        
+        <Link to="Profile"><p>Profile</p></Link>        
       </MenuItem>
     </Menu>
   );

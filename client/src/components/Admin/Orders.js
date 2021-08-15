@@ -73,7 +73,7 @@ export default function Orders() {
         <TableBody>
          {orders.orders.orders && orders.orders.orders.reverse().slice(0,10).map((row, index) => (
           <TableRow key={index}>
-            <TableCell className={classes.typography}>{moment().calendar(row.createdAt)}</TableCell>
+            <TableCell className={classes.typography}>{moment(row.creatAt).format('LL')}</TableCell>
             {/* <TableCell><UserInfo key ={index} data={row.user} /></TableCell> */}
             {/* <TableCell className={classes.typography}>{row.shipTo}</TableCell> */}
             <TableCell className={classes.typography}>{row._id}</TableCell>
