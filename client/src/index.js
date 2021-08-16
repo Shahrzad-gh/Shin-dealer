@@ -10,7 +10,7 @@ ReactDOM.render(
   <Provider store={store}>
   <React.Fragment>
     <App />
-  </React.Fragment>,
+  </React.Fragment>
   </Provider >,
   document.getElementById("root")
 );
