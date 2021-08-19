@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
@@ -37,7 +37,8 @@ function SignInLinks(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
-
+  const userInfo = useContext(authContext);
+  console.log(userInfo)
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -72,16 +73,59 @@ function SignInLinks(props) {
     }
     
   }
-
   const menuId = "primary-search-account-menu";
-
+  const renderMenu = (
+    <Menu
+    anchorEl={anchorEl}
+    anchorOrigin={{ vertical: "top", horizontal: "right" }}
+    id={menuId}
+    keepMounted
+    transformOrigin={{ vertical: "top", horizontal: "right" }}
+    open={isMenuOpen}
+    onClose={handleMenuClose}
+  >
+    {userInfo.user._id && <Link to={{pathname:'profile', query : {id : userInfo.user._id}}}><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>}
+    <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+    <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
+  </Menu>
+  );
   const mobileMenuId = "primary-search-account-menu-mobile";
+    const renderMobileMenu = (
+      <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={handleMobileMenuClose}
+    >
+      <MenuItem>
+        <IconButton aria-label="show 11 new shoppingbasket" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <ShoppingBasketIcon />
+          </Badge>
+        </IconButton>
+        <p>Shopping</p>
+      </MenuItem>
+      <MenuItem onClick={handleProfileMenuOpen}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <Link to={{pathname:`profile/${userInfo.user._id}`}}><p>Profile</p></Link>        
+      </MenuItem>
+    </Menu>
+    );
 
     return (
       <authContext.Consumer>
         {(user) => ( 
         <div>
-          {console.log(user)}
          <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
               <Badge badgeContent={0} color="secondary">
@@ -112,49 +156,9 @@ function SignInLinks(props) {
               <MoreIcon />
             </IconButton>
           </div>
-          
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <IconButton aria-label="show 11 new shoppingbasket" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <ShoppingBasketIcon />
-          </Badge>
-        </IconButton>
-        <p>Shopping</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <Link to={{pathname:"Profile", state: user}}><p>Profile</p></Link>        
-      </MenuItem>
-    </Menu>
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{ vertical: "top", horizontal: "right" }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{ vertical: "top", horizontal: "right" }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <Link to={{pathname:"profile", state: user}}><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-      <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
-    </Menu>
+          {renderMobileMenu}
+          {renderMenu}
+
         </div>
         )}      
 </authContext.Consumer>

@@ -21,15 +21,16 @@ const useStyles = makeStyles({
   },
   status:{
     display: 'flex',
-    justifyContent: 'flex-end'
   }
 })
 function Profile(props) {
+  console.log(props.location.query)
   const classes = useStyles();
   const dispatch = useDispatch()
-  const userId = "60d98604214b94312084c0b1"
   const user = useSelector(state => state.user)
+  const userId = props.location.query.id;
   const userInfo = user.user[userId]
+
   useEffect(() => {
     const payload = {
       params : {
@@ -38,13 +39,15 @@ function Profile(props) {
     }
     dispatch(getUserById(payload))
   }, [])
+
   console.log(userInfo)
+
   return (
     <Box className={classes.root}>
       <Box display="flex" p={1} height="100%" width="30%">
       {"user profile"}
       </Box>
-      <Box>
+      <Box width="70%">
       <Box display="flex" p={1} flexGrow={1} height="40%">
       <div>
         <div className={classes.header}>{"userInfo"}</div>
@@ -53,6 +56,7 @@ function Profile(props) {
          <>
          <div>{userInfo.firstName}</div>
          <div>{userInfo.lastName}</div>
+         <div>{userInfo.email}</div>
          </>
          )}
         </div>
