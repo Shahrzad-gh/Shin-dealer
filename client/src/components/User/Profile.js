@@ -92,7 +92,7 @@ function Profile(props) {
             <TableCell>OrderId</TableCell>
             <TableCell>Payment Status</TableCell>
             <TableCell>Sale Amount</TableCell>
-            <TableCell>Manage</TableCell>
+            <TableCell>Details</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -106,8 +106,8 @@ function Profile(props) {
              : <Typography className={classes.paymentPending}>{row.paymentStatus}</Typography>}</TableCell>
             <TableCell className={classes.typography} align="right">${row.totalAmount}</TableCell>
             <TableCell className={classes.typography}>
-              <Link to={{pathname:`ManageOrder/${row._id}`, param:{status}}}>
-                <Button variant="contained" color="primary" >Manage</Button>
+              <Link to={`Order/${row._id}`}>
+                <Button variant="contained" color="primary" >Details</Button>
                 </Link>
                 </TableCell>
           </TableRow>

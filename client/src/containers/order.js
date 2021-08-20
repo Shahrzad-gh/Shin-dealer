@@ -9,7 +9,8 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import { CardContent, Typography } from "@material-ui/core";
-
+import { useDispatch, useSelector } from "react-redux";
+import { getOrderById } from "../Store/actions/orderActions";
 const useStyles = makeStyles({
   root: {
     marginTop: 10,
@@ -39,48 +40,46 @@ const useStyles = makeStyles({
 
 export default function Order(props) {
   const classes = useStyles();
-  const [order, setOrder] = useState(null);
+  //const [order, setOrder] = useState(null);
+  const dispatch = useDispatch()
+  const order = useSelector(state => state.orders.orderDetails)
   
   useEffect(() => {
-    async function fetchData() {
-      try{
-        const data = await axios.get('/getorder', {params:{id:props.match.params.id}})
-        let o = data.data.order;
-        setOrder(o)
-      }catch(err){
-        console.error(err)
+    const payload = {
+      params: {
+        orderId : props.match.params.id
       }
     }
-    fetchData();
-    })
+    dispatch(getOrderById(payload))
+    },[dispatch])
 
+    order[0] && console.log(order[0])
   return (
     <Card className={classes.root} variant="outlined">
       <Typography className={classes.typography}>Track your Order</Typography>
       <Card>
         <CardContent>
           <Typography className={classes.typography}>Details:</Typography>
-          {order && order.map((item,index) => 
-          <section key={index}>
-              <div> Payment Satus: {item.paymentStatus}</div>
-              <div> Total: {item.totalAmount}</div>
-              <div> OrderId: {item._id}</div>
-              {item.items.map((i) => 
-                <div key={i._id}> item: {i.product}</div>
-              )}
+          {order[0] && 
+          <section key={order[0]._id}>
+              <div> Payment Satus: {order[0].paymentStatus}</div>
+              <div> Total: {order[0].totalAmount}</div>
+              <div> OrderId: {order[0]._id}</div>
           </section>
-            )}
+            }
         </CardContent>
       </Card>
     <Timeline align="right" className={classes.timeline}>
-      <TimelineItem>
+      {order[0] &&  order[0].orderStatus.map((item, index) =>
+        <TimelineItem key={index}>
         <TimelineSeparator>
-          <TimelineDot color="primary"/>
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Ordered</TimelineContent>
+          { item.isCompleted ? <TimelineDot color="primary"/> : <TimelineDot />}
+          {index === 3 ? null : <TimelineConnector />}
+       </TimelineSeparator>
+        <TimelineContent>{item.type}</TimelineContent>
       </TimelineItem>
-      <TimelineItem>
+      )}
+      {/* <TimelineItem>
         <TimelineSeparator>
           <TimelineDot />
           <TimelineConnector />
@@ -99,7 +98,7 @@ export default function Order(props) {
           <TimelineDot/>
         </TimelineSeparator>
         <TimelineContent>Delivered</TimelineContent>
-      </TimelineItem>
+      </TimelineItem> */}
     </Timeline> 
     </Card>
   );
