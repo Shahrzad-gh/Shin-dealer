@@ -58,7 +58,7 @@ module.exports.getAllOrders_get = async (req, res) => {
 }
 
 module.exports.getOrder_get = async (req, res) => {
-  Order.find({_id: req.query.id}).
+  Order.find({_id: req.params.id}).
   exec((error, order) => {
     if(error) return res.status(400).json({ error });
     if(order) {
