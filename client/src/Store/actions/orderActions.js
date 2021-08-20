@@ -94,3 +94,19 @@ export const getOrderStatus = (data) => {
     }
   }
 }
+
+export const getUserOrdersByUserId =(userId) => {
+  return async (dispatch) => {
+    let res;
+    try {
+      res = await axios.get('getUserOrdersByUserId', userId)
+      dispatch({type: orderConstants.GET_USER_ORDERS_BY_USER_ID_SUCCESS,
+      payload: {orders :res.data.orders}})
+    } catch (error) {
+      dispatch({
+        type: orderConstants.GET_USER_ORDERS_BY_USER_ID_FAILURE,
+        payload: {error: res.data.error}
+      })
+    }
+  }
+}
