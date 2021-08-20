@@ -75,6 +75,18 @@ export default (state = initState, action) => {
               error : action.payload,
               loading: false
             } 
+            case orderConstants.GET_ORDER_BY_ID_SUCCESS:
+              return state = {
+                ...state,
+                orderDetails : action.payload.orderDetails,
+                loading: false,
+              } 
+          case orderConstants.GET_ORDER_BY_ID_FAILURE:
+            return state = {
+              ...state,
+              error : action.payload,
+              loading: false
+            }
     default:
       return state
   }
