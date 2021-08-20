@@ -9,5 +9,6 @@ router.get('/getOrder', checkUser, orderController.getOrder_get);
 router.get('/getAllOrders', checkUser, orderController.getAllOrders_get);
 router.get('/getOrderstatus', checkUser, orderController.getOrderStatus_get);
 router.put('/updateOrderStatus', checkUser, orderController.updateOrderStatus_put);
+router.get('/getuserordersbyuserid', checkUser, orderController.getUserOrdersByUserId_get);
 
 module.exports = router;

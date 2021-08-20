@@ -115,3 +115,13 @@ module.exports.updateOrderStatus_put = async (req, res) => {
     }
   })
 }
+
+module.exports.getUserOrdersByUserId_get = async (req, res) => {
+  Order.find({user: req.query.userId}).
+  exec((error, orders) => {
+    if (error) {return res.status(400).json({error})}
+    if(orders){
+      res.status(200).json({ orders })
+    }
+  })
+}
