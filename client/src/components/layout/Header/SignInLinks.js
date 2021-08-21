@@ -117,7 +117,7 @@ function SignInLinks(props) {
         >
           <AccountCircle />
         </IconButton>
-        <Link to={{pathname:`profile/${userInfo.user._id}`}}><p>Profile</p></Link>        
+        <Link to={{pathname:'profile', query : {id : userInfo.user._id}}}><p>Profile</p></Link>        
       </MenuItem>
     </Menu>
     );

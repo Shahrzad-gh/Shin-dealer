@@ -11,6 +11,8 @@ import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import Cookies from 'js-cookie';
 
+const drawerWidth = 240;
+
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -61,6 +63,13 @@ const useStyles = makeStyles((theme) => ({
       width: "20ch",
     },
   },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  drawer: {
+    width: 240,
+    flexShrink: 0,
+  },
 }));
 
 function Navbar() {
@@ -75,7 +84,7 @@ function Navbar() {
   return (
       
       <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes.appbar}>
         <Toolbar>
           <IconButton
             edge="start"

@@ -14,6 +14,15 @@ import Title from '../Admin/Title';
 import moment from 'moment';
 import { Link } from "react-router-dom";
 import { Button } from '@material-ui/core';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import RateReviewIcon from '@material-ui/icons/RateReview';
+import InfoIcon from '@material-ui/icons/Info';
+import ReceiptIcon from '@material-ui/icons/Receipt';
+import EditLocationIcon from '@material-ui/icons/EditLocation';
+
 
 const useStyles = makeStyles({
   root: {
@@ -36,7 +45,7 @@ const useStyles = makeStyles({
     margin: '5px',
     border: '1px solid gray',
     borderRadius: '10px'
-  }
+  },
 })
 function Profile(props) {
   console.log(props.location.query)
@@ -46,8 +55,7 @@ function Profile(props) {
   const userId = props.location.query.id;
   const userInfo = user.user[userId]
   const orders = useSelector((state) => state.orders)
-  var status = "";
-
+  
   useEffect(() => {
     const payload = {
       params : {
@@ -61,11 +69,37 @@ function Profile(props) {
   console.log(userInfo)
   console.log(orders.orders.orders)
 
+  const handleIcon = (index) => {
+    switch(index){
+      case 0:
+        return <ReceiptIcon />
+      case 1:
+        return <RateReviewIcon />
+      case 2:
+        return <EditLocationIcon />
+      case 3:
+        return <InfoIcon />
+    }
+  }
+
   return (
     <Box className={classes.root}>
       <Box className={classes.profile} display="flex" p={1} height="100%" width="30%">
-      {"user profile"}
-      </Box>
+
+      <div className={classes.drawerContainer}>
+          <List>
+            {['Orders', 'Reviews', 'Addresses', 'Information'].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {handleIcon(index)}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+
+        </div>
+        </Box>
       <Box width="70%">
       <Box className={classes.profile} display="flex" p={1} flexGrow={1} height="40%">
       <div>

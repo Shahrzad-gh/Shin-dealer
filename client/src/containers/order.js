@@ -79,26 +79,6 @@ export default function Order(props) {
         <TimelineContent>{item.type}</TimelineContent>
       </TimelineItem>
       )}
-      {/* <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>packed</TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot />
-          <TimelineConnector />
-        </TimelineSeparator>
-        <TimelineContent>Shipped</TimelineContent>
-      </TimelineItem>
-      <TimelineItem>
-        <TimelineSeparator>
-          <TimelineDot/>
-        </TimelineSeparator>
-        <TimelineContent>Delivered</TimelineContent>
-      </TimelineItem> */}
     </Timeline> 
     </Card>
   );
