@@ -30,7 +30,7 @@ export default function Popular() {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <Carousel breakPoints={breakPoints}>
+        <Carousel itemsToShow={6} >
           <Item>
             <Link to="/Best">
               <CardMedia
