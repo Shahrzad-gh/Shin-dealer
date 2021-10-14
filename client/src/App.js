@@ -9,16 +9,16 @@ import Women from "./components/Women";
 import Navbar from "./components/layout/Header/Navbar";
 import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProdocutDetails";
-import SignIn from "./components/views/SignIn"
-import SignUp from "./components/views/SignUp"
-import ForgetPass from "./components/ForgetPass"
-import Cart from "./containers/cart"
-import axios from 'axios';
+import SignIn from "./components/views/SignIn";
+import SignUp from "./components/views/SignUp";
+import ForgetPass from "./components/ForgetPass";
+import Cart from "./containers/cart";
+import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 import Dashboard from "./components/Admin/Dashboard";
 import Basket from "./components/Basket";
-import WomenCloths from './components/WomenClothes';
-import MenCloths from './components/MenCloths';
+import WomenCloths from "./components/WomenClothes";
+import MenCloths from "./components/MenCloths";
 // import PrivateRoute from './HOC/privateRoutes';
 import Order from "./containers/order";
 import AllOrders from "./components/Admin/AllOrders";
@@ -29,7 +29,6 @@ import Profile from "./components/User/Profile";
 axios.defaults.withCredentials = true;
 
 function App() {
-
   return (
     <AuthContextProvider>
       <Router>
