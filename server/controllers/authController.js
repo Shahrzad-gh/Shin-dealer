@@ -46,12 +46,13 @@ const createToken = (id) => {
 module.exports.signup_get = (req, res) => {};
 
 module.exports.login_get = (req, res) => {
-  //console.log(res.locals)
+  console.log("login-get");
   res.status(201).json({ user: res.locals.user._id });
 };
 
 module.exports.landing_get = (req, res) => {
   //res.render('landing');
+  console.log("landing-get");
 };
 
 module.exports.signup_post = async (req, res) => {
@@ -75,6 +76,8 @@ module.exports.signup_post = async (req, res) => {
 };
 
 module.exports.login_post = async (req, res) => {
+  console.log("login-post");
+
   const { email, password } = req.body;
   try {
     const user = await User.login(email, password);
@@ -106,6 +109,7 @@ module.exports.loggedIn_get = (req, res) => {
     res.json(false);
   }
 };
+
 module.exports.getUser_get = (req, res) => {
   try {
     const token = req.cookies.token;
