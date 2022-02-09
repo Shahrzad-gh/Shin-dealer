@@ -44,61 +44,70 @@ function getSteps() {
     "Order is packed",
     "Order is shipped",
     "Order is delivered",
+    "finished",
   ];
 }
 
 function getStepNum(step) {
-  switch(step){
-    case 'Ordered':
+  switch (step) {
+    case "ordered":
       return 0;
-    case 'packed':
+    case "packed":
       return 1;
-    case 'shipped':
+    case "shipped":
       return 2;
-    case 'delivered':
-      return 3;  
+    case "delivered":
+      return 3;
+    case "finished":
+      return 4;
   }
 }
 
 function getStepContent(stepIndex) {
   switch (stepIndex) {
     case 0:
-      return "Ordered";
+      return "ordered";
     case 1:
       return "packed";
     case 2:
       return "shipped";
     case 3:
       return "delivered";
+    case 4:
+      return "finished";
     default:
-      return "Wrong";
+      return "wrong";
   }
 }
 
 function ManageOrder(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [activeStep, setActiveStep] = React.useState(props.location.param.status && getStepNum(props.location.param.status));
+  console.log(props.location.param.status);
+  const [activeStep, setActiveStep] = React.useState(
+    props.location.param.status && getStepNum(props.location.param.status)
+  );
   const steps = getSteps();
   const orders = useSelector((state) => state.orders);
-
+  console.log(orders);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     const step = getStepContent(activeStep);
+    console.log("s", step);
     const payload = {
       params: {
         step,
         id: props.match.params.id,
       },
     };
-    console.log(activeStep);
+    console.log("active", activeStep);
+    console.log("order", orders);
 
     dispatch(updateOrderStatus(payload));
   };
 
-  console.log(orders);
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep );
+    setActiveStep((prevActiveStep) => prevActiveStep);
   };
 
   const handleReset = () => {
