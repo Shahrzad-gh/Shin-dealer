@@ -51,7 +51,9 @@ function PaymentPanel(props) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [address, setAddress] = React.useState("female");
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+  const [selectedDate, setSelectedDate] = React.useState(
+    new Date("2014-08-18T21:11:54")
+  );
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -74,7 +76,7 @@ function PaymentPanel(props) {
   // const notes = 'Description'
 
   const handlepaymentStatus = async (id, amount, currency, orderId, dt) => {
-    console.log("Date & Time",dt)
+    console.log("Date & Time", dt);
     const payload = { params: { id, amount, currency, orderId, dt } };
     dispatch(getOrderStatus(payload));
   };
@@ -98,7 +100,7 @@ function PaymentPanel(props) {
   const handleRazorPay = () => {
     var options = {
       key: "rzp_test_AjdjKCRh2xA9Jv",
-      amount: 4000,
+      amount: props.location.query.total,
       currency: "EUR",
       name: "Fashion",
       description: "Transaction",
@@ -127,7 +129,14 @@ function PaymentPanel(props) {
     rzp1.open();
   };
   const o_id = orderDetails.orderDetails && orderDetails.orderDetails._id;
-  paymentId && handlepaymentStatus(paymentId, 4000, "EUR", o_id , selectedDate);
+  paymentId &&
+    handlepaymentStatus(
+      paymentId,
+      `${props.location.query.total}`,
+      "EUR",
+      o_id,
+      selectedDate
+    );
 
   return (
     <div>
@@ -136,7 +145,7 @@ function PaymentPanel(props) {
         <Chip
          //label={paymentStatus}
           color="primary" /> */}
-        <form className={classes.container} >
+        <form className={classes.container}>
           <TextField
             id="datetime-local"
             label="Choose Shipping Date and Time :"
