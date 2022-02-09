@@ -1,7 +1,9 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/userModel');
+const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
 const requireAuth = (req, res, next) => {
+  console.log("auth");
+
   const token = req.cookies.token;
 
   // check json web token exists & is verified
@@ -10,13 +12,13 @@ const requireAuth = (req, res, next) => {
       if (err) {
         console.log(err.message);
         //res.redirect('/signin');
-        console.log('signin please')
+        console.log("signin please");
       } else {
         next();
       }
     });
   } else {
-    console.log('signin please')
+    console.log("signin please");
     //res.redirect('/signin');
   }
 };
@@ -44,8 +46,8 @@ const checkUser = (req, res, next) => {
 const adminMiddleware = (req, res, next) => {
   //console.log(res.locals.user.role)
   if (res.locals.user.role !== "admin") {
-      return res.status(400).json({ message: "Admin access denied" });
-    }
+    return res.status(400).json({ message: "Admin access denied" });
+  }
   next();
 };
 
