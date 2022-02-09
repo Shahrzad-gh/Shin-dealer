@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Badge from "@material-ui/core/Badge";
@@ -7,38 +7,39 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import axios from 'axios';
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import authContext from "../../../context/AuthContext"
+import authContext from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-    sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex",
-      },
-    },
-    sectionMobile: {
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
       display: "flex",
-      [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
     },
-    typography : {
-      fontFamily: "Almarai", fontSize: "1rem",
-      padding: 12,
-      margin: 0
-    }
-  }));
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
+  typography: {
+    fontFamily: "Almarai",
+    fontSize: "1rem",
+    padding: 12,
+    margin: 0,
+  },
+}));
 
 function SignInLinks(props) {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const history = useHistory();
   const userInfo = useContext(authContext);
-  console.log(userInfo)
+  console.log(userInfo);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -61,37 +62,39 @@ function SignInLinks(props) {
 
   const handleSignOut = async (e) => {
     e.preventDefault();
-    try{
-     const res = await axios.get('/logout');
-     console.log(res)
-     handleMenuClose();
-     history.push("/");
-     window.location.reload(true);
-      
-    }catch(err){
-      console.error(err)
+    try {
+      const res = await axios.get("/logout");
+      console.log(res);
+      handleMenuClose();
+      history.push("/");
+      window.location.reload(true);
+    } catch (err) {
+      console.error(err);
     }
-    
-  }
+  };
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
-    anchorEl={anchorEl}
-    anchorOrigin={{ vertical: "top", horizontal: "right" }}
-    id={menuId}
-    keepMounted
-    transformOrigin={{ vertical: "top", horizontal: "right" }}
-    open={isMenuOpen}
-    onClose={handleMenuClose}
-  >
-    {userInfo.user._id && <Link to={{pathname:'profile', query : {id : userInfo.user._id}}}><MenuItem onClick={handleMenuClose}>Profile</MenuItem></Link>}
-    <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
-  </Menu>
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={handleMenuClose}
+    >
+      {userInfo.user._id && (
+        <Link to={{ pathname: "profile", query: { id: userInfo.user._id } }}>
+          <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+        </Link>
+      )}
+      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleSignOut}>SignOut</MenuItem>
+    </Menu>
   );
   const mobileMenuId = "primary-search-account-menu-mobile";
-    const renderMobileMenu = (
-      <Menu
+  const renderMobileMenu = (
+    <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       id={mobileMenuId}
@@ -101,12 +104,14 @@ function SignInLinks(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 11 new shoppingbasket" color="inherit">
-          <Badge badgeContent={11} color="secondary">
-            <ShoppingBasketIcon />
-          </Badge>
-        </IconButton>
-        <p>Shopping</p>
+        <Link to="/basket">
+          <IconButton aria-label="show 11 new shoppingbasket" color="inherit">
+            <Badge badgeContent={11} color="secondary">
+              <ShoppingBasketIcon />
+            </Badge>
+          </IconButton>
+          <p>Shopping</p>
+        </Link>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -117,22 +122,29 @@ function SignInLinks(props) {
         >
           <AccountCircle />
         </IconButton>
-        <Link to={{pathname:'profile', query : {id : userInfo.user._id}}}><p>Profile</p></Link>        
+        <Link to={{ pathname: "profile", query: { id: userInfo.user._id } }}>
+          <p>Profile</p>
+        </Link>
       </MenuItem>
     </Menu>
-    );
+  );
 
-    return (
-      <authContext.Consumer>
-        {(user) => ( 
+  return (
+    <authContext.Consumer>
+      {(user) => (
         <div>
-         <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                {/* badgeContent */}
-                <ShoppingBasketIcon />
-              </Badge>
-            </IconButton>
+          <div className={classes.sectionDesktop}>
+            <Link to="/basket">
+              <IconButton
+                aria-label="show 17 new shoppingbasket"
+                color="inherit"
+              >
+                <Badge badgeContent={0} color="secondary">
+                  {/* badgeContent */}
+                  <ShoppingBasketIcon />
+                </Badge>
+              </IconButton>
+            </Link>
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -140,9 +152,9 @@ function SignInLinks(props) {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
-              >
+            >
               <AccountCircle />
-            </IconButton>             
+            </IconButton>
             <p className={classes.typography}>{user.user.firstName}</p>
           </div>
           <div className={classes.sectionMobile}>
@@ -158,10 +170,10 @@ function SignInLinks(props) {
           </div>
           {renderMobileMenu}
           {renderMenu}
-
         </div>
-        )}      
-</authContext.Consumer>
-    )}
+      )}
+    </authContext.Consumer>
+  );
+}
 
-export default SignInLinks
+export default SignInLinks;
