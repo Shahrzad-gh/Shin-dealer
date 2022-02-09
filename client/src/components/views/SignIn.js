@@ -1,29 +1,29 @@
-import React,{ useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import {Link} from 'react-router-dom';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import axios from 'axios';
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" to="https://material-ui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -31,63 +31,65 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   error: {
-    color: 'red'
-  }
+    color: "red",
+  },
 }));
 
 function SignIn() {
   const classes = useStyles();
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
   const history = useHistory();
 
-  const { email, password } = formData
+  const { email, password } = formData;
 
-  function handleChange(e){
-    setFormData({...formData, [e.target.name]: e.target.value})
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-const [authError, setAuthError] = useState({email:'', password: ''})
-const handleSignIn =  async (e) => {
-  e.preventDefault();
-  try{
-    const loginData = {
-      email,
-      password
-    };
+  const [authError, setAuthError] = useState({ email: "", password: "" });
 
-    axios.post('/signin', loginData).then(res => {
-         history.push("/");
-   window.location.reload(true);
-    }).catch(err => {
-      setAuthError(err.response.data.errors)
-      // authError.email = err.response.data.errors.email;
-      // authError.password = err.response.data.errors.password;
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    try {
+      const loginData = {
+        email,
+        password,
+      };
+
+      axios
+        .post("/signin", loginData)
+        .then((res) => {
+          history.push("/");
+          window.location.reload(true);
+        })
+        .catch((err) => {
+          setAuthError(err.response.data.errors);
+          // authError.email = err.response.data.errors.email;
+          // authError.password = err.response.data.errors.password;
+        });
+    } catch (err) {
+      console.error("catch", err);
     }
-      );
-
-  }catch(err){
-    console.error("catch",err)
-  }
-}
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -114,7 +116,9 @@ const handleSignIn =  async (e) => {
             value={email}
           />
           <div className="email error">
-          { authError ? <p className={classes.error}>{authError.email}</p> : null }
+            {authError ? (
+              <p className={classes.error}>{authError.email}</p>
+            ) : null}
           </div>
           <TextField
             variant="outlined"
@@ -126,11 +130,13 @@ const handleSignIn =  async (e) => {
             label="Password"
             type="password"
             id="password"
-            onChange={e => handleChange(e)}
+            onChange={(e) => handleChange(e)}
             autoComplete="current-password"
           />
           <div className="password error">
-          { authError ? <p className={classes.error}>{authError.password}</p> : null }
+            {authError ? (
+              <p className={classes.error}>{authError.password}</p>
+            ) : null}
           </div>
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -142,12 +148,12 @@ const handleSignIn =  async (e) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-                      >
+          >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              { authError ? <p>{authError.password}</p> : null }
+              {authError ? <p>{authError.password}</p> : null}
               <Link to="forgetPass" variant="body2">
                 Forgot password?
               </Link>
@@ -167,4 +173,4 @@ const handleSignIn =  async (e) => {
   );
 }
 
-export default SignIn
+export default SignIn;
