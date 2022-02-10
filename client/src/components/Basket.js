@@ -1,38 +1,38 @@
-import React, {useEffect} from 'react'
-import { useDispatch, useSelector  } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import Cart from '../containers/cart';
-import { Typography } from '@material-ui/core';
-import {Link} from "react-router-dom"
+import Cart from "../containers/cart";
+import { Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
 //import CircularProgress from '@material-ui/core/CircularProgress';
-import { getUserCartItems } from '../Store/actions/cartActions';
-import {setOrder} from '../Store/actions/orderActions';
+import { getUserCartItems } from "../Store/actions/cartActions";
+import { setOrder } from "../Store/actions/orderActions";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles({
   root: {
     padding: 15,
-    marginTop: 10,
-    width: 300,
-    border:' 1px solid lightgray',
-    display: 'inline-block'
-    },
-    details: {
-      //flexDirection: "column",
-      padding: 5,
-    },
-    typography: {
-      fontFamily: "Almarai",
-      fontSize: "1rem",
-      fontWeight: 'bold'
-    },
-    cover: {
-      height: 350,
-    },
-    list:{
-      listStyle: 'none'
-    },
+    margin: 20,
+    width: "-webkit-fill-available",
+    border: " 1px solid lightgray",
+    display: "inline-block",
+  },
+  details: {
+    //flexDirection: "column",
+    padding: 5,
+  },
+  typography: {
+    fontFamily: "Almarai",
+    fontSize: "1rem",
+    fontWeight: "bold",
+  },
+  cover: {
+    height: 350,
+  },
+  list: {
+    listStyle: "none",
+  },
 });
 
 function Basket() {
@@ -41,54 +41,76 @@ function Basket() {
   //const [loadding, setLoadding] = useState(false);
   //const [signature, setSignature] = useState(null)
   const dispatch = useDispatch();
-  const cart = useSelector(state => state.cart.cart);
-  const orderDetails = useSelector(state => state.orders.orderDetails)
+  const cart = useSelector((state) => state.cart.cart);
+  const orderDetails = useSelector((state) => state.orders.orderDetails);
 
   useEffect(() => {
-    dispatch(getUserCartItems())
-  },[dispatch]);
-  
+    dispatch(getUserCartItems());
+  }, [dispatch]);
+
   const handleTotal = () => {
-     return cart !== null ? cart.cartItems && cart.cartItems.reduce((a, b)=> a + b.payable, 0) : 0
-  }
+    return cart !== null
+      ? cart.cartItems && cart.cartItems.reduce((a, b) => a + b.payable, 0)
+      : 0;
+  };
 
   const handlePay = async () => {
     const basketObj = {
       cart,
-      total : handleTotal()
+      total: handleTotal(),
+    };
+    try {
+      dispatch(setOrder(basketObj));
+    } catch (err) {
+      console.log(err);
     }
-    try{
-      dispatch(setOrder(basketObj))
-    }catch(err){
-      console.log(err)
-    }
-  }
-console.log(orderDetails)
+  };
+  console.log(orderDetails);
 
   return (
     <Card className={classes.root}>
       <div className={classes.typography}> سبد خرید </div>
-       {cart !== null ?   
-              cart.cartItems && cart.cartItems.map((item, index) => 
-              <div className={classes.details} key={index}>
-                <Cart data={item.product} count={item.count} payable={item.payable}/>
-                </div>) : <Typography className={classes.typography}> سبد خرید خالی می باشد </Typography>
-       //: <CircularProgress />
-       } 
-          <div>
-          <div className={classes.details}> قابل پرداخت : 
-          ${ handleTotal() } 
-          </div>
-          <Link to={{
-            pathname : '/paymentPanel',
-            query: { total : handleTotal(),}
-          }}>
-            <Button variant="contained" color="primary" type="submit" onClick={handlePay} className={classes.typography}>
-            ثبت سفارش 
-            </Button> </Link>    
-          </div>
+      {
+        cart !== null ? (
+          cart.cartItems &&
+          cart.cartItems.map((item, index) => (
+            <div className={classes.details} key={index}>
+              <Cart
+                data={item.product}
+                count={item.count}
+                payable={item.payable}
+              />
+            </div>
+          ))
+        ) : (
+          <Typography className={classes.typography}>
+            {" "}
+            سبد خرید خالی می باشد{" "}
+          </Typography>
+        )
+        //: <CircularProgress />
+      }
+      <div>
+        <div className={classes.details}> قابل پرداخت : ${handleTotal()}</div>
+        <Link
+          to={{
+            pathname: "/paymentPanel",
+            query: { total: handleTotal() },
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={handlePay}
+            className={classes.typography}
+          >
+            ثبت سفارش
+          </Button>{" "}
+        </Link>
+      </div>
     </Card>
-  )
+  );
 }
 
-export default Basket
+export default Basket;
