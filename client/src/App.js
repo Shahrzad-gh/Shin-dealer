@@ -54,7 +54,6 @@ function App() {
           <Route exact path="/PaymentPanel" component={PaymentPanel} />
           <Route exact path="/ManageOrder/:id" component={ManageOrder} />
           <Route exact path="/Profile" component={Profile} />
-          <Route path="/basket" component={Basket} />
         </div>
       </Router>
     </AuthContextProvider>
