@@ -1,39 +1,44 @@
-import React, {useEffect} from 'react'
-import {useDispatch , useSelector} from 'react-redux'
-import { getUserById } from '../../Store/actions/userAction'
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserById } from "../../Store/actions/userAction";
+import { Typography } from "mui/material";
+import { makeStyles } from "mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   typography: {
     fontFamily: "Almarai",
     fontSize: "1rem",
-    fontWeight: 'normal'
+    fontWeight: "normal",
   },
 }));
 
 function UserInfo(props) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const classes = useStyles();
 
-  const user = useSelector((state) => {return state.user})
-  const userFirstName = user.user[props.data]
+  const user = useSelector((state) => {
+    return state.user;
+  });
+  const userFirstName = user.user[props.data];
 
   useEffect(() => {
-    const userId = props.data
-    const payload ={
-      params : {
-        userId
-      }
-    }
-    dispatch(getUserById(payload))
-  }, [dispatch, props.data])
+    const userId = props.data;
+    const payload = {
+      params: {
+        userId,
+      },
+    };
+    dispatch(getUserById(payload));
+  }, [dispatch, props.data]);
 
   return (
     <div>
-     <Typography className={classes.typography}> {userFirstName && userFirstName.firstName } </Typography>
+      <Typography className={classes.typography}>
+        {" "}
+        {userFirstName && userFirstName.firstName}{" "}
+      </Typography>
     </div>
-  )
+  );
 }
 
-export default UserInfo
+export default UserInfo;

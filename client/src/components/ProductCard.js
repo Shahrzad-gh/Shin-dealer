@@ -1,10 +1,10 @@
-import React  from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardActionArea from '@material-ui/core/CardActionArea';
-import Typography from "@material-ui/core/Typography";
+import React from "react";
+import { makeStyles } from "@mui/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     padding: 15,
     marginTop: 10,
     width: 200,
-    border:' 1px solid lightgray'
-    },
+    border: " 1px solid lightgray",
+  },
   media: {
     height: 200,
   },
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   typography: {
     fontFamily: "Almarai",
     fontSize: "1rem",
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   addIcon: {
     height: 38,
@@ -35,49 +35,51 @@ const useStyles = makeStyles({
     height: 140,
   },
   content: {
-    paddingBottom: '0!important'
-  }
+    paddingBottom: "0!important",
+  },
 });
 
 export default function ProductCard(props) {
   const classes = useStyles();
- // const [cartItem, setCartItem] = useState({picture:"", name:"", price:"", count: 1});
+  // const [cartItem, setCartItem] = useState({picture:"", name:"", price:"", count: 1});
   //const {picture, name, price} = cartItem
   return (
     <Link to={`Product/${props.data._id}`}>
-    <Card className={classes.root}>
-      <CardActionArea>
-      <div className={classes.details}>
-          {props.data.picture && (<CardMedia
-          className={classes.cover}
-          image={props.data.picture.img}
-          title={props.data.name}
-          name="picture"
-          //value={picture}
-        />)}
-        <CardContent className={classes.content}>
-          <Typography
-            variant="subtitle1"
-            color="textSecondary"
-            className={classes.typography}
-            name="name"
-            //value={name}
-            >
-          {props.data.name}
-          </Typography>
-          <Typography
-            variant="subtitle2"
-            color="textSecondary"
-            className={classes.typography}
-            name="price"
-            //value={price}
-            >
-          {props.data.price}$
-          </Typography>
-        </CardContent>        
-      </div>
-      </CardActionArea>
-    </Card>
+      <Card className={classes.root}>
+        <CardActionArea>
+          <div className={classes.details}>
+            {props.data.picture && (
+              <CardMedia
+                className={classes.cover}
+                image={props.data.picture.img}
+                title={props.data.name}
+                name="picture"
+                //value={picture}
+              />
+            )}
+            <CardContent className={classes.content}>
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                className={classes.typography}
+                name="name"
+                //value={name}
+              >
+                {props.data.name}
+              </Typography>
+              <Typography
+                variant="subtitle2"
+                color="textSecondary"
+                className={classes.typography}
+                name="price"
+                //value={price}
+              >
+                {props.data.price}$
+              </Typography>
+            </CardContent>
+          </div>
+        </CardActionArea>
+      </Card>
     </Link>
   );
 }

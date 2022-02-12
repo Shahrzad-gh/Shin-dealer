@@ -1,31 +1,31 @@
-import React from 'react'
-import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
-import Badge from "@material-ui/core/Badge";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import React from "react";
+import IconButton from "@mui/material/IconButton";
+import { makeStyles } from "@mui/styles";
+import Badge from "@mui/material/Badge";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
-    sectionDesktop: {
-      display: "none",
-      [theme.breakpoints.up("md")]: {
-        display: "flex",
-      },
-    },
-    sectionMobile: {
-      display: "flex",
-      [theme.breakpoints.up("md")]: {
-        display: "none",
-      },
-    },
-  }));
+  sectionDesktop: {
+    display: "none",
+    // [theme.breakpoints.up("md")]: {
+    //   display: "flex",
+    // },
+  },
+  sectionMobile: {
+    display: "flex",
+    // [theme.breakpoints.up("md")]: {
+    //   display: "none",
+    // },
+  },
+}));
 function SignOutLinks(props) {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMenuOpen = Boolean(anchorEl);
@@ -59,7 +59,9 @@ function SignOutLinks(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <Link to="signIn"><MenuItem onClick={handleMenuClose}>SignIn</MenuItem></Link>
+      <Link to="signIn">
+        <MenuItem onClick={handleMenuClose}>SignIn</MenuItem>
+      </Link>
     </Menu>
   );
 
@@ -96,41 +98,41 @@ function SignOutLinks(props) {
     </Menu>
   );
 
+  return (
+    <div>
+      <div className={classes.sectionDesktop}>
+        <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
+          <Badge badgeContent={0} color="secondary">
+            {/* badgeContent */}
+            <ShoppingBasketIcon />
+          </Badge>
+        </IconButton>
+        <IconButton
+          edge="end"
+          aria-label="account of current user"
+          aria-controls={menuId}
+          aria-haspopup="true"
+          onClick={handleProfileMenuOpen}
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+      </div>
+      <div className={classes.sectionMobile}>
+        <IconButton
+          aria-label="show more"
+          aria-controls={mobileMenuId}
+          aria-haspopup="true"
+          onClick={handleMobileMenuOpen}
+          color="inherit"
+        >
+          <MoreIcon />
+        </IconButton>
+      </div>
+      {renderMobileMenu}
+      {renderMenu}
+    </div>
+  );
+}
 
-    return (
-        <div>
-         <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 17 new shoppingbasket" color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                {/* badgeContent */}
-                <ShoppingBasketIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </div>
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
-        {renderMobileMenu}
-        {renderMenu}
-          </div>
-    )}
-
-export default SignOutLinks
+export default SignOutLinks;

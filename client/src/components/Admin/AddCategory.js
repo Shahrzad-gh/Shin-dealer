@@ -1,62 +1,62 @@
-import React, { useState, useEffect } from 'react';
-import { makeStyles, withStyles  } from '@material-ui/core/styles';
-import Title from './Title';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { makeStyles, withStyles } from "@mui/styles";
+import Title from "./Title";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import axios from "axios";
 import { useHistory } from "react-router-dom";
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
+import InputLabel from "@mui/material/InputLabel";
+import NativeSelect from "@mui/material/NativeSelect";
+import InputBase from "@mui/material/InputBase";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     },
   },
 }))(InputBase);
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -67,43 +67,46 @@ const useStyles = makeStyles((theme) => ({
 export default function AddCategory() {
   const classes = useStyles();
   const [category, setCategory] = useState({
-    name:'',
+    name: "",
   });
-  const [parentCategory, setParentCategory] = React.useState('');
-  const [categoryItems, setCategoryItems] = useState([])
+  const [parentCategory, setParentCategory] = React.useState("");
+  const [categoryItems, setCategoryItems] = useState([]);
 
   const handleParent = (event) => {
     setParentCategory(event.target.value);
   };
   const history = useHistory();
 
-  const {name} = category;
+  const { name } = category;
   const parent = parentCategory;
 
-  function handleOnChange(e){
-    setCategory({...category,[e.target.name] : e.target.value});
+  function handleOnChange(e) {
+    setCategory({ ...category, [e.target.name]: e.target.value });
   }
   useEffect(() => {
     try {
-      axios.get('/getcategories').then(res => setCategoryItems(res.data.categoryList)).catch(err => console.log(err))
+      axios
+        .get("/getcategories")
+        .then((res) => setCategoryItems(res.data.categoryList))
+        .catch((err) => console.log(err));
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-      }, [])
+  }, []);
 
-  async function handleAddCategory(e){
+  async function handleAddCategory(e) {
     e.preventDefault();
-    try{
+    try {
       const categoryData = {
         parent,
-        name
+        name,
       };
-      console.log(categoryData)
-      await axios.post('/addcategory', categoryData);
+      console.log(categoryData);
+      await axios.post("/addcategory", categoryData);
       history.push("/Admin");
       window.location.reload(true);
-    }catch(err){
-      console.error(err)
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -111,26 +114,30 @@ export default function AddCategory() {
     <React.Fragment>
       <Title>Add Category</Title>
       <div>
-      <form className={classes.form} onSubmit={handleAddCategory} noValidate>
+        <form className={classes.form} onSubmit={handleAddCategory} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
-            <InputLabel htmlFor="parent-category">Parent Category</InputLabel>
-        <NativeSelect
-          id="parent-category"
-          value={parentCategory}
-          onChange={handleParent}
-          input={<BootstrapInput />}
-        >
-                    <option aria-label="None" value="" />
+              <InputLabel htmlFor="parent-category">Parent Category</InputLabel>
+              <NativeSelect
+                id="parent-category"
+                value={parentCategory}
+                onChange={handleParent}
+                input={<BootstrapInput />}
+              >
+                <option aria-label="None" value="" />
 
-          {categoryItems && categoryItems.map((cat, index) => 
-            <option key={index} value={cat._id} label={cat.name}>
-          </option>)}
-
-        </NativeSelect>
+                {categoryItems &&
+                  categoryItems.map((cat, index) => (
+                    <option
+                      key={index}
+                      value={cat._id}
+                      label={cat.name}
+                    ></option>
+                  ))}
+              </NativeSelect>
             </Grid>
             <Grid item xs={12} sm={6}>
-            <InputLabel htmlFor="name">Category Name</InputLabel>
+              <InputLabel htmlFor="name">Category Name</InputLabel>
               <TextField
                 autoComplete="name"
                 name="name"
@@ -150,7 +157,7 @@ export default function AddCategory() {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}       
+            className={classes.submit}
           >
             Add Category
           </Button>

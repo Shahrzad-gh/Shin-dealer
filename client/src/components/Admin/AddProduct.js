@@ -1,45 +1,45 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@mui/styles";
 import Title from "./Title";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
+import NativeSelect from "@mui/material/NativeSelect";
+import InputBase from "@mui/material/InputBase";
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
-    'label + &': {
+    "label + &": {
       marginTop: theme.spacing(3),
     },
   },
   input: {
     borderRadius: 4,
-    position: 'relative',
+    position: "relative",
     backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
+    border: "1px solid #ced4da",
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    padding: "10px 26px 10px 12px",
+    transition: theme.transitions.create(["border-color", "box-shadow"]),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      '-apple-system',
-      'BlinkMacSystemFont',
+      "-apple-system",
+      "BlinkMacSystemFont",
       '"Segoe UI"',
-      'Roboto',
+      "Roboto",
       '"Helvetica Neue"',
-      'Arial',
-      'sans-serif',
+      "Arial",
+      "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
-    ].join(','),
-    '&:focus': {
+    ].join(","),
+    "&:focus": {
       borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+      borderColor: "#80bdff",
+      boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
     },
   },
 }))(InputBase);
@@ -66,9 +66,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AddProduct() {
   const classes = useStyles();
-  const [picture, setPicture] = useState()
-  const [categoryItems, setCategoryItems] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState()
+  const [picture, setPicture] = useState();
+  const [categoryItems, setCategoryItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [product, setProduct] = useState({
     name: "",
     count: "",
@@ -77,7 +77,7 @@ export default function AddProduct() {
   });
   const history = useHistory();
 
-  const {name, count, price, description } = product;
+  const { name, count, price, description } = product;
 
   function handleOnChange(e) {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -87,32 +87,35 @@ export default function AddProduct() {
     setPicture(e.target.files[0]);
   }
   useEffect(() => {
-try {
-  axios.get('/getcategories').then(res => setCategoryItems(res.data.categoryList)).catch(err => console.log(err))
-} catch (err) {
-  console.log(err)
-}
-  }, [])
+    try {
+      axios
+        .get("/getcategories")
+        .then((res) => setCategoryItems(res.data.categoryList))
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
 
   const handleCategory = (e) => {
-    setSelectedCategory(e.target.value)
-  }
+    setSelectedCategory(e.target.value);
+  };
 
   async function handleOnSubmit(e) {
     e.preventDefault();
 
-    const productData = new FormData()
-    productData.append('name', name)
-    productData.append('count', count)
-    productData.append('price', price)
-    productData.append('description', description)
-    productData.append('category', selectedCategory)
-    productData.append('pictures', picture)
+    const productData = new FormData();
+    productData.append("name", name);
+    productData.append("count", count);
+    productData.append("price", price);
+    productData.append("description", description);
+    productData.append("category", selectedCategory);
+    productData.append("pictures", picture);
 
     try {
-      await axios.post("/addproduct",  productData);
-      
-     history.push("/Admin");
+      await axios.post("/addproduct", productData);
+
+      history.push("/Admin");
       window.location.reload(true);
     } catch (err) {
       console.error(err);
@@ -177,21 +180,25 @@ try {
               <div className="email error"></div>
             </Grid>
             <Grid item xs={12}>
-            <NativeSelect
-          value={selectedCategory}
-          onChange={handleCategory}
-          input={<BootstrapInput />}
-        >
-          <option aria-label="None" value="" />
-          {categoryItems && categoryItems.map((cat, index) => 
-            <optgroup key={index} label={cat.name}>
-            {cat.children.map((c, index) =>             
-            <option key={index} value={c._id}>{c.name}</option>)}
-          </optgroup>)}
+              <NativeSelect
+                value={selectedCategory}
+                onChange={handleCategory}
+                input={<BootstrapInput />}
+              >
+                <option aria-label="None" value="" />
+                {categoryItems &&
+                  categoryItems.map((cat, index) => (
+                    <optgroup key={index} label={cat.name}>
+                      {cat.children.map((c, index) => (
+                        <option key={index} value={c._id}>
+                          {c.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  ))}
+              </NativeSelect>
 
-        </NativeSelect>
-
-           <div className="category error"></div>
+              <div className="category error"></div>
             </Grid>
             <Grid item xs={12} sm={6}>
               <label htmlFor="upload-photo">

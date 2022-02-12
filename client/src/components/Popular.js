@@ -1,15 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import CardMedia from "@material-ui/core/CardMedia";
+import { makeStyles } from "@mui/styles";
+import CardMedia from "@mui/material/CardMedia";
 import Carousel from "react-elastic-carousel";
 import Item from "./Item";
 import { Link } from "react-router-dom";
-const breakPoints = [
-  { width: 1, itemsToShow: 1 },
-  { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 3 },
-  { width: 1200, itemsToShow: 4 },
-];
+// const breakPoints = [
+//   { width: 1, itemsToShow: 1 },
+//   { width: 550, itemsToShow: 2 },
+//   { width: 768, itemsToShow: 3 },
+//   { width: 1200, itemsToShow: 4 },
+// ];
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   typography: { fontFamily: "Almarai", fontSize: "1rem" },
   paper: {
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
   },
   paddingCard: {
     padding: 3,
@@ -30,7 +30,7 @@ export default function Popular() {
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <Carousel itemsToShow={6} >
+        <Carousel itemsToShow={6}>
           <Item>
             <Link to="/Best">
               <CardMedia

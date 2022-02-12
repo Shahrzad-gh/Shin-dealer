@@ -1,17 +1,18 @@
 import React from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 import moment from "moment";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 //import UserInfo from './UserInfo';
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@mui/material";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
-import DoneIcon from "@material-ui/icons/Done";
-import ClearIcon from "@material-ui/icons/Clear";
+// import DoneIcon from "@material-ui/icons/Done";
+// import ClearIcon from "@material-ui/icons/Clear";
 const useStyles = makeStyles(() => ({
   paymentPending: {
     fontFamily: "Almarai",

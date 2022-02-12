@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
+import { makeStyles } from "@mui/styles";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
 import axios from "axios";
-import RemoveIcon from "@material-ui/icons/Remove";
-import AddIcon from "@material-ui/icons/Add";
-import DeleteIcon from "@material-ui/icons/Delete";
+import RemoveIcon from "@mui/icons-material/Remove";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductDetailsById } from "../Store/actions/productActions";
 
@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 });
 
 export default function Cart(props) {
+  console.log(props);
   const classes = useStyles();
   let productCount = props.count;
   let payable = props.payable;

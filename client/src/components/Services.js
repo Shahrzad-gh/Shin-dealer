@@ -1,10 +1,10 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   typography: { fontFamily: "Almarai", fontSize: "1rem", textAlign: "center" },
   paper: {
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
   },
   paddingCard: {
     padding: 3,
@@ -30,7 +30,7 @@ export default function Services() {
           <Grid item xs={3}>
             <Card>
               <CardContent>
-                <Typography component={'span'} className={classes.typography}>
+                <Typography component={"span"} className={classes.typography}>
                   <i className="fas fa-retweet fa-2x"></i>
                   <p> بازگشت کالا </p>
                 </Typography>
@@ -48,7 +48,7 @@ export default function Services() {
           <Grid item xs={3}>
             <Card>
               <CardContent className={classes.typography}>
-                <Typography component={'span'} className={classes.typography}>
+                <Typography component={"span"} className={classes.typography}>
                   <i className="fas fa-shipping-fast fa-2x"></i>
                   <p> ارسال رایگان</p>
                 </Typography>
@@ -66,7 +66,7 @@ export default function Services() {
           <Grid item xs={3}>
             <Card>
               <CardContent className={classes.typography}>
-                <Typography  component={'span'} className={classes.typography}>
+                <Typography component={"span"} className={classes.typography}>
                   <i className="far fa-credit-card fa-2x"></i>
                   <p> پرداخت مطمئن</p>
                 </Typography>
@@ -84,7 +84,7 @@ export default function Services() {
           <Grid item xs={3}>
             <Card>
               <CardContent className={classes.typography}>
-                <Typography component={'span'} className={classes.typography}>
+                <Typography component={"span"} className={classes.typography}>
                   <i className="fas fa-phone-volume fa-2x"></i>
                   <p>پشتیبانی 24 ساعته</p>
                 </Typography>

@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 import Popular from "./Popular";
 import Footer from "./layout/Footer/Footer";
 import { Link } from "react-router-dom";
@@ -83,29 +83,33 @@ export default function Collections() {
             </Grid>
             <Grid item xs={4}>
               {/* //////////// */}
-              <Link to={{pathname:"MenCloths",state: {cat_id:"60db1f8455a62c4efc177e9d"}}}>
-
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="clothes"
-                    height="200"
-                    image="https://ae01.alicdn.com/kf/Hb9551ec4db134f878694a415ad64abc3i/Free-Ship-T-Shirts-Men-Women-100-Cotton-Summer-Short-Solid-Male-Female-Basic-Tshirts-Plain.jpg"
-                    title="لباس"
-                  />
-                  <CardContent className={classes.paddingCard}>
-                    <Typography
-                      className={classes.typography}
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                    >
-                      لباس
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <Link
+                to={{
+                  pathname: "MenCloths",
+                  state: { cat_id: "60db1f8455a62c4efc177e9d" },
+                }}
+              >
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt="clothes"
+                      height="200"
+                      image="https://ae01.alicdn.com/kf/Hb9551ec4db134f878694a415ad64abc3i/Free-Ship-T-Shirts-Men-Women-100-Cotton-Summer-Short-Solid-Male-Female-Basic-Tshirts-Plain.jpg"
+                      title="لباس"
+                    />
+                    <CardContent className={classes.paddingCard}>
+                      <Typography
+                        className={classes.typography}
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                      >
+                        لباس
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               </Link>
             </Grid>
           </Grid>

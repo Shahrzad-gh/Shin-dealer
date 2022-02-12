@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     textAlign: "center",
-    color: theme.palette.text.secondary,
+    // color: theme.palette.text.secondary,
   },
   paddingCard: {
     padding: 3,
@@ -33,7 +33,6 @@ export default function Collections() {
         <div className={classes.root}>
           <Grid container spacing={1}>
             <Grid item xs={4}>
-              {/* //////////// */}
               <Link to="Kids">
                 <Card className={classes.root}>
                   <CardActionArea>
@@ -59,8 +58,6 @@ export default function Collections() {
               </Link>
             </Grid>
             <Grid item xs={4}>
-              {/* /////////////// */}
-              {/* //////////// */}
               <Link to="Men">
                 <Card className={classes.root}>
                   <CardActionArea>
@@ -86,7 +83,6 @@ export default function Collections() {
               </Link>
             </Grid>
             <Grid item xs={4}>
-              {/* //////////// */}
               <Link to="Women">
                 <Card className={classes.root}>
                   <CardActionArea>

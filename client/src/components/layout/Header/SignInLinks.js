@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
-import Badge from "@material-ui/core/Badge";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import IconButton from "@mui/material/IconButton";
+import { makeStyles } from "@mui/styles";
+import Badge from "@mui/material/Badge";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import authContext from "../../../context/AuthContext";
@@ -15,15 +15,15 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
-    [theme.breakpoints.up("md")]: {
-      display: "flex",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   display: "flex",
+    // },
   },
   sectionMobile: {
     display: "flex",
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
+    // [theme.breakpoints.up("md")]: {
+    //   display: "none",
+    // },
   },
   typography: {
     fontFamily: "Almarai",

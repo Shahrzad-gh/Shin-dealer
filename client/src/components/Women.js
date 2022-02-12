@@ -1,12 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@mui/styles";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
 import Popular from "./Popular";
 import Footer from "./layout/Footer/Footer";
 import { Link } from "react-router-dom";
@@ -35,61 +35,62 @@ export default function Collections() {
         <div className={classes.root}>
           <Grid container spacing={1}>
             <Grid item xs={4}>
-              {/* //////////// */}
-              <Link to={{pathname:"WomenAccesories", data: ""}}>
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="accesory"
-                    height="200"
-                    image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
-                    title="اکسسوری"
-                  />
-                  <CardContent className={classes.paddingCard}>
-                    <Typography
-                      className={classes.typography}
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                    >
-                      اکسسوری
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <Link to={{ pathname: "WomenAccesories", data: "" }}>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt="accesory"
+                      height="200"
+                      image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
+                      title="اکسسوری"
+                    />
+                    <CardContent className={classes.paddingCard}>
+                      <Typography
+                        className={classes.typography}
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                      >
+                        اکسسوری
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               </Link>
             </Grid>
             <Grid item xs={4}>
-              {/* /////////////// */}
-              {/* //////////// */}
-              <Link to={{pathname:"WomenShoes", data: ""}}>
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="shoe"
-                    height="200"
-                    image="https://image.freepik.com/free-photo/shoes-footwear-woman_1203-7832.jpg"
-                    title="کفش"
-                  />
-                  <CardContent className={classes.paddingCard}>
-                    <Typography
-                      className={classes.typography}
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                    >
-                      کفش
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
+              <Link to={{ pathname: "WomenShoes", data: "" }}>
+                <Card className={classes.root}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt="shoe"
+                      height="200"
+                      image="https://image.freepik.com/free-photo/shoes-footwear-woman_1203-7832.jpg"
+                      title="کفش"
+                    />
+                    <CardContent className={classes.paddingCard}>
+                      <Typography
+                        className={classes.typography}
+                        gutterBottom
+                        variant="h5"
+                        component="h2"
+                      >
+                        کفش
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
               </Link>
             </Grid>
             <Grid item xs={4}>
-              {/* //////////// */}
-              <Link to={{pathname:"WomenCloths", state: {cat_id: "60daf6482d9c8f49c0242053"}}}>
+              <Link
+                to={{
+                  pathname: "WomenCloths",
+                  state: { cat_id: "60daf6482d9c8f49c0242053" },
+                }}
+              >
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
+import { makeStyles } from "@mui/styles";
+import Card from "@mui/material/Card";
 import Cart from "../containers/cart";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-//import CircularProgress from '@material-ui/core/CircularProgress';
+//import CircularProgress from '@mui/material/CircularProgress';
 import { getUserCartItems } from "../Store/actions/cartActions";
 import { setOrder } from "../Store/actions/orderActions";
-import Button from "@material-ui/core/Button";
+import Button from "@mui/material/Button";
 
 const useStyles = makeStyles({
   root: {

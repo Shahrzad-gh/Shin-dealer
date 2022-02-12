@@ -1,8 +1,8 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import { makeStyles } from "@mui/styles";
+import AppBar from "@mui/material/AppBar";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 
 const useStyles = makeStyles((theme) => ({
   root: {

@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
-import Grid from "@material-ui/core/Grid";
+import Grid from "@mui/material/Grid";
 import Basket from "./Basket";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsByCategory } from "../Store/actions/productActions";
 
@@ -17,13 +17,13 @@ const useStyles = makeStyles({
     listStyle: "none",
   },
   displayList: {
-    display: "-webkit-inline-box",
+    display: "flex",
   },
   Nopadding: {
     padding: 0,
   },
   filterMenu: {
-    width: " 100%",
+    width: "100%",
     border: "1px lightgray solid",
     display: "inline-flex",
     borderRadius: 15,
@@ -64,8 +64,8 @@ export default function ProductList(props) {
   };
 
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={4} sm={8}>
+    <Grid container>
+      <Grid item>
         <Grid>
           <List component="nav" className={classes.filterMenu}>
             <ListItem button onClick={handleSortDSD}>
@@ -82,8 +82,8 @@ export default function ProductList(props) {
             </ListItem>
           </List>
         </Grid>
-        <Grid container spacing={1}>
-          <Grid item xs={4} sm={4} className={classes.displayList}>
+        <Grid container>
+          <Grid item className={classes.displayList}>
             {productsList &&
               productsList.map((p) => (
                 <li key={p._id} className={classes.listStyle}>
@@ -92,10 +92,6 @@ export default function ProductList(props) {
               ))}
           </Grid>
         </Grid>
-      </Grid>
-      <Grid className={classes.Nopadding} item sm={4}>
-        {/* <Basket /> */}
-        {/* <Order /> */}
       </Grid>
     </Grid>
   );

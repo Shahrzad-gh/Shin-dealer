@@ -1,5 +1,5 @@
 import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
+import CssBaseline from "@mui/material/CssBaseline";
 import Footer from "../layout/Footer/Footer";
 import Collections from "../Collections";
 import Feeds from "../Feeds";
