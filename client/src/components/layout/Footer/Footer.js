@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   styledCard: {
-    padding: 10,
+    padding: 50,
   },
   typography: { fontFamily: "Almarai", fontSize: "1rem" },
 }));
