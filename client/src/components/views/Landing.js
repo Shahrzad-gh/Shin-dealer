@@ -12,8 +12,8 @@ export default function CenteredGrid() {
       <CssBaseline />
       <Collections />
       <Feeds />
-      <Popular />
-      <Services />
+      {/* <Popular />
+      <Services /> */}
       <Footer />
     </React.Fragment>
   );
