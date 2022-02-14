@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   typography: { fontFamily: "Almarai", fontSize: "1rem" },
   paper: {
     textAlign: "center",
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
   },
   paddingCard: {
     padding: 3,
