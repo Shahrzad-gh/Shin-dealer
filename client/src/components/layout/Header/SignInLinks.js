@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import { makeStyles } from "@mui/styles";
 import Badge from "@mui/material/Badge";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -15,15 +15,15 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   sectionDesktop: {
     display: "none",
-    // [theme.breakpoints.up("md")]: {
-    //   display: "flex",
-    // },
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
   },
   sectionMobile: {
     display: "flex",
-    // [theme.breakpoints.up("md")]: {
-    //   display: "none",
-    // },
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
   typography: {
     fontFamily: "Almarai",
@@ -107,7 +107,7 @@ function SignInLinks(props) {
         <Link to="/basket">
           <IconButton aria-label="show 11 new shoppingbasket" color="inherit">
             <Badge badgeContent={11} color="secondary">
-              <ShoppingBasketIcon />
+              <ShoppingCartIcon />
             </Badge>
           </IconButton>
           <p>Shopping</p>
@@ -141,7 +141,7 @@ function SignInLinks(props) {
               >
                 <Badge badgeContent={0} color="secondary">
                   {/* badgeContent */}
-                  <ShoppingBasketIcon />
+                  <ShoppingCartIcon />
                 </Badge>
               </IconButton>
             </Link>
