@@ -44,3 +44,46 @@ a {
 .container .MuiGrid-container {
   display: unset !important;
 }
+
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  box-shadow: none !important;
+}
+.css-h93ljk-MuiTypography-root {
+  font-weight: 800 !important;
+}
+
+.css-bhp9pd-MuiPaper-root-MuiCard-root {
+  box-shadow: none !important;
+}
+
+@media (max-width: 700px) {
+  .css-gj1fbr-MuiGrid-root {
+    max-width: none !important;
+  }
+  .css-a5rdam-MuiGrid-root {
+    flex-direction: column !important;
+  }
+}
+@media (min-width: 320px) {
+  .css-1oqqzyl-MuiContainer-root {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+  .makeStyles-title-3 {
+    display: block;
+  }
+}
+@media (min-width: 600px) {
+  .css-1oqqzyl-MuiContainer-root {
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+  }
+  .css-8u39c-MuiTypography-root {
+    font-weight: bold !important;
+  }
+}
+@media (min-width: 701px) {
+  .css-a5rdam-MuiGrid-root {
+    flex-direction: row !important;
+  }
+}
