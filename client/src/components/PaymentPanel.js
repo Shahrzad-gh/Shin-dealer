@@ -28,8 +28,9 @@ const useStyles = makeStyles({
     padding: 5,
   },
   typography: {
-    fontFamily: "Almarai",
-    fontSize: "1rem",
+    fontFamily: "Almarai !important",
+
+    fontSize: "1rem !important",
     fontWeight: "bold",
   },
   cover: {

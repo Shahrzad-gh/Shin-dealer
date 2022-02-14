@@ -23,8 +23,9 @@ const useStyles = makeStyles({
     flexDirection: "column",
   },
   typography: {
-    fontFamily: "Almarai",
-    fontSize: "1rem",
+    fontFamily: "Almarai !important",
+
+    fontSize: "1rem !important",
     fontWeight: "bold",
   },
   addIcon: {

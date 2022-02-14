@@ -11,10 +11,14 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     marginBottom: 15,
   },
-  typography: { fontFamily: "Almarai", fontSize: "1rem", textAlign: "center" },
+  typography: {
+    fontFamily: "Almarai !important",
+    fontSize: "1rem !important",
+    textAlign: "center",
+  },
   paper: {
     textAlign: "center",
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
   },
   paddingCard: {
     padding: 3,

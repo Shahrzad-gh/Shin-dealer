@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: 15,
   },
-  typography: { fontFamily: "Almarai", fontSize: "1rem" },
+  typography: { fontFamily: "Almarai !important", fontSize: "1rem !important" },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,

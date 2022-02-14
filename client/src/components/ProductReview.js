@@ -15,8 +15,8 @@ const useStyles = makeStyles({
     display: "inline-block",
   },
   typography: {
-    fontFamily: "Almarai",
-    fontSize: "1rem",
+    fontFamily: "Almarai !important",
+    fontSize: "1rem !important",
     fontWeight: "normal",
   },
 });

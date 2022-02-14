@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: 15,
   },
-  typography: { fontFamily: "Almarai", fontSize: "1rem" },
+  typography: { fontFamily: "Almarai !important", fontSize: "1rem !important" },
   paper: {
     textAlign: "center",
     color: theme.palette.text.secondary,
@@ -116,18 +116,14 @@ export default function Collections() {
             </Grid>
           </Grid>
         </div>
-        <div>
-          <Popular />
-        </div>
+        <div>{/* <Popular /> */}</div>
         <div>
           <img
             src="https://i.pinimg.com/originals/7c/e0/b8/7ce0b8145c2a8150f4b971d18fc48d5c.jpg"
             alt="banner"
           />
         </div>
-        <div>
-          <Popular />
-        </div>
+        <div>{/* <Popular /> */}</div>
       </Container>
       <Footer />
     </React.Fragment>
