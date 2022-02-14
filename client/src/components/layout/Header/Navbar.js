@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { Fade } from "@mui/material";
+import { alpha } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -12,38 +12,41 @@ import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import Cookies from "js-cookie";
 
-// const drawerWidth = 240;
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
-  // menuButton: {
-  //   marginRight: theme.spacing(2),
-  // },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
   title: {
     display: "none",
-    // [theme.breakpoints.up("sm")]: {
-    //   display: "block",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      display: "block",
+    },
+    "& span": {
+      fontWeight: "400 !important",
+    },
   },
   search: {
     position: "relative",
-    // borderRadius: theme.shape.borderRadius,
-    // backgroundColor: Fade(theme.palette.common.white, 0.15),
-    // "&:hover": {
-    //   backgroundColor: Fade(theme.palette.common.white, 0.25),
-    // },
-    // marginRight: theme.spacing(2),
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginRight: theme.spacing(2),
     marginLeft: 0,
     width: "100%",
-    // [theme.breakpoints.up("sm")]: {
-    //   marginLeft: theme.spacing(3),
-    //   width: "auto",
-    // },
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(3),
+      width: "auto",
+    },
   },
   searchIcon: {
-    // padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 2),
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
@@ -55,21 +58,26 @@ const useStyles = makeStyles((theme) => ({
     color: "inherit",
   },
   inputInput: {
-    // padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    // paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    // transition: theme.transitions.create("width"),
-    // width: "100%",
-    // [theme.breakpoints.up("md")]: {
-    //   width: "20ch",
-    // },
+    padding: theme.spacing(1, 1, 1, 0),
+    //vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
   },
   appBar: {
-    // zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.drawer + 1,
   },
   drawer: {
     width: 240,
     flexShrink: 0,
+  },
+  toolbar: {
+    padding: "0 100px !important",
+    background: "#fff !important",
+    color: "#000 !important",
   },
 }));
 
@@ -85,31 +93,19 @@ function Navbar() {
   return (
     <div className={classes.grow}>
       <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
-          <IconButton
+        <Toolbar className={classes.toolbar}>
+          {/* <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
           >
-            <MenuIcon />
-          </IconButton>
+            <MenuIcon /> */}
+          {/* </IconButton> */}
           <Typography className={classes.title} variant="h6" noWrap>
-            Shin-Dealer
+            SHIN <span>STORE</span>
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
+
           <div className={classes.grow} />
           {links}
         </Toolbar>
