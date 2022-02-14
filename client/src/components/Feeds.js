@@ -14,13 +14,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: 15,
   },
-  typography: { fontFamily: "Almarai", fontSize: "1rem" },
+  typography: { fontFamily: "Almarai !important", fontSize: "1rem !important" },
   paper: {
     textAlign: "center",
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
   },
-  paddingCard: {
-    padding: 3,
+  content: {
+    position: "absolute",
+    top: 20,
+    left: 10,
   },
 }));
 export default function Feeds() {
@@ -41,7 +43,7 @@ export default function Feeds() {
                     image="https://t4.ftcdn.net/jpg/02/06/48/31/240_F_206483181_lzr9IaOPG2djCIl1VdZHwWjDKODyJYev.jpg"
                     title="تخفیف"
                   />
-                  <CardContent className={classes.paddingCard}>
+                  <CardContent className={classes.content}>
                     <Typography
                       className={classes.typography}
                       gutterBottom
@@ -64,7 +66,7 @@ export default function Feeds() {
                     image="https://t4.ftcdn.net/jpg/02/32/16/07/240_F_232160763_FuTBWDd981tvYEJFXpFZtolm8l4ct0Nz.jpg"
                     title="پرفروش"
                   />
-                  <CardContent className={classes.paddingCard}>
+                  <CardContent className={classes.content}>
                     <Typography
                       className={classes.typography}
                       gutterBottom
