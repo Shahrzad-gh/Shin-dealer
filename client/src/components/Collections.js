@@ -8,23 +8,28 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     margin: 15,
   },
   typography: {
-    fontFamily: "Almarai",
-    fontSize: "1rem",
+    fontFamily: "Almarai !important",
+    fontSize: "1rem !important",
+    fontWeight: "bolder",
   },
   paper: {
     textAlign: "center",
-    // color: theme.palette.text.secondary,
+    color: theme.palette.text.secondary,
   },
-  paddingCard: {
-    padding: 3,
+  content: {
+    position: "absolute",
+    top: 20,
+    left: 10,
   },
 }));
+
 export default function Collections() {
   const classes = useStyles();
   return (
@@ -43,14 +48,14 @@ export default function Collections() {
                       image="https://image.freepik.com/free-photo/banner-with-surprised-children-peeking-edge_155003-10104.jpg"
                       title="بچه گانه"
                     />
-                    <CardContent className={classes.paddingCard}>
+                    <CardContent className={classes.content}>
                       <Typography
                         className={classes.typography}
                         gutterBottom
                         variant="h5"
                         component="h2"
                       >
-                        بچه گانه
+                        بـچـه گـانـه
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -68,14 +73,14 @@ export default function Collections() {
                       image="https://image.freepik.com/free-photo/portrait-young-handsome-man-jean-shirt-smiling-looking-camera_176420-12082.jpg"
                       title="مردانه"
                     />
-                    <CardContent className={classes.paddingCard}>
+                    <CardContent className={classes.content}>
                       <Typography
                         className={classes.typography}
                         gutterBottom
                         variant="h5"
                         component="h2"
                       >
-                        مردانه
+                        مـردانـه
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -93,14 +98,14 @@ export default function Collections() {
                       image="https://image.freepik.com/free-photo/beautiful-redhead-girl-with-freckles-smiling_176420-11278.jpg"
                       title="زنانه"
                     />
-                    <CardContent className={classes.paddingCard}>
+                    <CardContent className={classes.content}>
                       <Typography
                         className={classes.typography}
                         gutterBottom
                         variant="h5"
                         component="h2"
                       >
-                        زنانه
+                        زنـانـه
                       </Typography>
                     </CardContent>
                   </CardActionArea>
