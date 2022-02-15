@@ -55,7 +55,42 @@ a {
 .css-bhp9pd-MuiPaper-root-MuiCard-root {
   box-shadow: none !important;
 }
-
+.css-1unik2p-MuiGrid-root svg {
+  margin: 10px;
+}
+.css-11lq3yg-MuiGrid-root {
+  text-align: right;
+}
+.css-11lq3yg-MuiGrid-root h4 {
+  text-align: right;
+}
+.css-hip9hq-MuiPaper-root-MuiAppBar-root {
+  background-color: #282c34 !important;
+}
+.css-9mgopn-MuiDivider-root {
+  border-color: rgb(85, 83, 83) !important;
+}
+ul {
+  list-style: none;
+  text-align: right;
+}
+.css-1equabv-MuiGrid-root li {
+  padding-bottom: 15px !important;
+}
+.css-1unik2p-MuiGrid-root li {
+  padding-bottom: 15px !important;
+}
+.css-9mgopn-MuiDivider-root button {
+  padding: 5px;
+  background-color: #717fe0;
+  color: #fff;
+}
+.overview .css-11lq3yg-MuiGrid-root {
+  padding: 30px;
+}
+.MuiCardMedia-img {
+  overflow: hidden;
+}
 @media (max-width: 700px) {
   .css-gj1fbr-MuiGrid-root {
     max-width: none !important;
