@@ -88,6 +88,105 @@ ul {
 .overview .css-11lq3yg-MuiGrid-root {
   padding: 30px;
 }
+
+.right {
+  float: right !important;
+}
+/* Image zoom on hover + Overlay colour */
+.parent {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.child {
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.child a {
+  display: none;
+  font-size: 15px;
+  width: fit-content;
+  color: #000 !important;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  font-family: sans-serif;
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  bottom: -60px;
+  right: 0;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  cursor: pointer;
+  /*text-decoration: none;*/
+}
+.child a:hover {
+  cursor: pointer;
+  color: #fff !important;
+  background-color: #000;
+}
+.parent:hover .child,
+.parent:focus .child {
+  -ms-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.parent:hover .child:before,
+.parent:focus .child:before {
+  display: block;
+
+  /* transform: translate(-50%, -50%); */
+}
+
+.parent:hover a,
+.parent:focus a {
+  display: block;
+  /* right: 50%;
+  left: 50%;
+  bottom: 50px;
+  transform: translate(-50%, -50%); */
+  animation: toup 0.9s ease;
+}
+@keyframes toup {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(10%);
+  }
+}
+
+.child:before {
+  content: "";
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(52, 73, 94, 0.75);
+}
+/* Several different images */
+/* .bg-one {background-image: url(https://media.timeout.com/images/101602611/image.jpg);} */
+/* .bg-two {
+  background-image: url(http://s1.it.atcdn.net/wp-content/uploads/2015/08/2-London.jpg);
+} */
+
 .MuiCardMedia-img {
   overflow: hidden;
 }

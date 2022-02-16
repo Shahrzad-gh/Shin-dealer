@@ -22,17 +22,18 @@ const useStyles = makeStyles(() => ({
     // -moz-transition: "transform 0.9s ease",
   },
   media: {
-    width: "100%",
-    "&:hover": {
-      transform: "scale(1.3)",
-      transition: "transform 0.9s ease",
-    },
-    "&:hover + a": {
-      bottom: "50px",
-      animation: "2s ease infinite",
+    // width: "100%",
+    height: "100%",
+    // "&:hover": {
+    //   transform: "scale(1.3)",
+    //   transition: "transform 0.9s ease",
+    // },
+    // "&:hover + a": {
+    //   bottom: "50px",
+    //   animation: "2s ease infinite",
 
-      // transform: "translateY(-50%)",
-    },
+    //   //transform: "translateY(-50%)",
+    // },
   },
   details: {
     display: "flex",
@@ -42,20 +43,28 @@ const useStyles = makeStyles(() => ({
     padding: 50,
   },
   typography: { fontFamily: "Almarai !important", fontSize: "1rem !important" },
-  quickview: {
-    width: "10vw",
-    padding: 10,
-    backgroundColor: "#fff",
-    color: "#000",
-    position: "absolute",
-    bottom: "-50px",
-    left: "50%",
-    borderRadius: 20,
-    transform: "translateX(-50%)",
-    "& hover": {
-      backgroundColor: "#000",
-      color: "#fff",
-    },
+  media: {
+    height: 200,
+  },
+  details: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  typography: {
+    fontFamily: "Almarai !important",
+
+    fontSize: "1rem !important",
+    fontWeight: "bold",
+  },
+  addIcon: {
+    height: 38,
+    width: 38,
+  },
+  cover: {
+    height: 140,
+  },
+  content: {
+    paddingBottom: "0!important",
   },
 }));
 
@@ -133,38 +142,40 @@ function Overview() {
             className={(classes.styledCard, classes.typography)}
           >
             <Card className={classes.root}>
-              {product.img && (
-                <div className={classes.cover}>
-                  <img
-                    className={classes.media}
-                    src={product.img}
-                    title={product.title}
-                    name="picture"
-                    //value={picture}
-                  />
-                  <a className={classes.quickview}>نمایش</a>
+              <CardActionArea>
+                <div className={classes.details}>
+                  {product.img && (
+                    <div class="parent right" onclick="">
+                      <div
+                        class="child bg-two"
+                        style={{ backgroundImage: `url(${product.img})` }}
+                      >
+                        <a href="#">Quick view</a>
+                      </div>
+                    </div>
+                  )}
+                  <CardContent className={classes.content}>
+                    <Typography
+                      variant="subtitle1"
+                      color="textSecondary"
+                      className={classes.typography}
+                      name="name"
+                      //value={name}
+                    >
+                      {product.title}
+                    </Typography>
+                    <Typography
+                      variant="subtitle2"
+                      color="textSecondary"
+                      className={classes.typography}
+                      name="price"
+                      //value={price}
+                    >
+                      {product.price}$
+                    </Typography>
+                  </CardContent>
                 </div>
-              )}
-              <CardContent className={classes.content}>
-                <Typography
-                  variant="subtitle1"
-                  color="textSecondary"
-                  className={classes.typography}
-                  name="name"
-                  //value={name}
-                >
-                  {product.title}
-                </Typography>
-                <Typography
-                  variant="subtitle2"
-                  color="textSecondary"
-                  className={classes.typography}
-                  name="price"
-                  //value={price}
-                >
-                  {product.price}$
-                </Typography>
-              </CardContent>
+              </CardActionArea>
             </Card>
           </Grid>
         ))}
