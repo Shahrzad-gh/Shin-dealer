@@ -11,9 +11,12 @@ import Modal from "@mui/material/Modal";
 import { styled } from "@mui/material/styles";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "@mui/material/Button";
-import DialogActions from "@mui/material/DialogActions";
 import Box from "@mui/material/Box";
-
+import Container from "@mui/material/Container";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
 const style = {
   position: "absolute",
   top: "50%",
@@ -72,7 +75,6 @@ const useStyles = makeStyles(() => ({
   styledCard: {
     padding: 50,
   },
-  typography: { fontFamily: "Almarai !important", fontSize: "1rem !important" },
   media: {
     height: 200,
   },
@@ -82,9 +84,10 @@ const useStyles = makeStyles(() => ({
   },
   typography: {
     fontFamily: "Almarai !important",
-
+    width: "max-content",
     fontSize: "1rem !important",
     fontWeight: "bold",
+    textAlign: "right",
   },
   addIcon: {
     height: 38,
@@ -162,6 +165,7 @@ function Overview() {
   const [selectedCard, setSelectedCard] = useState();
 
   const handleShowModal = (e) => {
+    e.preventDefault();
     const index = e.target.attributes.index.value;
     setSelectedCard(allProduct[index]);
     setOpen(true);
@@ -224,29 +228,57 @@ function Overview() {
               </Card>
             </Grid>
           ))}
-          <Modal
-            hideBackdrop
+          <Dialog
             open={open}
             onClose={handleCloseModal}
-            aria-labelledby="child-modal-title"
-            aria-describedby="child-modal-description"
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
           >
-            <Box sx={{ ...style }}>
-              <h2 id="child-modal-title">{selectedCard?.title}</h2>
-              <img
-                src={selectedCard?.img}
-                alt={selectedCard?.title}
-                title=""
-                className={classes.media}
-              />
-              <p id="child-modal-description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              </p>
-              <p>{selectedCard?.price}</p>
-              <Button onClick={handleCloseModal}>اضافه به سبد خرید</Button>
-              <Button onClick={handleCloseModal}>انصراف</Button>
-            </Box>
-          </Modal>
+            {/* <DialogTitle id="alert-dialog-title">
+              {"Use Google's location service?"}
+            </DialogTitle> */}
+            <DialogContent>
+              <Container
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                }}
+              >
+                <Container disableGutters>
+                  <img
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "calc(100vh - 200px)",
+                    }}
+                    src={selectedCard?.img}
+                    alt="image"
+                  />
+                </Container>
+                <Container>
+                  <DialogContentText
+                    id="alert-dialog-description"
+                    className={classes.typography}
+                    style={{ marginLeft: "auto" }}
+                  >
+                    <p>{selectedCard?.title}</p>
+                    <p>{selectedCard?.price}</p>
+                  </DialogContentText>
+                  <DialogActions>
+                    <Button onClick={handleCloseModal}>
+                      <Typography className={classes.typography}>
+                        انصراف
+                      </Typography>
+                    </Button>
+                    <Button onClick={handleCloseModal} autoFocus>
+                      <Typography className={classes.typography}>
+                        افزودن به سبد خرید
+                      </Typography>
+                    </Button>
+                  </DialogActions>
+                </Container>
+              </Container>
+            </DialogContent>
+          </Dialog>
         </Grid>
       </div>
     </>
