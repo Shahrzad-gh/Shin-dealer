@@ -146,50 +146,63 @@ ul {
   transform: scale(1.2);
 }
 
-.parent:hover .child:before,
-.parent:focus .child:before {
-  display: block;
-
-  /* transform: translate(-50%, -50%); */
-}
-
 .parent:hover a,
 .parent:focus a {
   display: block;
-  /* right: 50%;
-  left: 50%;
-  bottom: 50px;
-  transform: translate(-50%, -50%); */
-  animation: toup 0.9s ease;
+  bottom: 30px;
+  /* transform: translate(-50%, -50%); */
+  /* animation: toup 0.9s ease; */
 }
-@keyframes toup {
+/* @keyframes toup {
   0% {
-    transform: translateY(100%);
+    transform: translateY(100px);
   }
   100% {
-    transform: translateY(10%);
+    transform: translateY(-10px);
   }
-}
-
-.child:before {
-  content: "";
-  display: none;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(52, 73, 94, 0.75);
-}
-/* Several different images */
-/* .bg-one {background-image: url(https://media.timeout.com/images/101602611/image.jpg);} */
-/* .bg-two {
-  background-image: url(http://s1.it.atcdn.net/wp-content/uploads/2015/08/2-London.jpg);
 } */
 
 .MuiCardMedia-img {
   overflow: hidden;
 }
+
+.modal-product {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @media (max-width: 700px) {
   .css-gj1fbr-MuiGrid-root {
     max-width: none !important;

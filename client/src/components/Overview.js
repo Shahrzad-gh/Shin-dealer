@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -7,6 +7,36 @@ import CardMedia from "@mui/material/CardMedia";
 import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import { styled } from "@mui/material/styles";
+import DialogTitle from "@mui/material/DialogTitle";
+import Button from "@mui/material/Button";
+import DialogActions from "@mui/material/DialogActions";
+import Box from "@mui/material/Box";
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
+// const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+//   "& .MuiDialogContent-root": {
+//     padding: theme.spacing(2),
+//   },
+//   "& .MuiDialogActions-root": {
+//     padding: theme.spacing(1),
+//   },
+// }));
+
 const useStyles = makeStyles(() => ({
   root: {
     maxWidth: 200,
@@ -128,59 +158,98 @@ function Overview() {
       img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
     },
   ];
+  const [open, setOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState();
+
+  const handleShowModal = (e) => {
+    const index = e.target.attributes.index.value;
+    setSelectedCard(allProduct[index]);
+    setOpen(true);
+  };
+  const handleCloseModal = (e) => {
+    setOpen(false);
+  };
 
   return (
-    <div className="overview">
-      <h1>Overview</h1>
-      <Grid container>
-        {allProduct.map((product, i) => (
-          <Grid
-            item
-            xs={6}
-            md={3}
-            key={i}
-            className={(classes.styledCard, classes.typography)}
-          >
-            <Card className={classes.root}>
-              <CardActionArea>
-                <div className={classes.details}>
-                  {product.img && (
-                    <div class="parent right" onclick="">
-                      <div
-                        class="child bg-two"
-                        style={{ backgroundImage: `url(${product.img})` }}
-                      >
-                        <a href="#">Quick view</a>
+    <>
+      <div className="overview">
+        <h1>Overview</h1>
+        <Grid container>
+          {allProduct.map((product, i) => (
+            <Grid
+              item
+              xs={6}
+              md={3}
+              key={i}
+              className={(classes.styledCard, classes.typography)}
+            >
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <div className={classes.details}>
+                    {product.img && (
+                      <div className="parent right">
+                        <div
+                          className="child bg-two"
+                          style={{ backgroundImage: `url(${product.img})` }}
+                        >
+                          <a index={i} onClick={handleShowModal} href="#">
+                            Quick view
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  <CardContent className={classes.content}>
-                    <Typography
-                      variant="subtitle1"
-                      color="textSecondary"
-                      className={classes.typography}
-                      name="name"
-                      //value={name}
-                    >
-                      {product.title}
-                    </Typography>
-                    <Typography
-                      variant="subtitle2"
-                      color="textSecondary"
-                      className={classes.typography}
-                      name="price"
-                      //value={price}
-                    >
-                      {product.price}$
-                    </Typography>
-                  </CardContent>
-                </div>
-              </CardActionArea>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </div>
+                    )}
+
+                    <CardContent className={classes.content}>
+                      <Typography
+                        variant="subtitle1"
+                        color="textSecondary"
+                        className={classes.typography}
+                        name="name"
+                        //value={name}
+                      >
+                        {product.title}
+                      </Typography>
+                      <Typography
+                        variant="subtitle2"
+                        color="textSecondary"
+                        className={classes.typography}
+                        name="price"
+                        //value={price}
+                      >
+                        {product.price}$
+                      </Typography>
+                    </CardContent>
+                  </div>
+                </CardActionArea>
+              </Card>
+            </Grid>
+          ))}
+          <Modal
+            hideBackdrop
+            open={open}
+            onClose={handleCloseModal}
+            aria-labelledby="child-modal-title"
+            aria-describedby="child-modal-description"
+          >
+            <Box sx={{ ...style }}>
+              <h2 id="child-modal-title">{selectedCard?.title}</h2>
+              <img
+                src={selectedCard?.img}
+                alt={selectedCard?.title}
+                title=""
+                className={classes.media}
+              />
+              <p id="child-modal-description">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              </p>
+              <p>{selectedCard?.price}</p>
+              <Button onClick={handleCloseModal}>اضافه به سبد خرید</Button>
+              <Button onClick={handleCloseModal}>انصراف</Button>
+            </Box>
+          </Modal>
+        </Grid>
+      </div>
+    </>
   );
 }
 
