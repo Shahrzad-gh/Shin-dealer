@@ -42,9 +42,10 @@ const style = {
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: 200,
+    //maxWidth: 200,
     marginLeft: "auto",
     marginRight: "auto",
+    padding: 10,
   },
   cover: {
     display: "block",
