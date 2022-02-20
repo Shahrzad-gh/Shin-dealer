@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -17,6 +17,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllProducts } from "../Store/actions/productActions";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,15 +33,6 @@ const style = {
   px: 4,
   pb: 3,
 };
-
-// const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-//   "& .MuiDialogContent-root": {
-//     padding: theme.spacing(2),
-//   },
-//   "& .MuiDialogActions-root": {
-//     padding: theme.spacing(1),
-//   },
-// }));
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -104,64 +98,13 @@ const useStyles = makeStyles(() => ({
 
 function Overview() {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const allProduct = useSelector((state) => state.product.products);
 
-  const allProduct = [
-    {
-      title: "پیراهن بلند",
-      price: "10.00",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "شلوار کتان",
-      price: "99.00",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "شومیز یقه گرد",
-      price: "100",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "کفش اسپورت",
-      price: "4000",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "دستبند مردانه",
-      price: "999.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "کمربند چرمی",
-      price: "12.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "گوشواره استیل",
-      price: "25.000",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "کراوات نخی",
-      price: "6.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "dfrgds",
-      price: "70.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "دکمه سرآستین استیل",
-      price: "120.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-    {
-      title: "پیراهن کوتاه",
-      price: "1200.0",
-      img: "https://img.freepik.com/free-photo/high-fashion-look-glamor-closeup-portrait-beautiful-sexy-stylish-caucasian-young-woman-model_158538-2774.jpg?w=360",
-    },
-  ];
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
+
   const [open, setOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState();
 
@@ -191,11 +134,13 @@ function Overview() {
               <Card className={classes.root}>
                 <CardActionArea>
                   <div className={classes.details}>
-                    {product.img && (
+                    {product.picture.img && (
                       <div className="parent right">
                         <div
                           className="child bg-two"
-                          style={{ backgroundImage: `url(${product.img})` }}
+                          style={{
+                            backgroundImage: `url(${product.picture.img})`,
+                          }}
                         >
                           <a index={i} onClick={handleShowModal} href="#">
                             Quick view
@@ -212,7 +157,7 @@ function Overview() {
                         name="name"
                         //value={name}
                       >
-                        {product.title}
+                        {product.name}
                       </Typography>
                       <Typography
                         variant="subtitle2"
@@ -251,7 +196,7 @@ function Overview() {
                       maxWidth: "100%",
                       maxHeight: "calc(100vh - 200px)",
                     }}
-                    src={selectedCard?.img}
+                    src={selectedCard?.picture.img}
                     alt="image"
                   />
                 </Container>
@@ -261,8 +206,8 @@ function Overview() {
                     className={classes.typography}
                     style={{ marginLeft: "auto" }}
                   >
-                    <p>{selectedCard?.title}</p>
-                    <p>{selectedCard?.price}</p>
+                    {selectedCard?.name}
+                    {selectedCard?.price}
                   </DialogContentText>
                   <DialogActions>
                     <Button onClick={handleCloseModal}>
