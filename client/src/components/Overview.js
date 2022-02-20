@@ -82,6 +82,7 @@ const useStyles = makeStyles(() => ({
     width: "max-content",
     fontSize: "1rem !important",
     fontWeight: "bold",
+
     textAlign: "right",
   },
   addIcon: {
@@ -93,6 +94,25 @@ const useStyles = makeStyles(() => ({
   },
   content: {
     paddingBottom: "0!important",
+  },
+  button: {
+    textAlign: "center",
+    fontFamily: "Almarai !important",
+    paddingTop: 10,
+    paddingBottom: 10,
+    minWidth: 180,
+    backgroundColor: "#282c34",
+    color: "#fff",
+    borderRadius: 20,
+  },
+  menu: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+  },
+  item: {
+    padding: 10,
+    marginRight: 5,
   },
 }));
 
@@ -121,7 +141,32 @@ function Overview() {
   return (
     <>
       <div className="overview">
-        <h1>Overview</h1>
+        <Typography className={classes.typography}>
+          <h1 style={{ marginRight: "50px" }}>بررسی اجمالی محصولات</h1>
+          <Container>
+            <ul className={classes.menu}>
+              <li className={classes.item}>
+                <buton>جواهرات</buton>
+              </li>
+              <li className={classes.item}>
+                <buton>کفش</buton>
+              </li>
+              <li className={classes.item}>
+                <buton>بچه گانه</buton>
+              </li>
+              <li className={classes.item}>
+                <buton>مردانه</buton>
+              </li>
+              <li className={classes.item}>
+                <buton>زنانه</buton>
+              </li>
+              <li className={classes.item}>
+                <buton>همه</buton>
+              </li>
+            </ul>
+          </Container>
+        </Typography>
+
         <Grid container>
           {allProduct.map((product, i) => (
             <Grid
@@ -226,6 +271,11 @@ function Overview() {
             </DialogContent>
           </Dialog>
         </Grid>
+        <Button>
+          <Typography className={(classes.typography, classes.button)}>
+            بیشتر
+          </Typography>
+        </Button>
       </div>
     </>
   );

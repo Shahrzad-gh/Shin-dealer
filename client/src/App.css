@@ -27,7 +27,21 @@ a {
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+.overview p {
+  text-align: right;
+  margin-left: auto;
+}
+.overview button {
+  padding-bottom: 30px;
+}
+.overview button p {
+  padding-right: 10px 15px !important;
+  text-align: center;
+}
+.overview h6 {
+  float: right;
+  width: 100%;
+}
 .App-link {
   color: #61dafb;
 }
@@ -105,6 +119,7 @@ ul {
 .child {
   height: 100%;
   width: 100%;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   -webkit-transition: all 0.5s;
