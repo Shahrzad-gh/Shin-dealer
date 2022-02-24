@@ -11,12 +11,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SignInLinks from "./SignInLinks";
 import SignOutLinks from "./SignOutLinks";
 import Cookies from "js-cookie";
+import Header from "../../Header";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+    position: "relative",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -69,6 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: "transparent !important",
   },
   drawer: {
     width: 240,
@@ -110,6 +113,7 @@ function Navbar() {
           {links}
         </Toolbar>
       </AppBar>
+      {/* <Header /> */}
     </div>
   );
 }

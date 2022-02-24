@@ -6,6 +6,8 @@ import Feeds from "../Feeds";
 import Popular from "../Popular";
 import Services from "../Services";
 import Overview from "../Overview";
+import Container from "@mui/material/Container";
+
 export default function CenteredGrid() {
   return (
     <React.Fragment>
