@@ -21,6 +21,7 @@ import authContext from "../context/AuthContext";
 import { Link } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/lab/Alert";
+import Breadcrumbs from "./layout/BreadCramp";
 const useStyles = makeStyles({
   root: {
     margin: 10,
@@ -132,7 +133,7 @@ export default function ProductDetails(props) {
                 </Typography>
               </Alert>
             </Snackbar>
-
+            <Breadcrumbs />
             <Card className={classes.root}>
               <CardContent>
                 <form onSubmit={handleAddToBasket}>
