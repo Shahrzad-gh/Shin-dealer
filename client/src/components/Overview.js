@@ -20,19 +20,19 @@ import DialogContentText from "@mui/material/DialogContentText";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllProducts } from "../Store/actions/productActions";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
+// const style = {
+//   position: "absolute",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: 400,
+//   bgcolor: "background.paper",
+//   border: "2px solid #000",
+//   boxShadow: 24,
+//   pt: 2,
+//   px: 4,
+//   pb: 3,
+// };
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -141,31 +141,21 @@ function Overview() {
   return (
     <>
       <div className="overview">
-        <Typography className={classes.typography}>
-          <h1 style={{ marginRight: "50px" }}>بررسی اجمالی محصولات</h1>
+        <div className={classes.typography} style={{ marginLeft: "auto" }}>
+          <span style={{ fontSize: "300", marginRight: "50px" }}>
+            بررسی اجمالی محصولات
+          </span>
           <Container>
             <ul className={classes.menu}>
-              <li className={classes.item}>
-                <buton>جواهرات</buton>
-              </li>
-              <li className={classes.item}>
-                <buton>کفش</buton>
-              </li>
-              <li className={classes.item}>
-                <buton>بچه گانه</buton>
-              </li>
-              <li className={classes.item}>
-                <buton>مردانه</buton>
-              </li>
-              <li className={classes.item}>
-                <buton>زنانه</buton>
-              </li>
-              <li className={classes.item}>
-                <buton>همه</buton>
-              </li>
+              <li className={classes.item}>جواهرات</li>
+              <li className={classes.item}>کفش</li>
+              <li className={classes.item}>بچه گانه</li>
+              <li className={classes.item}>مردانه</li>
+              <li className={classes.item}>زنانه</li>
+              <li className={classes.item}>همه</li>
             </ul>
           </Container>
-        </Typography>
+        </div>
 
         <Grid container>
           {allProduct.map((product, i) => (
