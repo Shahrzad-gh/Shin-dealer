@@ -17,15 +17,15 @@ const productSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please enter price"],
   },
-  information: {
-    Weight: { type: String },
-    Dimension: { type: String },
-    Material: { type: String },
-    Size: {
-      enum: ["S", "M", "L", "XL"],
-      default: "M",
-    },
-  },
+  // information: {
+  //   Weight: { type: String },
+  //   Dimension: { type: String },
+  //   Material: { type: String },
+  //   Size: {
+  //     enum: ["S", "M", "L", "XL"],
+  //     default: "M",
+  //   },
+  // },
   description: {
     type: String,
   },
