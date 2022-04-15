@@ -133,7 +133,7 @@ ul {
   transition: all 0.5s;
 }
 .child a {
-  display: none;
+min-width: 140px;
   font-size: 15px;
   width: fit-content;
   color: #000 !important;
@@ -145,7 +145,7 @@ ul {
   margin: auto;
   position: absolute;
   left: 50%;
-  bottom: -50px;
+  bottom: -50%;
   right: 0;
   transform: translateX(-50%);
   height: fit-content;
@@ -170,8 +170,9 @@ ul {
 .parent:hover a,
 .parent:focus a {
   display: block;
-  bottom: 30px;
-  /* transform: translate(-50%, -50%); */
+  left: 50%;
+  bottom: 15%;
+  transform: translateX(-30%, -50%);
   /* animation: toup 0.9s ease; */
 }
 /* @keyframes toup {
