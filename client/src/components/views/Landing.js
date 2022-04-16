@@ -7,11 +7,12 @@ import Popular from "../Popular";
 import Services from "../Services";
 import Overview from "../Overview";
 import Container from "@mui/material/Container";
-
+import Header from "../layout/Header/Header"
 export default function CenteredGrid() {
   return (
     <React.Fragment>
       <CssBaseline />
+      <Header />
       <Collections />
       <Feeds />
       <Overview />
