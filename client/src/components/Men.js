@@ -32,56 +32,7 @@ export default function Collections() {
       <Container maxWidth="xl">
         <div className={classes.root}>
           <Grid container spacing={1}>
-            <Grid item xs={4}>
-              {/* //////////// */}
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="accesory"
-                    height="200"
-                    image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
-                    title="اکسسوری"
-                  />
-                  <CardContent className={classes.paddingCard}>
-                    <Typography
-                      className={classes.typography}
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                    >
-                      اکسسوری
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
-              {/* /////////////// */}
-              {/* //////////// */}
-              <Card className={classes.root}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt="shoe"
-                    height="200"
-                    image="https://veganmenshoes.com/wp-content/uploads/2019/06/vegan-dress-shoes-for-men-best-mens-cruelty-free-vegetarian-leather-fake-faux-formal-casual-brown-black-sustainable-eco-friendly-synthetic-manmade-top-2019.jpg"
-                    title="کفش"
-                  />
-                  <CardContent className={classes.paddingCard}>
-                    <Typography
-                      className={classes.typography}
-                      gutterBottom
-                      variant="h5"
-                      component="h2"
-                    >
-                      کفش
-                    </Typography>
-                  </CardContent>
-                </CardActionArea>
-              </Card>
-            </Grid>
-            <Grid item xs={4}>
+          <Grid item xs={4}>
               {/* //////////// */}
               <Link
                 to={{
@@ -112,6 +63,56 @@ export default function Collections() {
                 </Card>
               </Link>
             </Grid>
+            <Grid item xs={4}>
+              {/* /////////////// */}
+              {/* //////////// */}
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="shoe"
+                    height="200"
+                    image="https://veganmenshoes.com/wp-content/uploads/2019/06/vegan-dress-shoes-for-men-best-mens-cruelty-free-vegetarian-leather-fake-faux-formal-casual-brown-black-sustainable-eco-friendly-synthetic-manmade-top-2019.jpg"
+                    title="کفش"
+                  />
+                  <CardContent className={classes.paddingCard}>
+                    <Typography
+                      className={classes.typography}
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                    >
+                      کفش
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+            <Grid item xs={4}>
+              {/* //////////// */}
+              <Card className={classes.root}>
+                <CardActionArea>
+                  <CardMedia
+                    component="img"
+                    alt="accesory"
+                    height="200"
+                    image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
+                    title="اکسسوری"
+                  />
+                  <CardContent className={classes.paddingCard}>
+                    <Typography
+                      className={classes.typography}
+                      gutterBottom
+                      variant="h5"
+                      component="h2"
+                    >
+                      اکسسوری
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            </Grid>
+            
           </Grid>
         </div>
         <div>

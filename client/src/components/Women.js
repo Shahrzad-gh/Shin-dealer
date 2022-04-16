@@ -35,15 +35,20 @@ export default function Collections() {
         <div className={classes.root}>
           <Grid container spacing={1}>
             <Grid item xs={4}>
-              <Link to={{ pathname: "WomenAccesories", data: "" }}>
+            <Link
+                to={{
+                  pathname: "WomenCloths",
+                  state: { cat_id: "60daf6482d9c8f49c0242053" },
+                }}
+              >
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      alt="accesory"
+                      alt="clothes"
                       height="200"
-                      image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
-                      title="اکسسوری"
+                      image="https://bayanbox.ir/download/4997248882443129847/qp-women-clothes.jpg"
+                      title="لباس"
                     />
                     <CardContent className={classes.paddingCard}>
                       <Typography
@@ -52,7 +57,7 @@ export default function Collections() {
                         variant="h5"
                         component="h2"
                       >
-                        اکسسوری
+                        لباس
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -85,20 +90,16 @@ export default function Collections() {
               </Link>
             </Grid>
             <Grid item xs={4}>
-              <Link
-                to={{
-                  pathname: "WomenCloths",
-                  state: { cat_id: "60daf6482d9c8f49c0242053" },
-                }}
-              >
+
+              <Link to={{ pathname: "WomenAccesories", data: "" }}>
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      alt="clothes"
+                      alt="accesory"
                       height="200"
-                      image="https://bayanbox.ir/download/4997248882443129847/qp-women-clothes.jpg"
-                      title="لباس"
+                      image="https://www.nextgaything.com/wp-content/uploads/2019/02/accesories.jpg"
+                      title="اکسسوری"
                     />
                     <CardContent className={classes.paddingCard}>
                       <Typography
@@ -107,7 +108,7 @@ export default function Collections() {
                         variant="h5"
                         component="h2"
                       >
-                        لباس
+                        اکسسوری
                       </Typography>
                     </CardContent>
                   </CardActionArea>
