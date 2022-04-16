@@ -38,15 +38,15 @@ export default function Collections() {
         <div className={classes.root}>
           <Grid container spacing={1}>
             <Grid item xs={4}>
-              <Link to="Kids">
+            <Link to="Women">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      alt="kid"
+                      alt="girl"
                       height="200"
-                      image="https://image.freepik.com/free-photo/banner-with-surprised-children-peeking-edge_155003-10104.jpg"
-                      title="بچه گانه"
+                      image="https://image.freepik.com/free-photo/beautiful-redhead-girl-with-freckles-smiling_176420-11278.jpg"
+                      title="زنانه"
                     />
                     <CardContent className={classes.content}>
                       <Typography
@@ -55,7 +55,7 @@ export default function Collections() {
                         variant="h5"
                         component="h2"
                       >
-                        بـچـه گـانـه
+                        زنـانـه
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -88,15 +88,15 @@ export default function Collections() {
               </Link>
             </Grid>
             <Grid item xs={4}>
-              <Link to="Women">
+              <Link to="Kids">
                 <Card className={classes.root}>
                   <CardActionArea>
                     <CardMedia
                       component="img"
-                      alt="girl"
+                      alt="kid"
                       height="200"
-                      image="https://image.freepik.com/free-photo/beautiful-redhead-girl-with-freckles-smiling_176420-11278.jpg"
-                      title="زنانه"
+                      image="https://image.freepik.com/free-photo/banner-with-surprised-children-peeking-edge_155003-10104.jpg"
+                      title="بچه گانه"
                     />
                     <CardContent className={classes.content}>
                       <Typography
@@ -105,7 +105,7 @@ export default function Collections() {
                         variant="h5"
                         component="h2"
                       >
-                        زنـانـه
+                        بـچـه گـانـه
                       </Typography>
                     </CardContent>
                   </CardActionArea>
