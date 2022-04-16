@@ -1,11 +1,23 @@
+*{
+  font-family: "Almarai" !important;
+}
 a {
   text-decoration: none;
 }
-
+html, body{
+  direction: rtl;
+  text-align: right;
+}
 .App {
   text-align: center;
 }
-
+.sort-icon{
+  -o-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -103,6 +115,12 @@ ul {
   padding: 5px;
   background-color: #717fe0;
   color: #fff;
+}
+.css-bshv44-MuiButtonBase-root-MuiListItem-root{
+  width: 150px !important;
+}
+.css-cvhtoe-MuiButtonBase-root-MuiListItemButton-root , .css-1p823my-MuiListItem-root , .css-bshv44-MuiButtonBase-root-MuiListItem-root{
+  text-align: right !important;
 }
 .overview .css-11lq3yg-MuiGrid-root {
   padding: 30px;
