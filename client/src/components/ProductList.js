@@ -11,22 +11,38 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsByCategory } from "../Store/actions/productActions";
+import SortIcon from '@mui/icons-material/Sort';
+import Container from "@mui/material/Container";
 
+import "../App.css"
 const useStyles = makeStyles({
+  root: {
+    width:"100%"
+  },
   listStyle: {
     listStyle: "none",
   },
   displayList: {
     display: "flex",
+    flexDirection: "row",
+    flexWrap: "wrap"
   },
   Nopadding: {
     padding: 0,
   },
   filterMenu: {
-    width: "100%",
-    border: "1px lightgray solid",
+    alignItems: "center",
     display: "inline-flex",
-    borderRadius: 15,
+  },
+  menu: {
+    paddingRight: 0,
+    display: "flex",
+    flexDirection: "row-reverse",
+    justifyContent: "flex-end",
+  },
+  item: {
+    padding: 10,
+    marginRight: 5,
   },
 });
 
@@ -64,24 +80,17 @@ export default function ProductList(props) {
   };
 
   return (
-    <Grid container>
-      <Grid item>
-        <Grid>
-          <List component="nav" className={classes.filterMenu}>
-            <ListItem button onClick={handleSortDSD}>
-              <ListItemIcon>
-                <ArrowUpwardIcon />
-              </ListItemIcon>
-              <ListItemText primary="گران ترین" />
-            </ListItem>
-            <ListItem button onClick={handleSortASD}>
-              <ListItemIcon>
-                <ArrowDownwardIcon />
-              </ListItemIcon>
-              <ListItemText primary="ارزان ترین" />
-            </ListItem>
-          </List>
-        </Grid>
+    <div className={classes.root}>
+                <Container>
+            <ul className={classes.menu}>
+              <li className={classes.item}>جواهرات</li>
+              <li className={classes.item}>کفش</li>
+              <li className={classes.item}>بچه گانه</li>
+              <li className={classes.item}>مردانه</li>
+              <li className={classes.item}>زنانه</li>
+              <li className={classes.item}>همه</li>
+            </ul>
+          </Container>
         <Grid container>
           <Grid item className={classes.displayList}>
             {productsList &&
@@ -91,8 +100,7 @@ export default function ProductList(props) {
                 </li>
               ))}
           </Grid>
-        </Grid>
       </Grid>
-    </Grid>
+      </div>
   );
 }
