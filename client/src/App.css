@@ -164,7 +164,7 @@ min-width: 140px;
   position: absolute;
   left: 50%;
   bottom: -50%;
-  right: 0;
+  /* right: 0; */
   transform: translateX(-50%);
   height: fit-content;
   cursor: pointer;
