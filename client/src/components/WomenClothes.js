@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router";
 import ProductList from "./ProductList";
 import { makeStyles } from "@mui/styles";
-import Basket from "./Basket";
+import Filters from "./Filters";
 
 const useStyles = makeStyles({
   container: {
@@ -18,8 +18,9 @@ export default function WomenClothes() {
 
   return (
     <div className={classes.container}>
+      {/* <Filters /> */}
       <ProductList category={location.state} />
-      <Basket />
+
     </div>
   );
 }
