@@ -27,6 +27,8 @@ import ManageOrder from "./components/Admin/ManageOrder";
 import Profile from "./components/User/Profile";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { orange } from "@mui/material/colors";
+import Girls from "./components/Girls";
+import GirlsCloths from "./components/GirlsCloths";
 
 axios.defaults.withCredentials = true;
 
@@ -63,6 +65,8 @@ function App() {
             <Route exact path="/PaymentPanel" component={PaymentPanel} />
             <Route exact path="/ManageOrder/:id" component={ManageOrder} />
             <Route exact path="/Profile" component={Profile} />
+            <Route exact path="/Girls" component={Girls} />
+            <Route exact path="/GirlsCloths" component={GirlsCloths} />
           </div>
         </Router>
       </AuthContextProvider>
