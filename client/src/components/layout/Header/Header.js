@@ -3,18 +3,26 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position:"relative"
+    position: "relative"
   },
   imagRoot: {
     width: "100%",
     height: "auto",
-    objectFit:"cover"
+    objectFit: "cover"
   },
   textRoot: {
     position: "absolute",
     top: '20%',
     left: '5%',
-    textAlign:"left"
+    textAlign: "left"
+  },
+  btn: {
+    backgroundColor: "blue",
+    color: "#fff",
+    borderRadius: 25,
+    width: "15vw",
+    padding: 10,
+    border: "none"
   }
 
 
@@ -30,7 +38,7 @@ function Header() {
       <div className={classes.textRoot}>
         <h3>Collection 2022</h3>
         <h1>NEW ARRIVALS</h1>
-        <button type="button">SHOP NOW</button>
+        <button type="button" className={classes.btn}>SHOP NOW</button>
       </div>
     </div>
   )
