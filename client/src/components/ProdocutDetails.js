@@ -64,6 +64,15 @@ const useStyles = makeStyles({
   tabContent: {
     direction: "rtl",
   },
+  container: {
+    padding: 20,
+    display: "flex",
+    flexDirection: "column",
+  },
+  cardStyle: {
+    display: "flex",
+    flexDirection: "row",
+  },
 });
 
 export default function ProductDetails(props) {
@@ -134,24 +143,31 @@ export default function ProductDetails(props) {
               </Alert>
             </Snackbar>
             <Breadcrumbs />
-            <Card className={classes.root}>
-              <CardContent>
-                <form onSubmit={handleAddToBasket}>
-                  <div className={classes.details}>
-                    <CardMedia
-                      component="img"
-                      className={classes.cover}
-                      alt={productInfo.name}
-                      name={productInfo.name}
-                      image={productInfo.picture && productInfo.picture.img}
-                    />
-                    <div className={classes.details}>
-                      <CardContent>
-                        <div name="name">{productInfo.name}</div>
-                        <div name="price">تومان {productInfo.price}</div>
-                        <div name="description">{productInfo.description}</div>
-                      </CardContent>
+            <div className={classes.container}>
+              <Card className={classes.root}>
+                <CardContent>
+                  <form onSubmit={handleAddToBasket}>
+                    <div className={classes.cardStyle}>
+                      <div>
+                        <CardMedia
+                          component="img"
+                          className={classes.cover}
+                          alt={productInfo.name}
+                          name={productInfo.name}
+                          image={productInfo.picture && productInfo.picture.img}
+                        />
+                      </div>
+                      <div className={classes.details}>
+                        <CardContent>
+                          <div name="name">{productInfo.name}</div>
+                          <div name="price">تومان {productInfo.price}</div>
+                          <div name="description">
+                            {productInfo.description}
+                          </div>
+                        </CardContent>
+                      </div>
                     </div>
+
                     <CardActions className={classes.details}>
                       {user.isLoggedIn ? (
                         <Button
@@ -182,68 +198,67 @@ export default function ProductDetails(props) {
                   <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
                 </Button> */}
                     </CardActions>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
-            <Card className={classes.root}>
-              <Box component="fieldset" mb={3} borderColor="transparent">
-                <Typography component="legend">Raiting</Typography>
-                <Rating name="read-only" value={value} readOnly />
-              </Box>
-              <Box className={classes.display}>
-                {/* add label for raiting */}
-                <Typography className={classes.typography}>
-                  ارزش خرید
-                </Typography>
-                <LinearProgress
-                  className={classes.margin}
-                  variant="determinate"
-                  value={35}
-                  width="35%"
-                />
-                <Typography className={classes.typography}>
-                  کیفیت ساخت
-                </Typography>
-                <LinearProgress
-                  className={classes.margin}
-                  variant="determinate"
-                  value={50}
-                />
-                <Typography className={classes.typography}>
-                  طراحی و زیبایی
-                </Typography>
-                <LinearProgress
-                  className={classes.margin}
-                  variant="determinate"
-                  value={15}
-                />
-                <Typography className={classes.typography}>
-                  سهولت استفاده و حمل نقل
-                </Typography>
+                  </form>
+                </CardContent>
+              </Card>
+              <Card className={classes.root}>
+                <Box component="fieldset" mb={3} borderColor="transparent">
+                  <Typography component="legend">Raiting</Typography>
+                  <Rating name="read-only" value={value} readOnly />
+                </Box>
+                <Box className={classes.display}>
+                  {/* add label for raiting */}
+                  <Typography className={classes.typography}>
+                    ارزش خرید
+                  </Typography>
+                  <LinearProgress
+                    className={classes.margin}
+                    variant="determinate"
+                    value={35}
+                    width="35%"
+                  />
+                  <Typography className={classes.typography}>
+                    کیفیت ساخت
+                  </Typography>
+                  <LinearProgress
+                    className={classes.margin}
+                    variant="determinate"
+                    value={50}
+                  />
+                  <Typography className={classes.typography}>
+                    طراحی و زیبایی
+                  </Typography>
+                  <LinearProgress
+                    className={classes.margin}
+                    variant="determinate"
+                    value={15}
+                  />
+                  <Typography className={classes.typography}>
+                    سهولت استفاده و حمل نقل
+                  </Typography>
 
-                <LinearProgress
-                  className={classes.margin}
-                  variant="determinate"
-                  value={45}
-                />
-              </Box>
-            </Card>
-            <Paper className={classes.paperRoot}>
-              <Tabs
-                value={tabValue}
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                className={classes.tabContent}
-              >
-                <Tab className={classes.typography} label="مشخصات" />
-                <Tab className={classes.typography} label="نقد و بررسی" />
-                <Tab className={classes.typography} label="نظرات" />
-                <Tab className={classes.typography} label="سوالات" />
-              </Tabs>
-            </Paper>
-
+                  <LinearProgress
+                    className={classes.margin}
+                    variant="determinate"
+                    value={45}
+                  />
+                </Box>
+              </Card>
+              <Paper className={classes.paperRoot}>
+                <Tabs
+                  value={tabValue}
+                  onChange={handleChange}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  className={classes.tabContent}
+                >
+                  <Tab className={classes.typography} label="مشخصات" />
+                  <Tab className={classes.typography} label="نقد و بررسی" />
+                  <Tab className={classes.typography} label="نظرات" />
+                  <Tab className={classes.typography} label="سوالات" />
+                </Tabs>
+              </Paper>
+            </div>
             {productInfo.reviews &&
               productInfo.reviews.map((item, index) => (
                 <li className={classes.list} key={item.userId}>
