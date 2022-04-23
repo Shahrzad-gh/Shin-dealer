@@ -7,7 +7,7 @@ import { makeStyles } from "mui/styles";
 const useStyles = makeStyles((theme) => ({
   typography: {
     fontFamily: "Almarai",
-    fontSize: "1rem",
+    // fontSize: "1rem",
     fontWeight: "normal",
   },
 }));
