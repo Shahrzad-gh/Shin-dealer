@@ -22,12 +22,14 @@ import { Link } from "react-router-dom";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/lab/Alert";
 import Breadcrumbs from "./layout/BreadCramp";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 const useStyles = makeStyles({
   root: {
     margin: 10,
     padding: 15,
     marginTop: 10,
-    width: 315,
     border: " 1px solid lightgray",
     display: "inline-block",
   },
@@ -42,6 +44,10 @@ const useStyles = makeStyles({
   },
   cover: {
     height: 350,
+  },
+  thumb: {
+    width: "auto",
+    height: 50,
   },
   list: {
     listStyle: "none",
@@ -72,7 +78,50 @@ const useStyles = makeStyles({
   cardStyle: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
   },
+  cardStylePic: {
+    display: "flex",
+    width: "30vw",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    position: "relative",
+  },
+  picColumn: {
+    display: "flex",
+    flexDirection: "column",
+    listStyle: "none",
+  },
+  btnPic: {
+    position: "absolute",
+    zIndex: 100,
+    width: "70%",
+    left: 0,
+    top: "calc(50% - 20px)",
+  },
+  btnPicArrowPre: {
+    left: 0
+  },
+  row: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  dragablePics: {
+    maxWidth: "500px",
+    position: "relative",
+    margin: "auto",
+
+  },
+  picSlide: {
+    position: "relative",
+    display: "none",
+    left: 0,
+    top: 0
+  },
+  PicSlideActive: {
+    display: "block",
+
+  }
 });
 
 export default function ProductDetails(props) {
@@ -144,30 +193,107 @@ export default function ProductDetails(props) {
             </Snackbar>
             <Breadcrumbs />
             <div className={classes.container}>
-              <Card className={classes.root}>
-                <CardContent>
-                  <form onSubmit={handleAddToBasket}>
-                    <div className={classes.cardStyle}>
-                      <div>
-                        <CardMedia
-                          component="img"
-                          className={classes.cover}
-                          alt={productInfo.name}
-                          name={productInfo.name}
-                          image={productInfo.picture && productInfo.picture.img}
-                        />
+              <CardContent>
+                <form onSubmit={handleAddToBasket} style={{ display: "flex" }}>
+                  <div className={classes.row}>
+                    <div className={classes.cardStylePic}>
+                      <div className={classes.picColumn}>
+                        <ul>
+                          {/*{productInfo.picture?.img?.map(p => ( */}
+                          <li>
+                            <CardMedia
+                              component="img"
+                              className={classes.thumb}
+                              alt={productInfo.name}
+                              name={productInfo.name}
+                              image={productInfo.picture && productInfo.picture.img}
+                            /></li>
+                          <li>
+                            <CardMedia
+                              component="img"
+                              className={classes.thumb}
+                              alt={productInfo.name}
+                              name={productInfo.name}
+                              image={productInfo.picture && productInfo.picture.img}
+                            /></li>
+                          <li>
+                            <CardMedia
+                              component="img"
+                              className={classes.thumb}
+                              alt={productInfo.name}
+                              name={productInfo.name}
+                              image={productInfo.picture && productInfo.picture.img}
+                            /></li>
+                          <li>
+                            <CardMedia
+                              component="img"
+                              className={classes.thumb}
+                              alt={productInfo.name}
+                              name={productInfo.name}
+                              image={productInfo.picture && productInfo.picture.img}
+                            /></li>
+
+
+                          {/* ))} */}
+                        </ul>
                       </div>
-                      <div className={classes.details}>
-                        <CardContent>
-                          <div name="name">{productInfo.name}</div>
-                          <div name="price">تومان {productInfo.price}</div>
-                          <div name="description">
-                            {productInfo.description}
-                          </div>
-                        </CardContent>
+                      <div className={classes.btnPic}>
+                        <button className={classes.btnPicArrowPre}>
+                          <ArrowBackIosIcon />
+                        </button>
+                        <button className={classes.btnPicArrowNex}>
+                          <ArrowForwardIosIcon />
+                        </button>
+                      </div>
+                      <div className={classes.dragablePics}>
+                        <div className={classes.picSlide}>
+                          <CardMedia
+                            component="img"
+                            className={classes.cover}
+                            alt={productInfo.name}
+                            name={productInfo.name}
+                            image={productInfo.picture && productInfo.picture.img}
+                          />
+                        </div>
+                        <div className={classes.picSlide}>
+                          <CardMedia
+                            component="img"
+                            className={classes.cover}
+                            alt={productInfo.name}
+                            name={productInfo.name}
+                            image={productInfo.picture && productInfo.picture.img}
+                          />
+                        </div>
+                        <div className={classes.picSlide}>
+                          <CardMedia
+                            component="img"
+                            className={classes.cover}
+                            alt={productInfo.name}
+                            name={productInfo.name}
+                            image={productInfo.picture && productInfo.picture.img}
+                          />
+                        </div>
+                        <div className={classes.picSlide}>
+                          <CardMedia
+                            component="img"
+                            className={classes.cover}
+                            alt={productInfo.name}
+                            name={productInfo.name}
+                            image={productInfo.picture && productInfo.picture.img}
+                          />
+                        </div>
+
                       </div>
                     </div>
-
+                  </div>
+                  <div className={classes.details}>
+                    <CardContent>
+                      <div name="name">{productInfo.name}</div>
+                      <div name="price">تومان {productInfo.price}</div>
+                      <div name="description">
+                        {productInfo.description}
+                      </div>
+                    </CardContent>
                     <CardActions className={classes.details}>
                       {user.isLoggedIn ? (
                         <Button
@@ -198,9 +324,9 @@ export default function ProductDetails(props) {
                   <Typography className={classes.typography}> افزودن به سبد خرید</Typography>
                 </Button> */}
                     </CardActions>
-                  </form>
-                </CardContent>
-              </Card>
+                  </div>
+                </form>
+              </CardContent>
               <Card className={classes.root}>
                 <Box component="fieldset" mb={3} borderColor="transparent">
                   <Typography component="legend">Raiting</Typography>
